@@ -1,0 +1,216 @@
+AI TrustBOM Commercial License (Trial and Subscription)
+
+Copyright (c) 2026 Resolve Interim Ltd. All Rights Reserved.
+
+AI TrustBOM is proprietary software. It is NOT open source. This license
+grants limited rights to use the software; it does not transfer ownership.
+
+1. Definitions
+
+"Software" means the AI TrustBOM command-line tool (trustbom), the
+AI TrustBOM GitHub Action, their documentation, and any binaries, packages,
+or container images that Resolve Interim Ltd, a company registered in
+England and Wales under company number 17311747 ("Resolve Interim"), publishes
+under this license. The CLI is provided as compiled binaries or packages.
+The GitHub Action includes workflow metadata and scripts in the form required
+for GitHub to execute it. All rights not expressly granted remain with
+Resolve Interim.
+
+"Trial Period" means the 30 days beginning when the license service issues a
+trial key for a GitHub owner.
+
+"Subscription" means a paid, per-organization right to use the Software,
+billed monthly or annually at the prices published on its official pricing
+page or set forth in an applicable order form.
+
+"GitHub owner" means the canonical GitHub organization or user namespace to
+which an entitlement is bound.
+
+"You" means the individual or organization that installs or uses the
+Software. You represent and warrant that You access and use the Software
+solely for business, trade, or professional purposes and not as a consumer.
+
+"Affiliate" means an entity that controls, is controlled by, or is under
+common control with You, where "control" means ownership of more than 50% of
+the voting interests or the power to direct management and policies.
+
+2. Grant
+
+Subject to this license, Resolve Interim grants You a perpetual,
+non-exclusive, non-transferable, non-sublicensable, worldwide license to
+install and run Free Operations, subject to Section 9. You may run Paid
+Operations during the Trial Period and afterwards while a paid entitlement
+remains valid, including its seven-day grace period.
+Use of Paid Operations is limited to repositories whose resolved GitHub owner
+matches the owner bound to Your entitlement. You may scan and assess
+repositories that You own or are authorized to assess, and generate and
+share the resulting output (for example card.json, card.md, questionnaire,
+SARIF, and exported packs) with Your buyers, auditors, and advisers.
+A corporate reorganization or GitHub organization rename does not change the
+owner binding automatically. On written request, Resolve Interim may, at its
+reasonable discretion, rebind an active entitlement to a new GitHub owner
+namespace.
+
+One Trial Period and one Subscription cover one GitHub owner. Your
+organization and its Affiliates may use Paid Operations only for repositories
+under that owner; a repository under a different GitHub owner requires a
+separate Subscription and entitlement. Your employees and contractors acting
+on behalf of You or an Affiliate may run the Software for Your benefit. You
+are responsible for their compliance with this license, and their use is
+counted as Your use. A contractor may not use the Software for its own
+benefit or for any other customer.
+
+3. Restrictions
+
+You may not: (a) copy or redistribute the Software except as needed to
+install and run it; (b) modify, reverse engineer, decompile, disassemble,
+attempt to derive or obtain the source code of, or create derivative works
+of the Software, except to the extent applicable law permits despite this
+restriction; (c) offer the Software, or a service
+substantially based on it, to third parties; (d) remove or alter copyright,
+license, or attribution notices; or (e) use the Software to violate any law
+or third-party right.
+
+Section 3(c) does not prevent You from providing advisory, auditing, or
+professional services that incorporate Output generated in compliance with
+Section 2, provided You do not resell, rehost, or wrap the Software itself
+as a managed service or API for third parties.
+
+4. Output
+
+You own the output the Software generates from Your repositories. Output
+describes the evidence the Software found and the declarations You made.
+You are responsible for reviewing and approving it before relying on or
+sharing it. The Software does not certify compliance with any law, standard,
+or contract, and it does not replace a human decision.
+
+5. Trial and Subscription
+
+The Trial Period is free, requires no payment method, and starts when the
+license service issues the trial key; it is available once per GitHub owner.
+Paid Operations are approved `export` (except `export --draft`), `publish`
+(including draft and `--from` modes), `pack` (including `--from`),
+`answer` (all modes), and `drift`, including Action or workflow steps that
+run those operations. They require a valid trial or paid entitlement. The
+CLI checks entitlement before a Paid Operation does work and refuses it
+without a valid entitlement, using exit code 4 and a `license-*` diagnostic.
+A paid entitlement runs through the paid-through date. A grace period of up
+to seven days applies only when an automatic subscription renewal has been
+initiated and the payment provider is still processing that renewal at the
+paid-through date. It does not apply to a canceled or non-renewing
+Subscription or to an expired Trial Period. Cancellation stops future
+renewal but does not shorten the already-paid billing period.
+
+Free Operations do not require a trial or Subscription and remain available
+after a trial or paid entitlement ends. They include `init`, `scan`, `gate`,
+`readiness`, `request-approval`, default-branch `stamp`, `export --draft`,
+the Docker-free Action's scan/gate, PR comment and check, `license`
+management commands, and `version`. Free Operations do not check
+entitlement, prompt for a key, or emit `license-*` diagnostics. The explicit
+`license activate`, `license refresh`, and `license request-trial`
+management commands may contact the license service; management failures
+use exit code 2 without `license-*` diagnostics. Plain `license` and
+`license status` remain offline.
+
+You must not disable, tamper with, or circumvent entitlement checks, or
+interfere with license-service requests made for trial issuance, activation,
+refresh, or Paid Operations. The Software sends only licensing data described
+in the Privacy Policy for those requests; it does not send repository content.
+
+The license is bound to one GitHub owner. Paid commands resolve that owner
+from the repository's `origin` remote; GitHub Actions use
+`GITHUB_REPOSITORY_OWNER`. Resolve Interim handles personal data involved
+in license requests and verification as described in its Privacy Policy at
+https://aitrustbom.com/legal/privacy/.
+
+Output You have already generated and approved remains Yours under section 4.
+A Subscription renews until You cancel it. Resolve Interim will give at least
+30 days' written notice before changing the price for an existing
+Subscription, delivered to the billing contact for that Subscription using
+the contact details recorded by the payment provider or in the applicable
+order form.
+
+6. Support
+
+Resolve Interim provides no commercial support, service level, or response
+time commitment. Free Operations are provided without an uptime, maintenance,
+or service-level guarantee. Support is best-effort through the contact route
+published with the Software. Paid onboarding or advisory work, if any, is a
+separate written agreement.
+
+7. Feedback
+
+If You send Resolve Interim feedback or suggestions, You grant Resolve
+Interim a perpetual, irrevocable, royalty-free license to use them without
+obligation to You.
+
+8. Disclaimer of warranty
+
+THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTY OF ANY
+KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY, FITNESS FOR
+A PARTICULAR PURPOSE, ACCURACY, AND NON-INFRINGEMENT. DETECTION IS BASED ON
+TRACKED FILES AND DECLARATIONS AND MAY BE INCOMPLETE OR INCORRECT.
+
+9. Limitation of liability and termination
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, RESOLVE INTERIM IS NOT LIABLE FOR
+INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR FOR LOST
+PROFITS, DATA, OR BUSINESS, ARISING FROM THE SOFTWARE OR ITS OUTPUT, AND ITS
+TOTAL AGGREGATE LIABILITY ARISING UNDER OR IN CONNECTION WITH THIS LICENSE,
+WHETHER IN CONTRACT, TORT (INCLUDING NEGLIGENCE), OR OTHERWISE, IS LIMITED TO
+THE GREATER OF (A) THE TOTAL FEES PAID BY YOU TO RESOLVE INTERIM LTD UNDER THIS
+LICENSE IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM (CONVERTED TO GBP AT THE
+BANK OF ENGLAND CLOSING SPOT RATE ON THE DATE THE CLAIM IS FIRST SUBMITTED, IF
+PAID IN A CURRENCY OTHER THAN GBP) OR (B) GBP 100. THE GBP 100 MINIMUM (OR ITS
+BILLING CURRENCY EQUIVALENT) ALSO APPLIES TO FREE OPERATIONS AND TRIAL USE.
+
+Nothing in this license excludes or limits liability for death or personal
+injury caused by negligence, for fraud or fraudulent misrepresentation, or
+for any other liability that cannot be excluded or limited by law.
+
+The perpetual license for Free Operations is not affected by expiry or
+cancellation of a Trial Period or Subscription, or by termination of Paid
+Operations on notice. Resolve Interim may terminate Your right to Paid
+Operations by giving You 30 days' written notice.
+
+Resolve Interim may terminate this license, including the perpetual license
+for Free Operations, immediately if You materially breach Section 3 or
+Section 5 through intentional or reckless conduct. For any other material
+breach, this license ends only if You fail to cure it within 14 days after
+written notice reasonably describing the breach. An accidental act or
+configuration error is not by itself a material breach if You exercised
+reasonable care and promptly take reasonable steps to correct it after
+discovery. On termination of this license, You must stop using the Software
+and delete Your copies.
+
+10. Third-party components
+
+The Software includes third-party components under their own licenses, which
+continue to apply to those components.
+
+11. Governing law
+
+This license and any dispute or claim (including non-contractual disputes or
+claims) arising out of or in connection with it or its subject matter shall be
+governed by and construed in accordance with the laws of England and Wales.
+The courts of England and Wales shall have exclusive jurisdiction to settle
+any such dispute or claim.
+
+Before commencing court proceedings, the parties shall try in good faith to
+resolve a dispute arising under this license through negotiations for 30 days
+after one party gives the other written notice of the dispute.
+Nothing in this section prevents either party from seeking immediate
+injunctive or emergency equitable relief in a court of competent jurisdiction.
+
+12. Export controls and sanctions
+
+You represent and warrant that You will comply with all applicable export
+control laws and sanctions maintained by the United Kingdom, the United
+States, and the European Union in Your use of the Software, and that You are
+not located in, or ordinarily resident in, a country or territory subject to
+comprehensive embargo or sanctions, and are not identified on any applicable
+restricted-party list.
+
+Resolve Interim Ltd
+Registered in England and Wales (Company No. 17311747)
+Contact: legal@aitrustbom.com
