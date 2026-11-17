@@ -59,7 +59,13 @@ cheaply* approval happens, never *whether*.
    fresh and the fingerprint is stable.
 6. **Dismiss only what is necessary.** Keep "dismiss stale reviews" on, but
    avoid pushing graph-changing commits after Trust has reviewed.
-7. **Check the setup.** `trustbom init --interactive` can read branch
+7. **Check the setup, and do not wait for an administrator.** You can adopt
+   AI TrustBOM without repository admin rights: the gate works and
+   `trustbom github-rules check --github` reports `audited` when every approval
+   change in history was properly reviewed. One administrator command,
+   `trustbom github-rules apply`, then makes the controls `enforced`; see
+   [Enforcement levels](enforcement-levels.md).
+   `trustbom init --interactive` can read branch
    protection and CODEOWNERS (read-only, with consent) and report what is
    missing. The planned `request-approval --check-controls` also checks for
    "approval of the most recent reviewable push", a CODEOWNERS entry for the
@@ -79,6 +85,7 @@ temporary exception.
 
 ## Related
 
+- [Enforcement levels](enforcement-levels.md)
 - [CLI reference: approve a graph in git](cli-reference.md)
 - [GitHub Action guide](github-action.md)
 - [Approved export](approved-export.md)

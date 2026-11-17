@@ -36,8 +36,7 @@ never prompt.
 - **Paid:** access runs to Paddle's paid-through date plus 7 days. A renewal
   payment moves it forward; cancelling or a failed payment needs no action.
   On the first payment the service emails a **new paid key**; the trial key
-  simply expires. Replace the key once, locally (`license activate
-  --key-stdin`) and in the `TRUSTBOM_LICENSE_KEY` CI secret.
+  simply expires. Replace the key once, locally (`license activate`) and in the `TRUSTBOM_LICENSE_KEY` CI secret.
 - **Lease:** a signed, owner-bound lease valid until the earlier of the
   entitlement end and 30 days. The CLI asks for a new one only when fewer than
   7 days remain, so a paid command with a valid cached lease runs fully
@@ -71,7 +70,7 @@ instructions; it never prompts.
 
 ```powershell
 trustbom license request-trial --email <email> [--github-owner <owner>]
-trustbom license activate --key-stdin [--github-owner <owner>]
+trustbom license activate [--github-owner <owner>]
 trustbom license refresh [--github-owner <owner>]
 trustbom license status [--json] [--github-owner <owner>]
 ```
@@ -97,7 +96,7 @@ tell those from an operational failure; a usable lease, including one due for
 renewal, exits `0`.
 
 ```powershell
-$licenseKey | trustbom license activate --key-stdin
+$licenseKey | trustbom license activate
 trustbom license status --json
 ```
 
@@ -200,7 +199,7 @@ One GitHub-owner license covers all the vendor's engineers and CI, with no
 seat or machine cap. A vendor administrator receives the key (by email, for a
 trial or on first purchase), keeps it in the company's password manager or
 secrets system and shares it securely. Each engineer activates the same key
-with `license activate --key-stdin` and stores a separate lease in their own
+with `license activate` and stores a separate lease in their own
 profile. CI uses the same key as an organization or repository secret exposed
 only to paid steps. The GitHub owner has a single trial; later engineers do
 not reset it.

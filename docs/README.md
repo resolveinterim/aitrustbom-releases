@@ -24,6 +24,8 @@ human approver, decides what is approved. These guides follow that journey.
    example.
 8. [Reducing review friction](reducing-review-friction.md): keep approvals
    small, fast and in Git.
+   [Enforcement levels](enforcement-levels.md): `enforced`, `audited`,
+   `violation` and `unverified`, and how to reach `enforced`.
 
 ## Share with buyers
 

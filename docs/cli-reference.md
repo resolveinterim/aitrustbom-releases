@@ -56,7 +56,9 @@ archive checksum **before** installing `trustbom` and its `tbom` shim; a
 matching checksum protects against accidental corruption, not a malicious
 source that replaces both the archive and checksum file. The default
 installation directory is `$HOME/.local/bin`; add it to `PATH` if needed.
-Git is still required at run time. Linux requires ICU; Alpine/musl is not
+Git is still required at run time. Linux requires ICU (for example `libicu74` on
+Ubuntu 24.04, `libicu` on Fedora/RHEL); the installer warns if it is missing, and
+without it the binary aborts at start-up. Alpine/musl is not
 supported. To update a script install, rerun the installer with a new
 matching archive and `SHA256SUMS` from a trusted release source. To uninstall
 that install, remove only `trustbom` and `tbom` on Linux/macOS, or
@@ -189,6 +191,71 @@ where they can be read safely. It does not declare model use or control facts.
 `--interactive --growth` and existing portfolio repositories are unsupported;
 use the [Growth setup guide](growth-workflow.md) instead.
 
+### Applying the approval ruleset
+
+`init` writes `.github/rulesets/trustbom.json`, the ruleset that makes CODEOWNER
+approval independent: active on the default branch, no bypass actors, a pull
+request with one approval, CODEOWNER review, stale approvals dismissed,
+approval of the most recent reviewable push, no force pushes or deletion, and
+merge commits only.
+
+```powershell
+trustbom github-rules apply --dry-run
+trustbom github-rules apply
+```
+
+`apply` uses your existing `gh` login, previews the change and asks for
+confirmation (`--yes` skips the prompt for automation). It creates the ruleset
+or updates it in place by name, and a rerun makes no change. It needs
+repository admin rights: without them it makes no write, exits `2` and prints
+the settings URL, the payload path and the command an administrator can run.
+Rulesets on private repositories need a GitHub plan that supports them. See
+[Enforcement levels](enforcement-levels.md) for what each level guarantees.
+
+### Checking the enforcement level
+
+```powershell
+trustbom github-rules check
+trustbom github-rules check --github
+trustbom github-rules check --github --require-enforced
+```
+
+`check` reports one level and the status of each of the seven rules
+(`verified`, `missing`, `unverified`):
+
+| Level | Meaning | Exit |
+| --- | --- | --- |
+| `enforced` | All seven rules are verified and the audit found no violation, so GitHub prevents uncontrolled approval changes. | 0 |
+| `audited` | Rules are not all verified, but every change to an approvals file since the approved graph baseline was merged by a pull request approved on its final push by a CODEOWNER who was neither the author nor the last pusher. | 0 |
+| `violation` | An approvals-file change in that window was a direct push or lacked such an approval; the finding names the commit. It outranks verified rules until a reviewed pull request re-approves the graph. | 3 |
+| `unverified` | The rules or history could not be read or proven (offline, shallow clone, no access). | 0 |
+
+Without `--github` nothing leaves your machine and the level is `unverified`;
+it still reports a CODEOWNERS file that does not cover an approvals file, with
+the exact line to add. `--require-enforced` exits `3` for any level below
+`enforced`. The level describes how approval changes were controlled; it is
+never an approval and changes no graph, hash or approval file.
+
+Limits: only repository rulesets are verified (not legacy branch protection or
+organisation rulesets); reading bypass actors may need admin rights; the last
+pusher is taken from the final commit's author on the pull request; a team
+CODEOWNER login that GitHub reports as not a member counts as not an owner.
+
+To report the level where reviewers read it, add `--github-rules` (needs `gh`
+and a token; off by default so `gate` and `export` stay offline):
+
+```powershell
+trustbom gate --github-rules
+trustbom export --system payments --github-rules
+```
+
+`gate` prints an "Enforcement level" section: a level below `enforced` is a
+finding, and only `violation` fails the gate (exit `3`). `export` appends an
+"Approval controls" section to `export/card.md` only; the manifest hashes the
+written card, and nothing enters `card.json` or any approval hash. The buyer
+pack does not state the level because it is a per-repository fact that cannot
+be proven centrally. `--github-rules` cannot be combined with `--draft`.
+
 ### Upgrading generated files
 
 ```powershell
@@ -287,7 +354,7 @@ and `trust/manual.yml`, then writes into `trust/`:
 - `trust/findings.sarif` — findings as SARIF 2.1.0 for code-scanning UIs
 
 The command prints the path of each file it wrote, a short graph fingerprint,
-and the full fingerprint to copy into an approval. `card.md` is watermarked `draft (unapproved)` until it is approved (step
+and the full fingerprint for review. Do not copy it into an approval by hand; `trustbom request-approval` writes the proposal. `card.md` is watermarked `draft (unapproved)` until it is approved (step
 5). Findings never fail the scan itself — only the gate enforces policy.
 
 `card.json` records a coverage statement: the detector packs and versions
@@ -621,6 +688,10 @@ For an internal-only, explicitly unapproved snapshot of the current branch
 trustbom export --draft
 ```
 
+Do not ignore `trust/card.json` or `trust/card.md`: commit them with the
+approval, because approved export reads `trust/card.json` from the default
+branch.
+
 Every `scan` rewrites the tracked `trust/card.json` and `trust/card.md` (commit
 id and assessment) even when the graph is unchanged. `export --draft` and
 `publish --draft` need the card's commit id to match `HEAD`, so rescan after
@@ -737,13 +808,15 @@ alignment section appears in approved `publish` and `pack` output.
 | `trustbom export` | **Paid** (not `--draft`). Write the approved `export/card.md` and `export/questionnaire.yml` (or `--draft` for an internal snapshot); `--format cyclonedx` also writes `export/trustbom.cdx.json` |
 | `trustbom publish` | **Paid.** Render a self-contained static trust page under `export/site/` (index, per-system pages, `verify.html`, `index.pdf`, downloads and approved `manifest.json`) from approved graphs, or `--draft` for a watermarked internal pack |
 | `trustbom license` | Print the license terms for the installed version; works offline |
-| `trustbom license activate --key-stdin [--github-owner <owner>]` | Exchange a license key (read from stdin) for a signed lease bound to the resolved GitHub owner |
+| `trustbom license activate [--github-owner <owner>]` | Exchange a license key (prompted, hidden, or piped on stdin) for a signed lease bound to the resolved GitHub owner |
 | `trustbom license refresh [--github-owner <owner>]` | Renew the license on this computer now, regardless of remaining lease time |
 | `trustbom license request-trial --email <email> [--github-owner <owner>]` | Request a free 30-day trial key by email; the service emails the key (never returned) and the 30-day trial starts when the key is issued |
 | `trustbom license status [--json]` | Report the cached license state offline (lease end, trial or subscription end, renewal due), without contacting the license service |
 | `trustbom readiness` | Write an advisory `export/readiness/` checklist for evidence coverage, approval validity, unresolved findings, and freshness; use `--framework <id>` for free offline framework-alignment overlays (`nist-ai-rmf`, `iso-42001`, `eu-ai-act`) |
 | `trustbom init --upgrade [--dry-run]` | Rewrite only unedited marker-carrying generated files to the running CLI's pinned version. Never combined with `--growth` or `--interactive` |
 | `trustbom init --growth` | Create a portfolio template, CODEOWNERS guidance, a local reusable Growth workflow and caller, and the pinned per-repository Action without overwriting existing files |
+| `trustbom github-rules apply [--dry-run] [--yes]` | **Free.** Create or update the `trustbom-approval` ruleset (written by `init` to `.github/rulesets/trustbom.json`) through your `gh` login; needs repository admin rights, otherwise nothing changes and the admin steps print |
+| `trustbom github-rules check [--github] [--require-enforced]` | **Free.** Report the enforcement level (`enforced`, `audited`, `violation`, `unverified`) with per-rule status; offline unless `--github`; exits `3` on `violation`, or below `enforced` with `--require-enforced` |
 | `trustbom pack [--from artifacts]` | **Paid.** Render independently approved monorepo or GitHub-verified sibling graphs into one portfolio pack |
 | `trustbom verify [<path>] [--repo <path>]` | **Free, offline.** Check a received pack against its `manifest.json`; with `--repo`, also confirm approved fingerprints against the named approvals |
 | `trustbom answer --portfolio --questions customer.csv` | **Paid** (every `answer` mode). Combine approved per-system answers with separate source citations into one row per buyer question |
@@ -844,7 +917,7 @@ unresolved owner reports `license-owner-mismatch`.
 
 **License management commands** are never paywalled:
 
-- `trustbom license activate --key-stdin [--github-owner <owner>]` exchanges a
+- `trustbom license activate [--github-owner <owner>]` exchanges a
   key read from standard input for a signed, verified lease and stores both for
   the current user at `%USERPROFILE%\.trustbom\license.json` (Windows) or
   `${XDG_CONFIG_HOME:-~/.config}/trustbom/license.json` (elsewhere).
@@ -867,7 +940,7 @@ unresolved owner reports `license-owner-mismatch`.
   outlasts the lease has no end date in the lease (`entitlementExpiresAtUtc` is
   `null`); status says it renews automatically. A trial lease cannot be refreshed past the trial, so for a trial status prints `Trial ends: YYYY-MM-DD (UTC). A trial does not renew.` (the lease end when the lease carries no entitlement end) and never mentions renewal or a purchase receipt. When a trial or subscription has
   ended, status and paid commands use the same wording and point to the buy page
-  and `trustbom license activate --key-stdin`.
+  and `trustbom license activate`.
 - `trustbom license` prints the license terms and works offline.
 
 Management commands report failures as a plain message, without `license-*`

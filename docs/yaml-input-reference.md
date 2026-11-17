@@ -454,7 +454,8 @@ and export `--from-approvals` support alternate paths where documented.
 
 Prefer `request-approval` to copying hashes/timestamps manually. Trust still
 reviews its proposal and can edit the fields below. `init` creates a
-comment-only **unsigned template**, not a valid approval.
+comment-only **unsigned template**, not a valid approval; `request-approval`
+replaces the template's comments with the proposal.
 
 ```yaml
 approved_graph_sha: cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc

@@ -25,7 +25,11 @@ Do not give untrusted fork code access to registry credentials.
 
 Every file `init` owns (`ai-trustbom.yml`, `ai-trustbom-growth.yml`, `growth.yml`, and the Action's `action.yml` and `install/action.yml`) starts with a marker such as `# trustbom-generated: version=1.2.3 sha256=<hash>` recording the generating `trustbom` version and a hash of the body. To move to a newer pinned version, first make the new exact main and RID packages available in the chosen registry. Install the newer `trustbom` CLI and run `trustbom init --upgrade --dry-run`, then `trustbom init --upgrade`: it rewrites only marked files whose body still matches the hash, never downgrades, and never touches unmarked or edited files, `trust/*.yml`, approvals or CODEOWNERS. Review the diff and merge it through a pull request; see the [CLI reference](./cli-reference.md#upgrading-generated-files).
 
-The generated workflow is equivalent to:
+The generated workflow is equivalent to the following. Every `with:` value is
+the Action's default, so a minimal workflow is the checkout step plus
+`uses: ./.github/actions/trustbom`; keep the inputs only to change them. No
+administrator rights are needed to add it. Review rules are separate: see
+[Enforcement levels](enforcement-levels.md).
 
 ```yaml
 name: AI TrustBOM
@@ -73,7 +77,10 @@ Two repository settings therefore decide how strong the gate is:
   landed on the default branch after the pull request's last run can merge
   unvalidated.
 
-Both are recommended controls, not enforced by `init`. `trustbom
+Both are recommended controls, not enforced by `init`. The seven review rules
+are applied by `trustbom github-rules apply` and graded by `trustbom
+github-rules check` as an [enforcement level](enforcement-levels.md).
+`trustbom
 request-approval --check-controls` reports each one as observed, missing or
 unverified (when the token cannot read branch rules). Do not add a push or
 post-merge job to compensate.

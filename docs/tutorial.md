@@ -110,7 +110,7 @@ Wrote C:\...\abingdon-taxi-solutions\trust\card.md
 Wrote C:\...\abingdon-taxi-solutions\trust\questionnaire.yml
 Wrote C:\...\abingdon-taxi-solutions\trust\findings.sarif
 Graph fingerprint: <12 lowercase hex characters>
-Full fingerprint (copy to approved_graph_sha): <64 lowercase hex characters>
+Full fingerprint (SHA-256): <64 lowercase hex characters>
 ```
 
 Read `trust/card.json` and `trust/card.md`. Our initial graph has no
@@ -242,7 +242,11 @@ from step 2 remains:
 ```
 
 The gate then reports a bootstrap failure, including the unresolved
-medium findings:
+medium findings. Its next step is to review the card and evidence, run
+`trustbom request-approval` with your `--high-risk` and `--article-50`
+decisions, rescan, commit the proposal with the rescanned `trust/card.json`
+and `trust/card.md`, and have a CODEOWNER other than the author approve the
+final pull request revision:
 
 ```text
 The gate is blocked because this repository has no reviewed graph approval.
@@ -401,10 +405,12 @@ commands (a missing license exits `4` with a `license-*` diagnostic);
 The `.github/workflows/ai-trustbom.yml` file created by `trustbom init`
 brings this same scan and gate into GitHub. In a repository hosted on
 GitHub, we commit the workflow to the default branch, replace the
-example `.github/CODEOWNERS` teams with our Trust reviewers, and
-configure branch protection to **require the `AI TrustBOM` check and
-CODEOWNER review** of `trust/approvals.yml`. The workflow runs the same
-engine we used locally.
+example `.github/CODEOWNERS` teams with our Trust reviewers. The
+workflow runs the same engine we used locally. Adding it needs no
+administrator rights. Run `trustbom github-rules check --github` to see our
+[enforcement level](enforcement-levels.md); an administrator makes it
+`enforced` once with `trustbom github-rules apply`, which creates the review
+ruleset, and until then the history audit reports `audited`.
 
 When findings are resolved (or have reviewed, unexpired waivers), run
 `trustbom request-approval --dry-run` to inspect the proposed
