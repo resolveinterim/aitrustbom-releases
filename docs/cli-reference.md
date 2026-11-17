@@ -227,7 +227,7 @@ trustbom github-rules check --github --require-enforced
 | --- | --- | --- |
 | `enforced` | All seven rules are verified and the audit found no violation, so GitHub prevents uncontrolled approval changes. | 0 |
 | `audited` | Rules are not all verified, but every change to an approvals file since the approved graph baseline was merged by a pull request approved on its final push by a CODEOWNER who was neither the author nor the last pusher. | 0 |
-| `violation` | An approvals-file change in that window was a direct push or lacked such an approval; the finding names the commit. It outranks verified rules until a reviewed pull request re-approves the graph. | 3 |
+| `violation` | An approvals-file change in that window was a direct push or lacked such an approval; the finding names the commit. It outranks verified rules until a reviewed pull request re-approves a changed graph (waivers alone do not clear it). | 3 |
 | `unverified` | The rules or history could not be read or proven (offline, shallow clone, no access). | 0 |
 
 Without `--github` nothing leaves your machine and the level is `unverified`;
