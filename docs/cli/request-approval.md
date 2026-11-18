@@ -17,7 +17,7 @@ is no `trustbom approve` command: approval is a normal, reviewed git change.
 
 Approval is a normal, reviewed git change to `trust/approvals.yml`: there is
 no separate UI or button. A Trust reviewer (the human authorized to publish
-on behalf of the vendor) edits the file to record the **full** graph fingerprint
+on behalf of your company) edits the file to record the **full** graph fingerprint
 shown in the gate's approval example (not the 12-character display prefix),
 for example:
 
@@ -38,7 +38,7 @@ non-empty `rejections` always keep the gate failing until resolved. This
 change is protected by CODEOWNERS like any other reviewed file, so merging it
 is the signature. Anyone with write access can propose the entry, but GitHub
 does not let an author approve their own pull request, so a CODEOWNER with the
-Trust role who is not the author must approve it; a vendor therefore needs at
+Trust role who is not the author must approve it; your company therefore needs at
 least two people able to review. `approved_by` and `approved_at` are unverified
 claims; the GitHub review and merge record are authoritative. The CLI records
 `approved_at` but does not enforce it (a future timestamp is not rejected); the

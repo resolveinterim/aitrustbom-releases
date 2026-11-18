@@ -1,6 +1,6 @@
 # Growth reusable workflow
 
-Run the Growth workflow from a vendor repository with a tracked
+Run the Growth workflow from a repository with a tracked
 `trust/portfolio.yml`. `trustbom init --growth` creates any missing portfolio
 example, CODEOWNERS example, `.github/workflows/ai-trustbom-growth.yml`
 caller, the reusable `.github/workflows/growth.yml` it calls, and the
@@ -18,8 +18,8 @@ read-only reusable workflow does not write approval state for Trust.
 The engine is the published `trustbom` npm package pinned in
 `.github/actions/trustbom/install/action.yml` to the version of the CLI that ran
 `init --growth` (a development build refuses to pin itself; set
-`TRUSTBOM_ACTION_VERSION` to a published version to override). No Docker or
-.NET SDK is needed; the runner needs Node.js, npm and Git. The caller
+`TRUSTBOM_ACTION_VERSION` to a published version to override). The runner
+needs Node.js, npm and Git. The caller
 uses the local reusable workflow (`uses: ./.github/workflows/growth.yml`), which runs
 that Action for the pull-request review and the same install action for the
 default-branch `pack`, `answer`, and `publish` steps. Upgrade with
@@ -83,7 +83,7 @@ The directory must contain
 
 ```json
 {
-  "organization": "Example vendor",
+  "organization": "Example company",
   "systems": [
     {
       "id": "assist",

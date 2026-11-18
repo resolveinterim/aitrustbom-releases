@@ -42,9 +42,9 @@ matching. Canonical IDs are `Q1_do_you_use_ai`,
 matches are ambiguous and remain unmatched; add a more specific alias rather
 than guessing. `Q9`, `Q10` and `Q11` are answered from the `data_handling`
 declarations in `trust/manual.yml`; a provider with no declaration answers
-`unknown`. `Q3` covers all training, including the vendor's own, which no
+`unknown`. `Q3` covers all training, including your own company's, which no
 declaration records: once any provider is declared it points to `Q10` and
-states that vendor-side training is not declared, and it stays uncited (a
+states that your own training is not declared, and it stays uncited (a
 readiness gap that `answer` never reuses).
 
 `export/answers.csv` contains `id,question,section,answer,cites,confidence`.
@@ -86,7 +86,7 @@ its existing marked PR comment, and drift never changes the gate result,
 To reuse reviewed workbook answers, run
 `trustbom answer --workbook buyer.xlsx --sheet Sheet1 --id-column id
 --question-column question --answer-column answer --suggest-only` to write
-draft match suggestions against the vendor's reviewed answer register (see
+draft match suggestions against your reviewed answer register (see
 [Buyer-answer drift](#buyer-answer-drift)) to a tracked mapping file (default
 `trust/answer-reuse.yml`) and a draft report under `export/`. After Trust
 reviews and marks accepted rows `status: reviewed` in Git, rerun the same

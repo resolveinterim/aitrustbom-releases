@@ -21,9 +21,10 @@ records and the customer request are synthetic.
 | **Trust** | The person at our company who approves what we share | A hat you put on for this exercise when you review and merge the approval. In a real company this is a different person from the author. |
 
 An **AI provider** (here Google, supplying Gemini) is the company whose model
-we use. The product's guides call our company the *vendor* and our customer
-the *buyer*; this tutorial uses "we" and "our customer" instead so that
-"vendor" is never confused with the AI provider.
+we use. The guides say "your company" and "your customer (the buyer)"; this
+tutorial says "we" and "our customer". The glossary calls the company *vendor*,
+a word kept for buyer-facing material, so that it is never confused with the AI
+provider.
 
 Scanning produces a *draft* inventory of what tracked files indicate. The
 team checks the underlying facts, and Trust approves a graph before it is used

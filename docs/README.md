@@ -1,8 +1,10 @@
 # AI TrustBOM guides
 
-AI TrustBOM is a git-native AI disclosure tool. A vendor builds AI-powered
-software, a buyer receives its evidence, and Trust, the vendor's authorized
-human approver, decides what is approved. These guides follow that journey.
+AI TrustBOM is a git-native AI disclosure tool. Your company builds
+AI-powered software, your customer (the buyer) receives its evidence, and
+Trust, your company's authorized human approver, decides what is approved.
+These guides follow that journey. Guides for buyers say "vendor" for the
+company that sends a pack.
 
 ## Start here
 

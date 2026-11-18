@@ -1,6 +1,6 @@
 # User-editable YAML schema reference
 
-This reference documents the YAML files a vendor can author or review in
+This reference documents the YAML files you can author or review in
 AI TrustBOM: fields, types, required values, defaults, limits and checks
 against Git or other files. It describes the **implemented loader contracts**,
 not a proposed format. It is human-readable schema documentation, not a
@@ -150,7 +150,7 @@ or fragment**. Provider identifiers should match detected graph providers
 `retention` accepts `none`, `indefinite`, `unknown` or a whole number of
 days from **1 through 36500**. `training_use` accepts `none`, `opt_in`,
 `"yes"` or `unknown`. These declarations concern provider behavior, not
-vendor-side training. Every data-handling provider must have a model in the
+your own company's training. Every data-handling provider must have a model in the
 final graph. Optional evidence/deletion paths must be Git-tracked files.
 Absent data handling renders as unknown and raises an advisory readiness gap.
 
@@ -301,7 +301,7 @@ must not be used with the non-backtracking engine.
 |---|---|
 | `Q1_do_you_use_ai` | AI use |
 | `Q2_models_and_vendors` | Models and providers |
-| `Q3_is_customer_data_used_to_train` | Customer-data training, including undeclared vendor-side training |
+| `Q3_is_customer_data_used_to_train` | Customer-data training, including undeclared training by your own company |
 | `Q4_inference_region` | Inference region |
 | `Q5_human_oversight` | Human oversight |
 | `Q6_high_risk_ai_act` | Human high-risk decision |

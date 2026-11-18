@@ -138,7 +138,7 @@ marker to take ownership of a file. It never touches `trust/*.yml`,
 `approvals.yml` or CODEOWNERS, and it never stages or commits. The run
 refuses (exit `2`) on a development build unless `TRUSTBOM_ACTION_VERSION` is set.
 
-There is no migration from earlier Docker-based or private-repository
+There is no migration from earlier private-repository
 workflows: no customer repositories used them. Regenerate such a repository
 with `init` after removing the old workflow files.
 

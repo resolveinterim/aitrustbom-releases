@@ -23,7 +23,7 @@ draft export never writes one, so there is nothing that falsely claims
 approval. The manifest is **not** itself an approval: approval stays in
 `trust/approvals.yml`, reviewed by an independent CODEOWNER.
 
-Given the vendor repository (or a checkout of it) via `--repo`, verification
+Given the repository that produced the pack (or a checkout of it) via `--repo`, verification
 additionally confirms that each system's `approved_graph_sha`,
 `approved_graph_commit`, and approval digest in the manifest match the approval file
 the manifest names, with the baseline re-derived from the repository's default-branch history. See
@@ -35,7 +35,7 @@ optional Sigstore signature.
 | Option or argument | Meaning |
 | --- | --- |
 | `<path>` | Pack directory or `manifest.json` to verify (default `export`). |
-| `--repo <path>` | Optional path to the vendor repository (or a checkout of it) to confirm each system's approved fingerprint and derived approved graph commit match the default-branch approval it names. |
+| `--repo <path>` | Optional path to the repository that produced the pack (or a checkout of it) to confirm each system's approved fingerprint and derived approved graph commit match the default-branch approval it names. |
 
 ```powershell
 trustbom verify

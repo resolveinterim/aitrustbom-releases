@@ -142,7 +142,7 @@ applies.
 | `article_50_copy_path` | `{ path: <repository-relative-file>, reason: ... }`. Points to disclosure copy, not a legal classification or approval. |
 | `data_handling` | One row per provider with a model in the final graph. Requires `provider`, `retention`, `training_use` and `reason`; optional `deletion_path` and `evidence_path`. Provider matching is case-insensitive; use lower-case identifiers consistently. |
 | `data_handling.retention` | `none`, `indefinite`, `unknown`, or an integer number of days from **1 to 36500**. `none` declares no retention; `unknown` means it has not been established. Do not use `0`, `"30 days"`, negative days or `null`. |
-| `data_handling.training_use` | `none`, `opt_in`, `"yes"` or `unknown`. Quote `"yes"` to avoid YAML boolean interpretation. These are provider-training declarations, not assertions about the vendor's own training. |
+| `data_handling.training_use` | `none`, `opt_in`, `"yes"` or `unknown`. Quote `"yes"` to avoid YAML boolean interpretation. These are provider-training declarations, not assertions about your own company's training. |
 | `reason` | Nonblank explanation required on every declaration, including exclusions, controls and paths. Reasons justify manual input; they are not automatically published verbatim as graph facts. |
 
 All top-level sections are optional; collections may be `[]`. To state an

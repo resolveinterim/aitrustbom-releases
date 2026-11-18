@@ -31,7 +31,7 @@ cheaply* approval happens, never *whether*.
 1. **Name a team, and at least two people.** List a visible GitHub team (or
    several individuals) as CODEOWNERS for `trust/approvals.yml`. GitHub does
    not let an author approve their own pull request, so a single Trust
-   reviewer who also authors the change cannot approve it. A vendor needs at
+   reviewer who also authors the change cannot approve it. Your company needs at
    least two people able to review.
 2. **Make the review small.** Trust should review the gate's pull-request
    comment (semantic changes, findings, required actions) and a short
@@ -75,10 +75,10 @@ cheaply* approval happens, never *whether*.
    because the generated workflow has no post-merge run (see
    [GitHub Action guide](github-action.md#recommended-repository-controls)).
 
-## Solo vendors
+## Solo founders and small teams
 
 If one person is both author and the only Trust reviewer, GitHub will not let
-them approve their own pull request. Vendors then either add a second reviewer
+them approve their own pull request. You then either add a second reviewer
 or accept a weaker setup such as administrator bypass. The bypass removes the
 independence the approval is meant to provide, so treat it as a recorded,
 temporary exception.

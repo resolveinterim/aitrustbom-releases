@@ -23,7 +23,7 @@ independent signature or trusted delivery channel (see step 2).
 ## 1. Verify the files (free, offline)
 
 Install the CLI with the install script for your platform (see
-[installation](installing.md); no Node.js or .NET SDK
+[installation](installing.md); no Node.js
 needed), or with npm, which needs Node.js:
 
 ```powershell

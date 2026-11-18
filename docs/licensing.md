@@ -143,11 +143,11 @@ store, and a fresh lease is requested on every run, so a paid step fails with
 `license-service-unreachable` while the service is unavailable. CI never
 prompts: with no key a paid command fails with `license-missing` and
 instructions. Free commands need no secret, and fork pull requests never
-receive the vendor's key.
+receive your key.
 
 #### Create the `license-key` secret
 
-1. In the vendor repository (or organization) open **Settings → Secrets and
+1. In your repository (or organization) open **Settings → Secrets and
    variables → Actions** and create a secret named `TRUSTBOM_LICENSE_KEY`
    holding your license key. Never put the key in a workflow file, an input
    default or a log; only secrets are passed to the CLI, always as the
@@ -195,8 +195,8 @@ other exit codes are unchanged (see the
 
 ## Multiple engineers
 
-One GitHub-owner license covers all the vendor's engineers and CI, with no
-seat or machine cap. A vendor administrator receives the key (by email, for a
+One GitHub-owner license covers all your company's engineers and CI, with no
+seat or machine cap. An administrator in your company receives the key (by email, for a
 trial or on first purchase), keeps it in the company's password manager or
 secrets system and shares it securely. Each engineer activates the same key
 with `license activate` and stores a separate lease in their own
