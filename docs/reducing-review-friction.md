@@ -2,7 +2,7 @@
 
 AI TrustBOM keeps approval in Git: a pull request that changes
 `trust/approvals.yml` must be approved by a CODEOWNER with the Trust role who is
-not its author (see [approving a graph](cli-reference.md)). Trust is often
+not its author (see [approving a graph](cli/request-approval.md#approve-a-graph-in-git)). Trust is often
 outside the development team, so this can feel like a bottleneck. This guide
 explains where waiting actually happens and how to keep it small without
 weakening the control.
@@ -86,6 +86,6 @@ temporary exception.
 ## Related
 
 - [Enforcement levels](enforcement-levels.md)
-- [CLI reference: approve a graph in git](cli-reference.md)
+- [CLI reference: approve a graph in git](cli/request-approval.md#approve-a-graph-in-git)
 - [GitHub Action guide](github-action.md)
 - [Approved export](approved-export.md)

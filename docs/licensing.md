@@ -191,7 +191,7 @@ A valid result with a warning (service outage with a usable cached lease) runs
 the command and prints the warning on standard error. Exit `4` is reserved for
 entitlement failures (paid commands, and `license status` with no usable lease);
 other exit codes are unchanged (see the
-[CLI reference](cli-reference.md)).
+[CLI reference](cli/README.md)).
 
 ## Multiple engineers
 

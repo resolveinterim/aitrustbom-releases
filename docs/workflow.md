@@ -1,8 +1,8 @@
 # How you use AI TrustBOM
 
 This is the end-to-end workflow at a glance. Each step links to the
-[CLI reference](cli-reference.md) for commands and options, and the
-[tutorial](tutorial.md) walks through it hands-on.
+[CLI reference](cli/README.md) for commands and options, and the
+[tutorial](tutorial/README.md) walks through it hands-on.
 
 **Who is involved:** your developers, an existing team member authorized to
 review and approve the record (the **Trust approver**), and recipients such
@@ -40,8 +40,8 @@ flowchart TD
   trial. Start a trial or activate a subscription when you need paid
   operations.
 
-See [install](cli-reference.md#1-install-the-cli),
-[initialize](cli-reference.md#2-initialize-a-repository) and
+See [install](installing.md),
+[initialize](cli/init.md) and
 [licensing](licensing.md).
 
 ## 2. Scan
@@ -51,7 +51,7 @@ See [install](cli-reference.md#1-install-the-cli),
   signals. This is not exhaustive discovery or runtime monitoring.
 - It produces your AI disclosure (the "trust card") and a questionnaire.
 
-See [scan](cli-reference.md#3-scan-the-repository).
+See [scan](cli/scan.md).
 
 ## 3. Declare what repository evidence cannot establish
 
@@ -79,7 +79,7 @@ See [manual declarations](manual-declarations.md).
   - **Needs approval:** request approval (step 6).
   - **Ready:** open a pull request (step 7).
 
-See [evaluate the gate](cli-reference.md#4-evaluate-the-gate-locally).
+See [evaluate the gate](cli/gate.md).
 
 ## 5. Waive a finding (optional)
 
@@ -100,7 +100,7 @@ See [evaluate the gate](cli-reference.md#4-evaluate-the-gate-locally).
   `trust/card.json` beside the approval, so it must be committed and not
   ignored by `.gitignore` (only `export/` should be ignored).
 
-See [approve a graph](cli-reference.md#5-approve-a-graph-in-git).
+See [approve a graph](cli/request-approval.md#approve-a-graph-in-git).
 
 The `approved_by` and `approved_at` values in `trust/approvals.yml` are
 declared metadata. The independent GitHub review and merge history is the
@@ -133,9 +133,9 @@ See [the GitHub Action](github-action.md).
 - Optionally, `trustbom readiness` gives an advisory view of evidence gaps.
 - Previously shared packs do not update when the record changes.
 
-See [export](cli-reference.md#6-export-a-customer-facing-pack),
+See [export](cli/export.md),
 [approved export](approved-export.md), [trust page](trust-page.md) and
-[readiness](cli-reference.md#8-review-advisory-evidence-readiness).
+[readiness](cli/readiness.md).
 
 ## 10. Recipient verifies
 

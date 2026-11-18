@@ -173,6 +173,127 @@ classification can come from supported detection; explicit human legal
 classifications belong in approvals. Declare a tool through `tools` rather
 than inventing a separate MCP declaration schema.
 
+## Declaring subprocessors
+
+Commit a repository-root `trust/subprocessors.yml` and the DPA files it
+references. Each row uses the graph provider identifier for matching; `party`
+is the processor's legal name (for example, `provider: bedrock` with
+`party: AWS`):
+
+```yaml
+subprocessors:
+- provider: bedrock
+  party: AWS
+  purpose: model inference
+  location: Ireland
+  dpa_path: trust/dpas/aws.pdf
+```
+
+The file is limited to 256 KiB and 100 unique providers. Every `dpa_path`
+must be a tracked, repository-relative regular file; paths, YAML syntax,
+duplicate keys, and links are validated. A row without a matching model
+does not appear on the system card. A detected non-self-hosted provider
+without a matching row produces a medium `subprocessor-undeclared` finding;
+a detected data-processing dependency without a matching row produces a
+medium `data-processor-undeclared` finding; invalid declarations produce
+`subprocessors-invalid` (error). A declared row whose `provider` names the
+detected party resolves either finding and makes the row visible. Scan still
+writes a draft graph, but the gate applies its configured threshold.
+
+The hashed `card.json` stores cited subprocessor rows so approved exports
+and buyer CSV answers cannot silently change when the declaration changes.
+Q4 includes the model's inference region when known and labels the
+processor's location separately, citing both sources; processor location
+alone does **not** prove an inference region. Q3 (customer-data training)
+remains `unknown`: a DPA index does not establish training use. Trust declares
+training use explicitly in `data_handling`, which answers `Q10`. A portfolio
+shares the root declaration, includes only matching rows in each system's
+approved graph, and lists the approved rows once on its cover. This does not
+host or sign legal agreements.
+
+## Declaring data handling
+
+Declare, per AI provider, how long prompts and customer data are retained,
+whether that data is used to train provider models, and how deletion is
+requested. The section lives in `trust/manual.yml`:
+
+```yaml
+data_handling:
+  - provider: anthropic
+    retention: 30
+    training_use: none
+    deletion_path: trust/deletion-anthropic.md
+    evidence_path: trust/terms/anthropic-dpa.md
+    reason: Trust reviewed the enterprise agreement on 2026-10-19.
+```
+
+`provider` must match a provider that has a model in the graph; a declaration
+for any other provider is dropped and reported as a `data-handling-invalid`
+error. `retention` is `none`, `indefinite`, `unknown`, or a whole number of
+days from 1 to 36500. `training_use` is `none`, `opt_in`, `yes` or `unknown`
+(quote `"yes"` so YAML does not read it as a boolean). `deletion_path` and
+`evidence_path` are optional and must be tracked, repository-relative files.
+`reason` is required for each row and is validated but never stored in
+`card.json`, exactly like the `reason` on a model or tool declaration.
+
+Only declared rows are stored in the graph, always with `source: manual`. A
+provider with a model but no declaration is **not** stored; `card.md`, the
+questionnaire, the HTML/PDF pack and the portfolio cover render it as
+`unknown`, and `trustbom readiness` raises a `disclosure:data-handling` gap.
+"unknown" means Trust has not declared the value: it is never a statement
+that data is retained, used for training, or safe. AI TrustBOM does not read,
+fetch or verify provider terms.
+
+Declared rows are part of the graph hash, so adding, changing or removing one
+is a blocking semantic delta: the gate reports `data handling for <provider>`
+and the change must be approved before it can be exported. A graph with no
+declaration at all hashes exactly as it did before this feature, so existing
+approvals stay valid.
+
+The questionnaire renders three canonical questions from these rows:
+`Q9_prompt_retention`, `Q10_provider_training_use` and `Q11_deletion_path`.
+Existing reviewed answers to other questions are unaffected.
+
+## Showing CI evaluation results
+
+Commit `trust/evals.yml` with the names and repository-relative paths of
+artifacts your CI already produces:
+
+```yaml
+evals:
+  - name: refund
+    artifact: evals/out/summary.json
+    threshold: 95
+```
+
+A JSON summary at that path can contain
+`{"pass":true,"score":97.2,"timestamp":"2026-09-30T11:30:00Z"}`.
+`pass` must be a boolean; `score` is an optional percentage from 0 to 100,
+and `timestamp` must include a UTC offset. Alternatively, declare a JUnit
+`.xml` artifact: `pass` is based on its tests, failures, errors, and skipped
+counts; JUnit supplies no numeric score. A JUnit run timestamp is optional;
+a timestamp without a timezone cannot establish the run time and appears
+as `unknown`.
+The optional declaration `threshold` is a 0–100 percentage shown alongside
+the artifact result; it does not override the artifact's pass/fail value.
+
+Run `trustbom scan` **after** CI has produced the artifact. Only `evals.yml`
+must be git-tracked; the artifact may be an untracked CI output, but must be a
+repository-local regular file (at most 1 MiB). The declaration has a 256 KiB
+limit and at most 100 entries. The resulting `card.json` contains cited
+`eval_results[]`, separate from workflow-presence-only `eval_gates[]`; the
+Markdown card links to the declared repository path and shows the last run
+from the artifact, or `unknown` if absent. Exported cards retain the path
+link but do not embed CI artifacts; keep them available for Trust to review.
+An absent artifact yields a `low`-severity `eval-artifact-missing` finding,
+not a fabricated result. An unreadable/unsafe/malformed artifact yields
+`eval-artifact-invalid`; invalid declarations yield `evals-invalid`. Scanning
+still writes a draft card, and the gate applies its usual finding threshold
+(default `medium`). Neither scanning nor the Action runs evaluations.
+For `scan --portfolio`, put each declaration at
+`<system-path>/trust/evals.yml` and its artifacts inside that system's path;
+root `trust/evals.yml` is not shared between systems.
+
 ## Scan, review and approve
 
 Scanning reads Git-tracked files only. Do not Git-ignore `trust/` (or the
@@ -206,5 +327,5 @@ independent CODEOWNER review, and merge to the default branch. This
 file, its reasons and a passing local scan are not themselves approval.
 Approved export/publication additionally require an active license.
 
-See the [CLI reference](cli-reference.md) and
+See the [`scan`](cli/scan.md) reference and
 [approved export rules](approved-export.md).

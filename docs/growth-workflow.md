@@ -23,7 +23,7 @@ The engine is the published `trustbom` npm package pinned in
 uses the local reusable workflow (`uses: ./.github/workflows/growth.yml`), which runs
 that Action for the pull-request review and the same install action for the
 default-branch `pack`, `answer`, and `publish` steps. Upgrade with
-`trustbom init --upgrade` (see [upgrading generated files](cli-reference.md#upgrading-generated-files))
+`trustbom init --upgrade` (see [upgrading generated files](cli/init.md#upgrading-generated-files))
 or by changing the
 version in the install action through a reviewed pull request; the pinned version
 must support portfolios and the verbs listed below. Because pull requests run

@@ -23,7 +23,7 @@ independent signature or trusted delivery channel (see step 2).
 ## 1. Verify the files (free, offline)
 
 Install the CLI with the install script for your platform (see
-[installation](cli-reference.md#1-install-the-cli); no Node.js or .NET SDK
+[installation](installing.md); no Node.js or .NET SDK
 needed), or with npm, which needs Node.js:
 
 ```powershell
@@ -120,6 +120,6 @@ Publish `export/manifest.json.sigstore` alongside the pack. Buyers then follow
 steps 1 and 2 above. `trustbom verify` ignores `manifest.json.sigstore` when
 checking files, so a signed pack still verifies cleanly.
 
-See the [CLI reference](./cli-reference.md#verify-a-received-pack) for the
+See the [`verify` reference](./cli/verify.md) for the
 `trustbom verify` options and [approved-export.md](./approved-export.md) for how
 approved packs are produced.

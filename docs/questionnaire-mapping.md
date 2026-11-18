@@ -63,3 +63,45 @@ Use `--from <artifacts-dir>` to answer from verified approved sibling-repository
 bundles rather than a local monorepo. Verification requires access to each
 source repository's current default-branch approval; an uploaded `card.json`
 is not evidence of approval by itself.
+
+## Buyer-answer drift
+
+To check buyer-answer drift, run
+`trustbom drift [--register <path>]` (a paid command: it checks the license first, see
+[license enforcement](cli/license.md#license-enforcement)) to compare explicitly supplied, reviewed
+answer versions in a tracked YAML register with current graph evidence. The
+default register path is `trust/answer-register.yml`. The register stores
+identifiers, approved source commits and hashes, semantic field dependencies,
+and tracked citations, not buyer question or answer text. The internal report
+shows each supplied version, its approved source snapshot, changed facts, and
+Trust's review action. Exit code `0` means the report was verified (even when
+answers are affected); `2` means a register or source cannot be verified.
+Previously supplied versions are immutable: append a newly reviewed version
+bound to its new approved graph. The GitHub Action publishes only counts in
+its existing marked PR comment, and drift never changes the gate result,
+`card.json`, or `approvals.yml`. The command reference is [`drift`](cli/drift.md).
+
+## Reviewed workbook reuse
+
+To reuse reviewed workbook answers, run
+`trustbom answer --workbook buyer.xlsx --sheet Sheet1 --id-column id
+--question-column question --answer-column answer --suggest-only` to write
+draft match suggestions against the vendor's reviewed answer register (see
+[Buyer-answer drift](#buyer-answer-drift)) to a tracked mapping file (default
+`trust/answer-reuse.yml`) and a draft report under `export/`. After Trust
+reviews and marks accepted rows `status: reviewed` in Git, rerun the same
+command without `--suggest-only` to export a filled copy of the workbook plus
+a cited reuse report. Both the suggestions report and export report identify
+the source answer version, per-system graph fingerprint and evidence paths;
+they remain local and are not posted to PR comments. Unknown or uncited
+answers, unverified or affected dependencies, ambiguous matches, and
+unreviewed mappings remain unresolved. A new suggestion run replaces older
+reuse output rather than retaining a buyer-ready workbook.
+
+For sibling imports, `answer --from artifacts` and
+`publish --from artifacts` use the same verified approved snapshots as
+`pack --from artifacts`. Set a read-only `TRUSTBOM_GITHUB_TOKEN` with access
+to each source repository and prepare `portfolio-import.json` as described
+in the [Growth workflow guide](growth-workflow.md). Unverified artifact
+content is never an approved buyer claim. The command reference is
+[`answer`](cli/answer.md).

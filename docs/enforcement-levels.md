@@ -85,7 +85,7 @@ asked.
 
 ## Related
 
-- [CLI reference: applying and checking the ruleset](cli-reference.md#applying-the-approval-ruleset)
+- [CLI reference: applying and checking the ruleset](cli/github-rules.md#apply-the-ruleset)
 - [GitHub Action guide](github-action.md#recommended-repository-controls)
 - [Reducing review friction](reducing-review-friction.md)
 - [Approved export](approved-export.md)

@@ -390,7 +390,7 @@ hashes cannot pass those checks.
 Keep supplied versions immutable; append a newly reviewed/supplied version
 instead of rewriting history. Invalid/unverifiable input is an explicit
 error; verified affected answers are reported for review, not automatically
-reapproved. See [the drift walkthrough](cli-reference.md#buyer-answer-drift).
+reapproved. See [the drift walkthrough](questionnaire-mapping.md#buyer-answer-drift).
 
 ## Reviewed workbook mapping
 
