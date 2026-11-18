@@ -6,8 +6,8 @@ questions that cannot be answered.
 
 **You will need:** the approved repository from [page 3](3-approve.md) (the
 checkpoint reached, `main` checked out, `origin/main` equal to `main`) and the
-licence from [Get a licence](get-a-licence.md): `export` and `answer` are paid
-commands. Without a licence they exit `4` with a `license-*` diagnostic
+license from [Get a license](get-a-license.md): `export` and `answer` are paid
+commands. Without a license they exit `4` with a `license-*` diagnostic
 ([licensing diagnostics](../licensing.md#diagnostics-and-exit-codes)).
 
 ## Try it

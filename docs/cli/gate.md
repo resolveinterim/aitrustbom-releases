@@ -50,9 +50,9 @@ trustbom gate --baseline trust/approvals.yml --fail-on medium
 | `2` | Operational or argument failure (for example an invalid `--fail-on`, or Git or input failures). |
 | `3` | Policy failure (`CliExitCodes.GateFailed`). |
 
-## Licence
+## License
 
-Free, single-system or portfolio. `gate` never checks a licence.
+Free, single-system or portfolio. `gate` never checks a license.
 
 ## Example
 

@@ -52,9 +52,9 @@ alignment section appears in approved `publish` and `pack` output.
 | `1` | Parser or usage error. |
 | `2` | Operational or argument failure, including an unknown framework id (rejected before any file is written). |
 
-## Licence
+## License
 
-Free. `readiness` never checks a licence; framework overlays are free and offline.
+Free. `readiness` never checks a license; framework overlays are free and offline.
 
 ## Example
 

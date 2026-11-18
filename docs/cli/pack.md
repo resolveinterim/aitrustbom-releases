@@ -36,7 +36,7 @@ never an approved buyer claim.
 | `2` | Refused or operational failure (changed membership, an unapproved system, unverified artifacts, Git or input failures). |
 | `4` | Entitlement failure. |
 
-## Licence
+## License
 
 **Paid**, including `--from`.
 
@@ -46,7 +46,7 @@ never an approved buyer claim.
 trustbom pack
 ```
 
-With a usable licence and every system approved on its default branch it
+With a usable license and every system approved on its default branch it
 writes the portfolio pack. Without one nothing is written; a build with
 licensing not configured printed (real output, exit `4`):
 

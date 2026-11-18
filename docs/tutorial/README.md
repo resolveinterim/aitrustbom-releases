@@ -37,10 +37,10 @@ to answer a customer. See the glossary for terms.
   **PowerShell** and **bash** pair where they differ; run the one for your shell.
 - The `trustbom` CLI. The simplest route is `npm install --global trustbom`;
   other routes avoid Node.js. See [installing the CLI](../installing.md).
-- **A free trial licence before page 4.** Pages 1 to 3 use only free
+- **A free trial license before page 4.** Pages 1 to 3 use only free
   commands. The approved `export`, `answer` and `publish` commands on pages 4
-  and 5 are paid, so do [Get a licence](get-a-licence.md) after page 3
-  (the trial emails a key, so start it early if you like). The licence is bound
+  and 5 are paid, so do [Get a license](get-a-license.md) after page 3
+  (the trial emails a key, so start it early if you like). The license is bound
   to the GitHub owner in `origin`, so fork the starter into your own account on
   page 1. [Licensing](../licensing.md#free-and-paid-commands) lists which commands
   are free.
@@ -73,7 +73,7 @@ interrupt a command sequence and need not be run.
 | [1. Set up](1-setup.md) | Clone, `init`, identity, scope exclusion, first scan | Core |
 | [2. Detect](2-detect.md) | Add Gemini and an MCP connection; read the card and questionnaire | Core |
 | [3. Approve](3-approve.md) | Resolve findings, `gate`, `request-approval`, merge as Trust | Core |
-| [Get a licence](get-a-licence.md) | Activate a free trial for the paid commands | Before page 4 |
+| [Get a license](get-a-license.md) | Activate a free trial for the paid commands | Before page 4 |
 | [4. Answer](4-answer.md) | Draft versus approved export; answer the RFI | Independent |
 | [5. Publish](5-publish.md) | CycloneDX, readiness, `publish`, `verify` | Independent |
 | [6. Automate](6-automate.md) | The Action, PR comment, enforcement, upgrade, portfolio | Independent |

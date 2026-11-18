@@ -177,7 +177,7 @@ checkpoint reached and the stand-in remote from [page 1](1-setup.md#try-it).
    Both commit ids are identical. [`trustbom export`](../cli/export.md#example)
    uses the approval on the **default branch**, never the current branch; it
    is a paid command, so it runs on [page 4](4-answer.md) after
-   [Get a licence](get-a-licence.md). If it says
+   [Get a license](get-a-license.md). If it says
    `Git cannot prove the default branch`, run `git remote set-head origin main`
    (offline) and retry.
 

@@ -29,9 +29,9 @@ register stores and how versions are appended.
 | `2` | A register or source cannot be verified. |
 | `4` | Entitlement failure. |
 
-## Licence
+## License
 
-**Paid.** `drift` checks the licence first.
+**Paid.** `drift` checks the license first.
 
 ## Example
 
@@ -39,7 +39,7 @@ register stores and how versions are appended.
 trustbom drift
 ```
 
-With a usable licence and a tracked `trust/answer-register.yml` it prints the
+With a usable license and a tracked `trust/answer-register.yml` it prints the
 internal report. Without one it prints nothing but the diagnostic; a build with
 licensing not configured printed (real output, exit `4`):
 

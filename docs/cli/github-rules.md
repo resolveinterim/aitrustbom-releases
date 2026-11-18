@@ -97,9 +97,9 @@ be proven centrally. `--github-rules` cannot be combined with `--draft`.
 | `2` | `apply` failed: no repository admin rights (nothing written, the admin steps are printed), no usable `gh`, or an operational error. |
 | `3` | `check` found `violation`, or a level below `enforced` with `--require-enforced`. |
 
-## Licence
+## License
 
-Free. `github-rules` never checks a licence.
+Free. `github-rules` never checks a license.
 
 ## Example
 

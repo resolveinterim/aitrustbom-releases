@@ -51,9 +51,9 @@ trustbom verify export --repo .
 | `1` | Parser or usage error. |
 | `2` | Verification failed (a file changed, was added or removed, or the manifest is missing) or an operational error. |
 
-## Licence
+## License
 
-Free and offline. `verify` never checks a licence or the network.
+Free and offline. `verify` never checks a license or the network.
 
 ## Example
 

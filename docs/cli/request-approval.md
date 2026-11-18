@@ -94,9 +94,9 @@ trustbom request-approval --check-controls
 | `1` | Parser or usage error. |
 | `2` | Refused with no changes: unwaived findings at the threshold, rejections, break-glass, invalid manual input, missing identity, or an invalid option value. |
 
-## Licence
+## License
 
-Free. `request-approval` never checks a licence and never approves anything.
+Free. `request-approval` never checks a license and never approves anything.
 
 ## Example
 

@@ -64,7 +64,7 @@ scripted.
 > Operations: an internal npm registry or offline install is covered in
 > [offline and mirrored installs](../installing.md#offline-and-mirrored-installs)
 > and the [Action guide](../github-action.md#generated-consumer-workflow); the
-> licence in CI and its exit codes in [licensing](../licensing.md#continuous-integration);
+> license in CI and its exit codes in [licensing](../licensing.md#continuous-integration);
 > several systems in one repository with
 > [`trustbom scan --portfolio`](../cli/scan.md#options),
 > [`trustbom gate --portfolio`](../cli/gate.md#options) and

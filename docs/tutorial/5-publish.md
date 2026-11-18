@@ -4,7 +4,7 @@
 page, check readiness, and verify the result the way a buyer would.
 
 **You will need:** the approved repository from [page 3](3-approve.md) and the
-licence from [Get a licence](get-a-licence.md). `export` and `publish` are paid;
+license from [Get a license](get-a-license.md). `export` and `publish` are paid;
 `readiness` and `verify` are free
 ([which commands are paid](../licensing.md#free-and-paid-commands)). This page
 does not depend on [page 4](4-answer.md).

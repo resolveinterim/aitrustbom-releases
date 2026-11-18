@@ -57,9 +57,9 @@ trustbom export --format cyclonedx
 | `0` | Success. |
 | `1` | Parser or usage error (for example an unknown `--format`). |
 | `2` | Refused or operational failure: missing, invalid or stale approval, unwaived finding or rejection, default branch not provable, shallow clone, or invalid option combination. |
-| `4` | Entitlement failure (approved export only; `--draft` never checks a licence). |
+| `4` | Entitlement failure (approved export only; `--draft` never checks a license). |
 
-## Licence
+## License
 
 **Paid** for approved export. `export --draft` is free.
 
@@ -80,8 +80,8 @@ Full fingerprint: 42ff94542d7806435413a1de532e05b98f5cf7c5cdc150fd58d059c41902ac
 Status: internal draft - unapproved - not for customer use
 ```
 
-Exit code `0`. The approved form, `trustbom export`, checks the licence first.
-Without a usable licence it writes nothing, prints `license-<id>: <message>`
+Exit code `0`. The approved form, `trustbom export`, checks the license first.
+Without a usable license it writes nothing, prints `license-<id>: <message>`
 on standard error and exits `4`; with one it writes the three files above and
 labels the card `approved`.
 

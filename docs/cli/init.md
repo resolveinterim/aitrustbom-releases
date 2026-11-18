@@ -150,9 +150,9 @@ with `init` after removing the old workflow files.
 | `1` | Parser or usage error (unknown option). |
 | `2` | Operational failure: Git or file failures, an incompatible option combination, cancelled interactive setup or invalid terminal, a failed requested scan, or `--upgrade` on a development build without `TRUSTBOM_ACTION_VERSION`. Ctrl+C at an interactive prompt was observed to exit `130`. |
 
-## Licence
+## License
 
-Free. `init` never checks a licence, prompts or contacts the licence service.
+Free. `init` never checks a license, prompts or contacts the license service.
 
 ## Example
 

@@ -19,7 +19,7 @@ company that sends a pack.
 4. [Install the CLI](installing.md): installer scripts, npm, offline installs
    and first-run warnings.
 5. [CLI reference](cli/README.md): one page per command, from `init` to
-   approved `export`, with options, exit codes and licence tier.
+   approved `export`, with options, exit codes and license tier.
 6. [GitHub Action](github-action.md): the generated workflow, permissions,
    gate and pull-request comment.
 7. [YAML input reference](yaml-input-reference.md): the files you author and

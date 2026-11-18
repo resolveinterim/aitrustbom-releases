@@ -49,7 +49,7 @@ approved snapshots as `pack --from artifacts`.
 | `2` | Unmatched rows or an operational error (the error is written to standard error). |
 | `4` | Entitlement failure (`answer` is paid in every mode). |
 
-## Licence
+## License
 
 **Paid**, in every mode, including workbook reuse and `--suggest-only`.
 
@@ -62,7 +62,7 @@ trustbom answer --questions customer.csv
 On success it writes `export/answers.csv` (`id,question,section,answer,cites,confidence`)
 and `export/unmatched.csv` (`id,text,section`) together. Rows Trust must answer
 separately appear in `unmatched.csv` and make the exit code `2`. Without a
-usable licence nothing is written. A build without licensing configured
+usable license nothing is written. A build without licensing configured
 printed (real output, exit `4`):
 
 ```text

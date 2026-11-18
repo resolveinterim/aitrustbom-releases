@@ -23,7 +23,7 @@ after the command) to suppress it in automation. Generated artifacts never
 include the line. The `tbom` command is a short alias that runs `trustbom`.
 
 `trustbom license` prints the license terms for the installed version. It works
-offline and needs no licence.
+offline and needs no license.
 
 ## Offline and mirrored installs
 

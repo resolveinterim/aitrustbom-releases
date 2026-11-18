@@ -111,7 +111,7 @@ unresolved owner reports `license-owner-mismatch`.
 | `2` | Operational failure of a management command. |
 | `4` | `license status` found the cached state not usable (no lease, a lease for another GitHub owner, a lease that did not verify, a suspended license, or a trial, subscription or lease that has ended). Paid commands exit `4` on any entitlement failure. |
 
-## Licence
+## License
 
 Free. `license` and every `license` subcommand are never paywalled and never
 check a license.

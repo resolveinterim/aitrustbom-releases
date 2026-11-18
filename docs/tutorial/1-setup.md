@@ -9,7 +9,7 @@ are and what is out of scope, and run the first scan.
 local stand-in for the GitHub remote.
 
 Everything on pages 1 to 3 uses free commands. The paid commands on pages 4
-and 5 need a trial licence, which the page [Get a licence](get-a-licence.md)
+and 5 need a trial license, which the page [Get a license](get-a-license.md)
 sets up before page 4.
 
 ## Try it
@@ -17,7 +17,7 @@ sets up before page 4.
 1. **Clone the starter**, then read
    `service/experience.md`
    and `rfi/request.csv`.
-   A licence is bound to the GitHub owner in `origin`, so **fork**
+   A license is bound to the GitHub owner in `origin`, so **fork**
    [`resolveinterim/abingdon-taxi-solutions`](https://github.com/resolveinterim/abingdon-taxi-solutions)
    into your own GitHub account first and clone the fork (replace
    `<your-owner>`).
@@ -31,7 +31,7 @@ sets up before page 4.
    an approval you must update that reference. A real team merges a pull
    request on GitHub; in this exercise you push to a local bare repository
    instead, so nothing is written to the public repository. The fetch URL
-   stays on GitHub (the licence checks the owner in it). The same two
+   stays on GitHub (the license checks the owner in it). The same two
    commands work in both shells:
 
    ```sh

@@ -109,10 +109,10 @@ default; Trust can still declare its external hosting provider explicitly.
 | `1` | Parser or usage error (unknown option). The usage text is printed and nothing is written. |
 | `2` | Operational failure, such as a Git or input failure. |
 
-## Licence
+## License
 
 Free, single-system or portfolio, any number of systems. `scan` never checks a
-licence.
+license.
 
 ## Example
 

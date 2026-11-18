@@ -32,7 +32,7 @@ for the baseline rules and limits.
 | `1` | Parser or usage error. |
 | `2` | No Markdown: an unavailable default branch, missing or shallow history, an unverified baseline, a malformed or tampered graph, fewer than two verified baselines in implicit mode, or a comparison with more than 500 semantic changes. |
 
-## Licence
+## License
 
 Free. `changelog` is not a paid command.
 

@@ -48,7 +48,7 @@ artifact content is never an approved buyer claim.
 | `2` | Refused or operational failure (approval missing, invalid or stale; unwaived finding; default branch not provable; invalid option combination). |
 | `4` | Entitlement failure. |
 
-## Licence
+## License
 
 **Paid**, including `--draft` and `--from`.
 
@@ -58,7 +58,7 @@ artifact content is never an approved buyer claim.
 trustbom publish
 ```
 
-With a usable licence and an approved graph on the default branch this writes
+With a usable license and an approved graph on the default branch this writes
 `export/site/` as described above. Without one nothing is written; a build with
 licensing not configured printed (real output, exit `4`):
 
