@@ -19,7 +19,7 @@ Resolve Interim.
 "Trial Period" means the 30 days beginning when the license service issues a
 trial key for a GitHub owner.
 
-"Subscription" means a paid, per-organization right to use the Software,
+"Subscription" means a paid, per-GitHub-owner right to use the Software,
 billed monthly or annually at the prices published on its official pricing
 page or set forth in an applicable order form.
 
@@ -51,8 +51,8 @@ owner binding automatically. On written request, Resolve Interim may, at its
 reasonable discretion, rebind an active entitlement to a new GitHub owner
 namespace.
 
-One Trial Period and one Subscription cover one GitHub owner. Your
-organization and its Affiliates may use Paid Operations only for repositories
+One Trial Period and one Subscription cover one GitHub owner. You
+and Your Affiliates may use Paid Operations only for repositories
 under that owner; a repository under a different GitHub owner requires a
 separate Subscription and entitlement. Your employees and contractors acting
 on behalf of You or an Affiliate may run the Software for Your benefit. You
@@ -103,7 +103,7 @@ renewal but does not shorten the already-paid billing period.
 
 Free Operations do not require a trial or Subscription and remain available
 after a trial or paid entitlement ends. They include `init`, `scan`, `gate`,
-`readiness`, `request-approval`, default-branch `stamp`, `export --draft`,
+`readiness`, `request-approval`, `export --draft`,
 the Docker-free Action's scan/gate, PR comment and check, `license`
 management commands, and `version`. Free Operations do not check
 entitlement, prompt for a key, or emit `license-*` diagnostics. The explicit
