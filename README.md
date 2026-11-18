@@ -8,6 +8,6 @@ This repository hosts the downloadable release builds of **AI TrustBOM**, a prod
 
 ## Releases
 
-Each release lists the self-contained `trustbom` binaries for Windows, Linux and macOS, and a `SHA256SUMS` file. Verify the checksum of a download before you run it.
+Choose the [latest stable release](https://github.com/resolveinterim/aitrustbom-releases/releases/latest). Each release includes standalone installers and checksum-verified archives for Windows, Linux and macOS.
 
-No release has been published yet. Install instructions will be added here and on <https://aitrustbom.com/install/> when the first release is available.
+If you already have Node.js and npm, install with `npm install --global trustbom`. Otherwise, use the installer for your platform. The complete download, install and first-scan steps are at <https://aitrustbom.com/install/>; see the [CLI installation reference](docs/cli-reference.md#1-install-the-cli) for offline and other options.
