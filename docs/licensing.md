@@ -33,8 +33,8 @@ never prompt.
 - **Trial:** 30 days from when the trial key is issued; no card. One trial
   per GitHub owner. The service emails the key to the requester (that is the
   email verification) and never returns it in a response.
-- **Paid:** access runs to Paddle's paid-through date plus 7 days. A renewal
-  payment moves it forward; cancelling or a failed payment needs no action.
+- **Paid:** a subscription covers its current paid billing period. A renewal
+  payment extends access; cancelling stops future renewals.
   On the first payment the service emails a **new paid key**; the trial key
   simply expires. Replace the key once, locally (`license activate`) and in the `TRUSTBOM_LICENSE_KEY` CI secret.
 - **Lease:** a signed, owner-bound lease valid until the earlier of the
