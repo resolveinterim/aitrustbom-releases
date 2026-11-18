@@ -28,22 +28,22 @@ company that sends a pack.
    example, subprocessors, data handling and CI evaluation results.
 9. [Reducing review friction](reducing-review-friction.md): keep approvals
    small, fast and in Git.
-   [Enforcement levels](enforcement-levels.md): `enforced`, `audited`,
-   `violation` and `unverified`, and how to reach `enforced`.
+10. [Enforcement levels](enforcement-levels.md): `enforced`, `audited`,
+    `violation` and `unverified`, and how to reach `enforced`.
 
 ## Share with buyers
 
-10. [Approved and draft export](approved-export.md): the approved customer pack
+11. [Approved and draft export](approved-export.md): the approved customer pack
     and explicit draft packs.
-11. [Map a buyer questionnaire](questionnaire-mapping.md): answer a buyer's
+12. [Map a buyer questionnaire](questionnaire-mapping.md): answer a buyer's
     questions from approved evidence, including answer drift and workbook reuse.
-12. [Publish the trust page](trust-page.md): a static trust site, for example on
+13. [Publish the trust page](trust-page.md): a static trust site, for example on
     GitHub Pages.
-13. [Growth reusable workflow](growth-workflow.md): scan and approve a portfolio
+14. [Growth reusable workflow](growth-workflow.md): scan and approve a portfolio
     of systems in one repository.
-14. [Review pack history](pack-history.md): compare approved graphs over time.
+15. [Review pack history](pack-history.md): compare approved graphs over time.
 
 ## Receive and verify
 
-15. [Verifying a received pack](pack-verification.md): for buyers checking a
+16. [Verifying a received pack](pack-verification.md): for buyers checking a
     vendor's pack.

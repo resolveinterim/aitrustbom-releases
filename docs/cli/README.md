@@ -1,7 +1,7 @@
 # Welcome to the CLI reference
 
 This is the reference for `trustbom`, the AI TrustBOM command-line tool. Here
-you will find every command with its options, exit codes, licence tier,
+you will find every command with its options, exit codes,
 examples and common errors. Use it when you know what you want to do and need
 the exact command, or want to check what a command writes and when it fails.
 
@@ -16,33 +16,14 @@ and gates on pull requests, and [approved export](../approved-export.md).
 
 ## Commands
 
-| Command | Page | Licence |
-|---|---|---|
-| `trustbom init` | [init](init.md) | Free |
-| `trustbom scan` | [scan](scan.md) | Free |
-| `trustbom gate` | [gate](gate.md) | Free |
-| `trustbom request-approval` | [request-approval](request-approval.md) | Free |
-| `trustbom export` | [export](export.md) | Paid (approved export; `--draft` is free) |
-| `trustbom answer` | [answer](answer.md) | Paid (every mode) |
-| `trustbom publish` | [publish](publish.md) | Paid |
-| `trustbom verify` | [verify](verify.md) | Free, offline |
-| `trustbom readiness` | [readiness](readiness.md) | Free |
-| `trustbom github-rules` | [github-rules](github-rules.md) | Free |
-| `trustbom license` | [license](license.md) | Free |
-| `trustbom pack` | [pack](pack.md) | Paid |
-| `trustbom changelog` | [changelog](changelog.md) | Free |
-| `trustbom drift` | [drift](drift.md) | Paid |
-
-## Summary of commands
-
 | Command | Purpose |
 |---|---|
 | [`trustbom init`](init.md) | Write preserved-file scaffolding; use `--interactive` for previewed single-system onboarding and optional read-only setup checks |
 | [`trustbom scan`](scan.md) | Detect AI usage and write `trust/card.json`, `card.md`, `questionnaire.yml`, `findings.sarif` |
 | [`trustbom gate`](gate.md) | Compare the current graph with the approved baseline and explain what blocks the PR |
 | [`trustbom request-approval [--check-controls]`](request-approval.md) | Author an approval-file proposal for independent CODEOWNER review; optionally inspect read-only GitHub controls |
-| [`trustbom export`](export.md) | **Paid** (not `--draft`). Write the approved `export/card.md` and `export/questionnaire.yml` (or `--draft` for an internal snapshot); `--format cyclonedx` also writes `export/trustbom.cdx.json` |
-| [`trustbom publish`](publish.md) | **Paid.** Render a self-contained static trust page under `export/site/` (index, per-system pages, `verify.html`, `index.pdf`, downloads and approved `manifest.json`) from approved graphs, or `--draft` for a watermarked internal pack |
+| [`trustbom export`](export.md) | Write the approved `export/card.md` and `export/questionnaire.yml` (or `--draft` for an internal snapshot); `--format cyclonedx` also writes `export/trustbom.cdx.json` |
+| [`trustbom publish`](publish.md) | Render a self-contained static trust page under `export/site/` (index, per-system pages, `verify.html`, `index.pdf`, downloads and approved `manifest.json`) from approved graphs, or `--draft` for a watermarked internal pack |
 | [`trustbom license`](license.md) | Print the license terms for the installed version; works offline |
 | [`trustbom license activate [--github-owner <owner>]`](license.md#options) | Exchange a license key (prompted, hidden, or piped on stdin) for a signed lease bound to the resolved GitHub owner |
 | [`trustbom license refresh [--github-owner <owner>]`](license.md#options) | Renew the license on this computer now, regardless of remaining lease time |
@@ -51,16 +32,13 @@ and gates on pull requests, and [approved export](../approved-export.md).
 | [`trustbom readiness`](readiness.md) | Write an advisory `export/readiness/` checklist for evidence coverage, approval validity, unresolved findings, and freshness; use `--framework <id>` for free offline framework-alignment overlays (`nist-ai-rmf`, `iso-42001`, `eu-ai-act`) |
 | [`trustbom init --upgrade [--dry-run]`](init.md#upgrading-generated-files) | Rewrite only unedited marker-carrying generated files to the running CLI's pinned version. Never combined with `--growth` or `--interactive` |
 | [`trustbom init --growth`](init.md#options) | Create a portfolio template, CODEOWNERS guidance, a local reusable Growth workflow and caller, and the pinned per-repository Action without overwriting existing files |
-| [`trustbom github-rules apply [--dry-run] [--yes]`](github-rules.md#apply-the-ruleset) | **Free.** Create or update the `trustbom-approval` ruleset (written by `init` to `.github/rulesets/trustbom.json`) through your `gh` login; needs repository admin rights, otherwise nothing changes and the admin steps print |
-| [`trustbom github-rules check [--github] [--require-enforced]`](github-rules.md#check-the-enforcement-level) | **Free.** Report the enforcement level (`enforced`, `audited`, `violation`, `unverified`) with per-rule status; offline unless `--github`; exits `3` on `violation`, or below `enforced` with `--require-enforced` |
-| [`trustbom pack [--from artifacts]`](pack.md) | **Paid.** Render independently approved monorepo or GitHub-verified sibling graphs into one portfolio pack |
-| [`trustbom verify [<path>] [--repo <path>]`](verify.md) | **Free, offline.** Check a received pack against its `manifest.json`; with `--repo`, also confirm approved fingerprints against the named approvals |
-| [`trustbom answer --portfolio --questions customer.csv`](answer.md) | **Paid** (every `answer` mode). Combine approved per-system answers with separate source citations into one row per buyer question |
-| [`trustbom changelog`](changelog.md) | **Free.** Print a Git-derived Markdown comparison of approved graph baselines |
-| [`trustbom drift [--register <path>]`](drift.md) | **Paid.** Report which registered buyer answers may be stale against current graph evidence |
-
-`trust/card.json` is always the machine source of truth; every other artifact
-is a renderer of it.
+| [`trustbom github-rules apply [--dry-run] [--yes]`](github-rules.md#apply-the-ruleset) | Create or update the `trustbom-approval` ruleset (written by `init` to `.github/rulesets/trustbom.json`) through your `gh` login; needs repository admin rights, otherwise nothing changes and the admin steps print |
+| [`trustbom github-rules check [--github] [--require-enforced]`](github-rules.md#check-the-enforcement-level) | Report the enforcement level (`enforced`, `audited`, `violation`, `unverified`) with per-rule status; offline unless `--github`; exits `3` on `violation`, or below `enforced` with `--require-enforced` |
+| [`trustbom pack [--from artifacts]`](pack.md) | Render independently approved monorepo or GitHub-verified sibling graphs into one portfolio pack |
+| [`trustbom verify [<path>] [--repo <path>]`](verify.md) | Check a received pack against its `manifest.json`; with `--repo`, also confirm approved fingerprints against the named approvals |
+| [`trustbom answer --portfolio --questions customer.csv`](answer.md) | Combine approved per-system answers with separate source citations into one row per buyer question |
+| [`trustbom changelog`](changelog.md) | Print a Git-derived Markdown comparison of approved graph baselines |
+| [`trustbom drift [--register <path>]`](drift.md) | Report which registered buyer answers may be stale against current graph evidence |
 
 ### Exit codes
 
@@ -74,7 +52,3 @@ is a renderer of it.
 
 Treat any nonzero code as a failure in automation; parser errors exit `1`
 rather than `2` and fail closed.
-
-Five commands are paid and check the license before doing any work; every
-other command is free. See [license enforcement](license.md#license-enforcement)
-and the [licensing guide](../licensing.md).

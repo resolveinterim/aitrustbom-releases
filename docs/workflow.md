@@ -6,27 +6,9 @@ This is the end-to-end workflow at a glance. Each step links to the
 
 **Who is involved:** your developers, an existing team member authorized to
 review and approve the record (the **Trust approver**), and recipients such
-as customers or auditors. This is a responsibility, not a new hire or
-department.
+as customers or auditors.
 
-```mermaid
-flowchart TD
-  A["Install (once)"] --> B["Initialise repository and configure review protections (once)"]
-  B --> C["Scan supported repository evidence"]
-  C --> D["Add any needed declarations in trust/manual.yml"]
-  D --> C2["Re-scan exact record"]
-  C2 --> L{"Local gate check"}
-  L -->|needs attention| D
-  L -->|finding needs waiver| W["Propose time-bounded waiver with a reason"]
-  W --> R["Request approval and prepare exact-record proposal"]
-  L -->|ready for review| R
-  R --> P["Open pull request with approval proposal"]
-  P --> E{"PR check against approved record"}
-  E -->|needs attention| D
-  E -->|passes| G["Authorized teammate independently reviews exact record and merges"]
-  G --> H["Export approved evidence snapshot"]
-  H --> I["Recipient checks pack against its manifest"]
-```
+For a graphical overview of the flow, including the loops back when a check or\nreview needs changes, see the [workflow diagram](workflow-diagram.md).
 
 ## 1. Get set up (once)
 
@@ -74,8 +56,7 @@ See [manual declarations](manual-declarations.md).
   - **Needs attention:** fix the issue or add a declaration (step 3), then
     re-scan.
   - **A finding can't be fixed now:** add a waiver (step 5).
-  - **Needs approval:** request approval (step 6).
-  - **Ready:** open a pull request (step 7).
+  - **Ready:** request approval (step 6).
 
 See [evaluate the gate](cli/gate.md).
 
@@ -106,11 +87,11 @@ authoritative evidence of who reviewed the change.
 
 ## 7. Open a pull request
 
-- The generated workflow runs the gate and comments on the pull request.
+- Open a pull request with the approval entry. The generated workflow runs the\n  gate again on GitHub (the remote check) and comments on the pull request.
   Require its status check and configure branch protections if a failing
   gate must prevent merging; a workflow or CODEOWNERS file alone does not
   enforce that.
-- If it needs attention, go back to step 3.
+- If the remote check needs attention, go back to step 3.
 
 See [the GitHub Action](github-action.md).
 
@@ -120,9 +101,11 @@ See [the GitHub Action](github-action.md).
   independently reviews the exact record and approval entry, then merges.
   GitHub review and merge history records that action; the YAML approver
   fields are declarations, not proof of the review.
+- If the approver requests changes or rejects the pull request, go back to\n  step 3.
 
 ## 9. Share your disclosure
 
+- A developer, the Trust approver or an automated job after the merge runs\n  the export.
 - Paid `trustbom export` produces a snapshot of the approved record:
   summary, questionnaire answers and an integrity manifest. Add
   `--format cyclonedx` for a CycloneDX BOM. `export --draft` is free and
