@@ -11,23 +11,21 @@ department.
 
 ```mermaid
 flowchart TD
-  subgraph once [One-time setup]
-    A[Install] --> B[Initialise repository<br/>configure review protections]
-  end
-  B --> C[Scan supported repository evidence]
-  C --> D[Add any needed declarations in trust/manual.yml]
-  D --> C2[Re-scan exact record]
-  C2 --> L{Local gate check}
-  L -- needs attention --> D
-  L -- finding needs waiver --> W[Propose time-bounded waiver<br/>with a reason]
-  W --> R[Request approval<br/>and prepare exact-record proposal]
-  L -- ready for review --> R
-  R --> P[Open pull request<br/>with approval proposal]
-  P --> E{PR check against approved record}
-  E -- needs attention --> D
-  E -- passes --> G[Authorized teammate independently<br/>reviews exact record and merges]
-  G --> H[Export approved evidence snapshot]
-  H --> I[Recipient checks pack<br/>against its manifest]
+  A["Install (once)"] --> B["Initialise repository and configure review protections (once)"]
+  B --> C["Scan supported repository evidence"]
+  C --> D["Add any needed declarations in trust/manual.yml"]
+  D --> C2["Re-scan exact record"]
+  C2 --> L{"Local gate check"}
+  L -->|needs attention| D
+  L -->|finding needs waiver| W["Propose time-bounded waiver with a reason"]
+  W --> R["Request approval and prepare exact-record proposal"]
+  L -->|ready for review| R
+  R --> P["Open pull request with approval proposal"]
+  P --> E{"PR check against approved record"}
+  E -->|needs attention| D
+  E -->|passes| G["Authorized teammate independently reviews exact record and merges"]
+  G --> H["Export approved evidence snapshot"]
+  H --> I["Recipient checks pack against its manifest"]
 ```
 
 ## 1. Get set up (once)
