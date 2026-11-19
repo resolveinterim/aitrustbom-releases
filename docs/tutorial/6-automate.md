@@ -24,13 +24,13 @@ scripted.
    trustbom init --upgrade --dry-run
    ```
 
-   ```text
-   Upgrade plan for <repo>:
-     unchanged: .github/workflows/ai-trustbom.yml (already current (<version>))
-     unchanged: .github/actions/trustbom/action.yml (already current (<version>))
-     unchanged: .github/actions/trustbom/install/action.yml (already current (<version>))
-   Dry run complete; no files were modified.
-   ```
+   Output:
+
+       Upgrade plan for <repo>:
+         unchanged: .github/workflows/ai-trustbom.yml (already current (<version>))
+         unchanged: .github/actions/trustbom/action.yml (already current (<version>))
+         unchanged: .github/actions/trustbom/install/action.yml (already current (<version>))
+       Dry run complete; no files were modified.
 
    See [upgrading generated files](../cli/init.md#upgrading-generated-files).
 

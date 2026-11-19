@@ -19,13 +19,13 @@ does not depend on [page 4](4-answer.md).
    trustbom readiness --framework nist-ai-rmf
    ```
 
-   ```text
-   Wrote <repo>/export/readiness/readiness.md
-   Wrote <repo>/export/readiness/readiness.json
-   Readiness gaps: <count>; assessed: <count>; excluded: <count>
-   Wrote <repo>/export/readiness/frameworks/nist-ai-rmf.md
-   Wrote <repo>/export/readiness/frameworks/nist-ai-rmf.json
-   ```
+   Output:
+
+       Wrote <repo>/export/readiness/readiness.md
+       Wrote <repo>/export/readiness/readiness.json
+       Readiness gaps: <count>; assessed: <count>; excluded: <count>
+       Wrote <repo>/export/readiness/frameworks/nist-ai-rmf.md
+       Wrote <repo>/export/readiness/frameworks/nist-ai-rmf.json
 
    The gaps are controls with no evidence in the repository; counts vary with
    the checkout. Each `card.json` also carries a coverage statement of what the
@@ -39,13 +39,13 @@ does not depend on [page 4](4-answer.md).
    trustbom export --format cyclonedx
    ```
 
-   ```text
-   Wrote <repo>/export/card.md
-   Wrote <repo>/export/questionnaire.yml
-   Wrote <repo>/export/trustbom.cdx.json
-   Wrote <repo>/export/manifest.json
-   Approved graph fingerprint: <12 lowercase hex characters>
-   ```
+   Output:
+
+       Wrote <repo>/export/card.md
+       Wrote <repo>/export/questionnaire.yml
+       Wrote <repo>/export/trustbom.cdx.json
+       Wrote <repo>/export/manifest.json
+       Approved graph fingerprint: <12 lowercase hex characters>
 
    An export replaces `export/`; if you ran page 4, it also reports removing
    `answers.csv` and `unmatched.csv`.
@@ -57,13 +57,13 @@ does not depend on [page 4](4-answer.md).
    trustbom publish
    ```
 
-   ```text
-   Publishing 1 system page(s) to export/site/ (approved).
-   ...
-   Wrote <repo>/export/site/index.html
-   Wrote <repo>/export/site/index.pdf
-   Status: approved
-   ```
+   Output:
+
+       Publishing 1 system page(s) to export/site/ (approved).
+       ...
+       Wrote <repo>/export/site/index.html
+       Wrote <repo>/export/site/index.pdf
+       Status: approved
 
    `export/site` holds `index.html`, `verify.html`, `index.pdf`,
    `manifest.json` and `downloads/<system>/` (`card.json`,
@@ -79,11 +79,11 @@ does not depend on [page 4](4-answer.md).
    trustbom verify export/site --repo .
    ```
 
-   ```text
-   Verified 6 file(s) plus manifest.json across 1 system(s) against manifest.json.
-   Repository check passed: approved fingerprints and approved graph commits match the default-branch approvals.
-   Pack verification: OK
-   ```
+   Output:
+
+       Verified 6 file(s) plus manifest.json across 1 system(s) against manifest.json.
+       Repository check passed: approved fingerprints and approved graph commits match the default-branch approvals.
+       Pack verification: OK
 
 > **In production.** Host `export/site` on GitHub Pages from the Action, so
 > the page changes only when an approval merges: see the

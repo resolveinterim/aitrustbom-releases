@@ -77,9 +77,8 @@ and `osx-x64`. The shell installer supports Linux and macOS; the PowerShell
 installer supports Windows. Both install into `$HOME/.local/bin` by default;
 add it to your `PATH` if needed.
 
-Linux needs the ICU runtime library (for example `libicu74` on Ubuntu 24.04,
-`libicu` on Fedora or RHEL). The installer warns if it is missing, and without
-it the binary stops at start-up. Alpine and musl are not supported.
+Linux needs a glibc-based distribution; no ICU library is required, because the
+binary runs with invariant globalization. Alpine and musl are not supported.
 
 ## Update and uninstall
 

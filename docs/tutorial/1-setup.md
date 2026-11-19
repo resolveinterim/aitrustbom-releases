@@ -31,8 +31,7 @@ sets up before page 4.
    an approval you must update that reference. A real team merges a pull
    request on GitHub; in this exercise you push to a local bare repository
    instead, so nothing is written to the public repository. The fetch URL
-   stays on GitHub (the license checks the owner in it). The same two
-   commands work in both shells:
+   stays on GitHub (the license checks the owner in it):
 
    ```sh
    git init --bare ../abingdon-origin.git
@@ -46,24 +45,24 @@ sets up before page 4.
    trustbom init
    ```
 
-   ```text
-   Initialization plan for <repo>:
-     create: trust/system.yml
-     create: trust/manual.yml
-     create: trust/approvals.yml
-     create: .github/CODEOWNERS
-     create: .github/rulesets/trustbom.json
-     create: .github/workflows/ai-trustbom.yml
-     create: .github/actions/trustbom/action.yml
-     create: .github/actions/trustbom/install/action.yml
-     preserve: .gitignore
-   Created 8 file(s); preserved 1 existing file(s).
-   ```
+   Output:
 
-   `init --interactive` collects the identity and Trust reviewers in a real
-   terminal; decline its optional scan here. See the
-   [guided setup reference](../cli/init.md#guided-single-system-setup). Scanning
-   reads Git-tracked files only, so never Git-ignore `trust/`.
+       Initialization plan for <repo>:
+         create: trust/system.yml
+         create: trust/manual.yml
+         create: trust/approvals.yml
+         create: .github/CODEOWNERS
+         create: .github/rulesets/trustbom.json
+         create: .github/workflows/ai-trustbom.yml
+         create: .github/actions/trustbom/action.yml
+         create: .github/actions/trustbom/install/action.yml
+         preserve: .gitignore
+       Created 8 file(s); preserved 1 existing file(s).
+
+   This tutorial edits the generated files by hand in the next two steps. To
+   be prompted for them instead, see the
+   [guided setup reference](../cli/init.md#guided-single-system-setup).
+   Scanning reads Git-tracked files only, so never Git-ignore `trust/`.
 
 4. **Record our identity** in `trust/system.yml`:
 
@@ -92,15 +91,15 @@ sets up before page 4.
    trustbom scan
    ```
 
-   ```text
-   Wrote <repo>/trust/card.json
-   Wrote <repo>/trust/card.md
-   Wrote <repo>/trust/questionnaire.yml
-   Wrote <repo>/trust/findings.sarif
-   Graph fingerprint: <12 lowercase hex characters>
-   Full fingerprint (SHA-256): <64 lowercase hex characters>
-   Found 0 model(s), 0 tool(s), 1 finding(s). Review <repo>/trust/card.md.
-   ```
+   Output:
+
+       Wrote <repo>/trust/card.json
+       Wrote <repo>/trust/card.md
+       Wrote <repo>/trust/questionnaire.yml
+       Wrote <repo>/trust/findings.sarif
+       Graph fingerprint: <12 lowercase hex characters>
+       Full fingerprint (SHA-256): <64 lowercase hex characters>
+       Found 0 model(s), 0 tool(s), 1 finding(s). Review <repo>/trust/card.md.
 
    Git may print line-ending warnings on Windows; they are cosmetic.
 

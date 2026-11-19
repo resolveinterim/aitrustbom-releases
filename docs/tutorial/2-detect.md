@@ -38,11 +38,9 @@ checkpoint reached.
    [`trustbom scan`](../cli/scan.md#example) writes the same four artifacts
    and prints a **changed** fingerprint, because the model is now in the graph:
 
-   ```text
-   Graph fingerprint: <12 lowercase hex characters>
-   Full fingerprint (SHA-256): <64 lowercase hex characters>
-   Found 1 model(s), 0 tool(s), 2 finding(s). Review <repo>/trust/card.md.
-   ```
+       Graph fingerprint: <12 lowercase hex characters>
+       Full fingerprint (SHA-256): <64 lowercase hex characters>
+       Found 1 model(s), 0 tool(s), 2 finding(s). Review <repo>/trust/card.md.
 
 2. **Read the model in `trust/card.json`** (selected fields). Each citation
    points at the exact file Trust will review:
