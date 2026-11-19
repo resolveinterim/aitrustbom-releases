@@ -29,7 +29,8 @@ required, one per GitHub owner.
    If it prints the GitHub URL, run
    `git remote set-url --push origin ../abingdon-origin.git`.
 
-2. **Request a trial** ([reference](../cli/license.md)):
+2. **Request a trial** ([reference](../cli/license.md)). The commands are the
+   same in both shells:
 
    ```sh
    trustbom license request-trial --email <you@example.com>

@@ -27,7 +27,7 @@ checkpoint reached.
    cp workshop/models.example config/models.yaml
    ```
 
-   Then commit and scan:
+   Then commit and scan (the same in both shells):
 
    ```sh
    git add -A

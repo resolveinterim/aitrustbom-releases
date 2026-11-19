@@ -31,7 +31,8 @@ sets up before page 4.
    an approval you must update that reference. A real team merges a pull
    request on GitHub; in this exercise you push to a local bare repository
    instead, so nothing is written to the public repository. The fetch URL
-   stays on GitHub (the license checks the owner in it):
+   stays on GitHub (the license checks the owner in it). The same two
+   commands work in both shells:
 
    ```sh
    git init --bare ../abingdon-origin.git
@@ -59,14 +60,12 @@ sets up before page 4.
    Created 8 file(s); preserved 1 existing file(s).
    ```
 
-   This tutorial edits the generated files by hand in the next two steps. To
-   be prompted for them instead, see the
-   [guided setup reference](../cli/init.md#guided-single-system-setup).
-   Scanning reads Git-tracked files only, so never Git-ignore `trust/`.
+   `init --interactive` collects the identity and Trust reviewers in a real
+   terminal; decline its optional scan here. See the
+   [guided setup reference](../cli/init.md#guided-single-system-setup). Scanning
+   reads Git-tracked files only, so never Git-ignore `trust/`.
 
-4. **Record our identity.** Open `trust/system.yml` in your editor (for
-   example `code trust/system.yml`), replace its three lines with the block
-   below, and save:
+4. **Record our identity** in `trust/system.yml`:
 
    ```yaml
    name: Abingdon Taxi Solutions service
@@ -74,10 +73,9 @@ sets up before page 4.
    customer_facing_name: Abingdon Taxi Solutions
    ```
 
-5. **Exclude the workshop inputs.** Open `trust/manual.yml` in your editor,
-   replace the line `not_in_scope: []` with the block below (keep the other
-   lines), and save. The `workshop/` files are examples you copy in later;
-   excluding them stops them appearing as current AI use.
+5. **Exclude the workshop inputs.** In `trust/manual.yml` replace
+   `not_in_scope: []` with the block below. The `workshop/` files are examples
+   you copy in later; excluding them stops them appearing as current AI use.
 
    ```yaml
    not_in_scope:
