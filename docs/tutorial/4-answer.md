@@ -24,6 +24,8 @@ commands. Without a license they exit `4` with a `license-*` diagnostic
    git restore trust
    ```
 
+   Output:
+
    ```text
    Wrote <repo>/export/card.md
    Wrote <repo>/export/questionnaire.yml
@@ -44,6 +46,8 @@ commands. Without a license they exit `4` with a `license-*` diagnostic
    ```sh
    trustbom export
    ```
+
+   Output:
 
    ```text
    Wrote <repo>/export/card.md
@@ -69,6 +73,8 @@ commands. Without a license they exit `4` with a `license-*` diagnostic
    ```sh
    trustbom answer --questions rfi/request.csv
    ```
+
+   Output:
 
    ```text
    Wrote <repo>/export/answers.csv (5 matched)
@@ -99,6 +105,8 @@ commands. Without a license they exit `4` with a `license-*` diagnostic
    ```sh
    trustbom answer --questions rfi/extra-question.csv
    ```
+
+   Output:
 
    ```text
    Wrote <repo>/export/answers.csv (0 matched)

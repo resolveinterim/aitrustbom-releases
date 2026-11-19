@@ -19,6 +19,8 @@ checkpoint reached and the stand-in remote from [page 1](1-setup.md#try-it).
    trustbom gate
    ```
 
+   Output:
+
    ```text
    <!-- ai-trustbom-pr-comment -->
    ## AI TrustBOM
@@ -114,6 +116,8 @@ checkpoint reached and the stand-in remote from [page 1](1-setup.md#try-it).
    trustbom scan
    ```
 
+   Output:
+
    ```text
    Graph fingerprint: <12 lowercase hex characters>
    Full fingerprint (SHA-256): <64 lowercase hex characters>
@@ -134,6 +138,8 @@ checkpoint reached and the stand-in remote from [page 1](1-setup.md#try-it).
    trustbom request-approval --dry-run --high-risk no --article-50 applies
    trustbom request-approval --high-risk no --article-50 applies
    ```
+
+   Output:
 
    ```text
    Wrote proposal to trust/approvals.yml (graph <64 lowercase hex characters>).
@@ -157,6 +163,8 @@ checkpoint reached and the stand-in remote from [page 1](1-setup.md#try-it).
    trustbom gate
    git restore trust/card.md
    ```
+
+   Output:
 
    ```text
    **Status:** passed

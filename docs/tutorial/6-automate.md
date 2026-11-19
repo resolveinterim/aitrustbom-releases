@@ -26,6 +26,8 @@ scripted.
    trustbom init --upgrade --dry-run
    ```
 
+   Output:
+
    ```text
    Upgrade plan for <repo>:
      unchanged: .github/workflows/ai-trustbom.yml (already current (<version>))

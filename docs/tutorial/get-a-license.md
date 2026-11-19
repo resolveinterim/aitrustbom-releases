@@ -67,6 +67,8 @@ required, one per GitHub owner.
 
 Without a license a paid command writes nothing and exits `4`:
 
+Output:
+
 ```text
 license-missing: No license key found, and this run cannot prompt for one. Set TRUSTBOM_LICENSE_KEY (for example from a CI secret) or run 'trustbom license activate'. To request a free 30-day trial key, run 'trustbom license request-trial --email <email>'.
 ```

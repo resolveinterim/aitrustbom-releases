@@ -21,6 +21,8 @@ does not depend on [page 4](4-answer.md).
    trustbom readiness --framework nist-ai-rmf
    ```
 
+   Output:
+
    ```text
    Wrote <repo>/export/readiness/readiness.md
    Wrote <repo>/export/readiness/readiness.json
@@ -43,6 +45,8 @@ does not depend on [page 4](4-answer.md).
    trustbom export --format cyclonedx
    ```
 
+   Output:
+
    ```text
    Wrote <repo>/export/card.md
    Wrote <repo>/export/questionnaire.yml
@@ -62,6 +66,8 @@ does not depend on [page 4](4-answer.md).
    ```sh
    trustbom publish
    ```
+
+   Output:
 
    ```text
    Publishing 1 system page(s) to export/site/ (approved).
@@ -86,6 +92,8 @@ does not depend on [page 4](4-answer.md).
    trustbom verify export/site
    trustbom verify export/site --repo .
    ```
+
+   Output:
 
    ```text
    Verified 6 file(s) plus manifest.json across 1 system(s) against manifest.json.

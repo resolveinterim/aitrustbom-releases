@@ -51,6 +51,8 @@ sets up before page 4.
    trustbom init
    ```
 
+   Output:
+
    ```text
    Initialization plan for <repo>:
      create: trust/system.yml
@@ -101,6 +103,8 @@ sets up before page 4.
    git commit -m "Initialize our taxi service AI inventory"
    trustbom scan
    ```
+
+   Output:
 
    ```text
    Wrote <repo>/trust/card.json
