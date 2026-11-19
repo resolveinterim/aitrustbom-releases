@@ -17,21 +17,21 @@ checkpoint reached and the stand-in remote from [page 1](1-setup.md#try-it).
    trustbom gate
    ```
 
-   Output:
+   ```text
+   <!-- ai-trustbom-pr-comment -->
+   ## AI TrustBOM
 
-       <!-- ai-trustbom-pr-comment -->
-       ## AI TrustBOM
+   **Status:** bootstrap required
+   **Graph fingerprint:** `<12 lowercase hex characters>`
+   ...
+   ### Findings
 
-       **Status:** bootstrap required
-       **Graph fingerprint:** `<12 lowercase hex characters>`
-       ...
-       ### Findings
+   - `medium` **region-unknown**: The deployment region for gemini could not be determined.
+   - `medium` **subprocessor-undeclared**: Provider 'gemini' has no declared subprocessor.
 
-       - `medium` **region-unknown**: The deployment region for gemini could not be determined.
-       - `medium` **subprocessor-undeclared**: Provider 'gemini' has no declared subprocessor.
-
-       ### How to resolve
-       ...
+   ### How to resolve
+   ...
+   ```
 
    `gate` appends its assessment to the tracked `trust/card.md`, which leaves
    the working tree dirty and would block a branch switch later. Restore it:
@@ -106,11 +106,11 @@ checkpoint reached and the stand-in remote from [page 1](1-setup.md#try-it).
    trustbom scan
    ```
 
-   Output:
-
-       Graph fingerprint: <12 lowercase hex characters>
-       Full fingerprint (SHA-256): <64 lowercase hex characters>
-       Found 1 model(s), 0 tool(s), 0 finding(s). Review <repo>/trust/card.md.
+   ```text
+   Graph fingerprint: <12 lowercase hex characters>
+   Full fingerprint (SHA-256): <64 lowercase hex characters>
+   Found 1 model(s), 0 tool(s), 0 finding(s). Review <repo>/trust/card.md.
+   ```
 
 5. **Write the approval proposal.** `high_risk` and `article_50` are human
    decisions the scanner never infers. For this exercise we state them
@@ -125,10 +125,10 @@ checkpoint reached and the stand-in remote from [page 1](1-setup.md#try-it).
    trustbom request-approval --high-risk no --article-50 applies
    ```
 
-   Output:
-
-       Wrote proposal to trust/approvals.yml (graph <64 lowercase hex characters>).
-       Rescan, then commit the proposal file trust/approvals.yml with the rescanned trust/card.json and trust/card.md in a pull request; ...
+   ```text
+   Wrote proposal to trust/approvals.yml (graph <64 lowercase hex characters>).
+   Rescan, then commit the proposal file trust/approvals.yml with the rescanned trust/card.json and trust/card.md in a pull request; ...
+   ```
 
    The proposal records the **full** fingerprint, `approved_by` (claimed from
    `git config user.email`, **not verified identity**) and `approved_at`. See
@@ -146,13 +146,13 @@ checkpoint reached and the stand-in remote from [page 1](1-setup.md#try-it).
    git restore trust/card.md
    ```
 
-   Output:
+   ```text
+   **Status:** passed
+   ...
+   ### Gate result
 
-       **Status:** passed
-       ...
-       ### Gate result
-
-       The current graph matches its approval and has no blocking policy conditions.
+   The current graph matches its approval and has no blocking policy conditions.
+   ```
 
    `gate` exits `0`. The approval is still only a proposal on a branch.
 

@@ -45,26 +45,28 @@ sets up before page 4.
    trustbom init
    ```
 
-   Output:
-
-       Initialization plan for <repo>:
-         create: trust/system.yml
-         create: trust/manual.yml
-         create: trust/approvals.yml
-         create: .github/CODEOWNERS
-         create: .github/rulesets/trustbom.json
-         create: .github/workflows/ai-trustbom.yml
-         create: .github/actions/trustbom/action.yml
-         create: .github/actions/trustbom/install/action.yml
-         preserve: .gitignore
-       Created 8 file(s); preserved 1 existing file(s).
+   ```text
+   Initialization plan for <repo>:
+     create: trust/system.yml
+     create: trust/manual.yml
+     create: trust/approvals.yml
+     create: .github/CODEOWNERS
+     create: .github/rulesets/trustbom.json
+     create: .github/workflows/ai-trustbom.yml
+     create: .github/actions/trustbom/action.yml
+     create: .github/actions/trustbom/install/action.yml
+     preserve: .gitignore
+   Created 8 file(s); preserved 1 existing file(s).
+   ```
 
    This tutorial edits the generated files by hand in the next two steps. To
    be prompted for them instead, see the
    [guided setup reference](../cli/init.md#guided-single-system-setup).
    Scanning reads Git-tracked files only, so never Git-ignore `trust/`.
 
-4. **Record our identity** in `trust/system.yml`:
+4. **Record our identity.** Open `trust/system.yml` in your editor (for
+   example `code trust/system.yml`), replace its three lines with the block
+   below, and save:
 
    ```yaml
    name: Abingdon Taxi Solutions service
@@ -72,9 +74,10 @@ sets up before page 4.
    customer_facing_name: Abingdon Taxi Solutions
    ```
 
-5. **Exclude the workshop inputs.** In `trust/manual.yml` replace
-   `not_in_scope: []` with the block below. The `workshop/` files are examples
-   you copy in later; excluding them stops them appearing as current AI use.
+5. **Exclude the workshop inputs.** Open `trust/manual.yml` in your editor,
+   replace the line `not_in_scope: []` with the block below (keep the other
+   lines), and save. The `workshop/` files are examples you copy in later;
+   excluding them stops them appearing as current AI use.
 
    ```yaml
    not_in_scope:
@@ -91,15 +94,15 @@ sets up before page 4.
    trustbom scan
    ```
 
-   Output:
-
-       Wrote <repo>/trust/card.json
-       Wrote <repo>/trust/card.md
-       Wrote <repo>/trust/questionnaire.yml
-       Wrote <repo>/trust/findings.sarif
-       Graph fingerprint: <12 lowercase hex characters>
-       Full fingerprint (SHA-256): <64 lowercase hex characters>
-       Found 0 model(s), 0 tool(s), 1 finding(s). Review <repo>/trust/card.md.
+   ```text
+   Wrote <repo>/trust/card.json
+   Wrote <repo>/trust/card.md
+   Wrote <repo>/trust/questionnaire.yml
+   Wrote <repo>/trust/findings.sarif
+   Graph fingerprint: <12 lowercase hex characters>
+   Full fingerprint (SHA-256): <64 lowercase hex characters>
+   Found 0 model(s), 0 tool(s), 1 finding(s). Review <repo>/trust/card.md.
+   ```
 
    Git may print line-ending warnings on Windows; they are cosmetic.
 

@@ -22,13 +22,13 @@ commands. Without a license they exit `4` with a `license-*` diagnostic
    git restore trust
    ```
 
-   Output:
-
-       Wrote <repo>/export/card.md
-       Wrote <repo>/export/questionnaire.yml
-       Draft graph fingerprint: <12 lowercase hex characters>
-       Full fingerprint: <64 lowercase hex characters>
-       Status: internal draft - unapproved - not for customer use
+   ```text
+   Wrote <repo>/export/card.md
+   Wrote <repo>/export/questionnaire.yml
+   Draft graph fingerprint: <12 lowercase hex characters>
+   Full fingerprint: <64 lowercase hex characters>
+   Status: internal draft - unapproved - not for customer use
+   ```
 
    A draft is never customer evidence. See the
    [approved export guide](../approved-export.md) for the watermarking rules.
@@ -41,15 +41,15 @@ commands. Without a license they exit `4` with a `license-*` diagnostic
    trustbom export
    ```
 
-   Output:
-
-       Wrote <repo>/export/card.md
-       Wrote <repo>/export/questionnaire.yml
-       Wrote <repo>/export/manifest.json
-       License: <trial or subscription> for GitHub owner <owner>
-       Approved graph fingerprint: <12 lowercase hex characters>
-       Full fingerprint: <64 lowercase hex characters>
-       Approved graph commit: <40 lowercase hex characters>
+   ```text
+   Wrote <repo>/export/card.md
+   Wrote <repo>/export/questionnaire.yml
+   Wrote <repo>/export/manifest.json
+   License: <trial or subscription> for GitHub owner <owner>
+   Approved graph fingerprint: <12 lowercase hex characters>
+   Full fingerprint: <64 lowercase hex characters>
+   Approved graph commit: <40 lowercase hex characters>
+   ```
 
    The approved graph commit is derived from `main`'s history. Compare the
    fingerprint with the one you approved on page 3. See the
@@ -64,10 +64,10 @@ commands. Without a license they exit `4` with a `license-*` diagnostic
    trustbom answer --questions rfi/request.csv
    ```
 
-   Output:
-
-       Wrote <repo>/export/answers.csv (5 matched)
-       Wrote <repo>/export/unmatched.csv (0 unmatched)
+   ```text
+   Wrote <repo>/export/answers.csv (5 matched)
+   Wrote <repo>/export/unmatched.csv (0 unmatched)
+   ```
 
    `export/answers.csv` (`id,question,section,answer,cites,confidence`):
 
@@ -92,10 +92,10 @@ commands. Without a license they exit `4` with a `license-*` diagnostic
    trustbom answer --questions rfi/extra-question.csv
    ```
 
-   Output:
-
-       Wrote <repo>/export/answers.csv (0 matched)
-       Wrote <repo>/export/unmatched.csv (1 unmatched)
+   ```text
+   Wrote <repo>/export/answers.csv (0 matched)
+   Wrote <repo>/export/unmatched.csv (1 unmatched)
+   ```
 
    The command exits `2`, and `export/unmatched.csv` contains:
 

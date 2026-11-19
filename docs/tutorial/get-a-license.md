@@ -29,8 +29,7 @@ required, one per GitHub owner.
    If it prints the GitHub URL, run
    `git remote set-url --push origin ../abingdon-origin.git`.
 
-2. **Request a trial** ([reference](../cli/license.md)). The commands are the
-   same in both shells:
+2. **Request a trial** ([reference](../cli/license.md)):
 
    ```sh
    trustbom license request-trial --email <you@example.com>
@@ -62,7 +61,9 @@ required, one per GitHub owner.
 
 Without a license a paid command writes nothing and exits `4`:
 
-    license-missing: No license key found, and this run cannot prompt for one. Set TRUSTBOM_LICENSE_KEY (for example from a CI secret) or run 'trustbom license activate'. To request a free 30-day trial key, run 'trustbom license request-trial --email <email>'.
+```text
+license-missing: No license key found, and this run cannot prompt for one. Set TRUSTBOM_LICENSE_KEY (for example from a CI secret) or run 'trustbom license activate'. To request a free 30-day trial key, run 'trustbom license request-trial --email <email>'.
+```
 
 An interactive paid command with no license also offers the trial at a key
 prompt. Other `license-*` diagnostics are explained in
