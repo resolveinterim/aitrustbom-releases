@@ -21,6 +21,8 @@ sets up before page 4.
    [`resolveinterim/abingdon-taxi-solutions`](https://github.com/resolveinterim/abingdon-taxi-solutions)
    into your own GitHub account first and clone the fork (replace
    `<your-owner>`).
+   **PowerShell / bash:**
+
    ```sh
    git clone https://github.com/<your-owner>/abingdon-taxi-solutions.git
    cd abingdon-taxi-solutions
@@ -31,8 +33,9 @@ sets up before page 4.
    an approval you must update that reference. A real team merges a pull
    request on GitHub; in this exercise you push to a local bare repository
    instead, so nothing is written to the public repository. The fetch URL
-   stays on GitHub (the license checks the owner in it). The same two
-   commands work in both shells:
+   stays on GitHub (the license checks the owner in it):
+
+   **PowerShell / bash:**
 
    ```sh
    git init --bare ../abingdon-origin.git
@@ -41,6 +44,8 @@ sets up before page 4.
 
 3. **Initialise.** [`trustbom init`](../cli/init.md#example) writes the
    configuration and the GitHub files but changes nothing else:
+
+   **PowerShell / bash:**
 
    ```sh
    trustbom init
@@ -60,12 +65,14 @@ sets up before page 4.
    Created 8 file(s); preserved 1 existing file(s).
    ```
 
-   `init --interactive` collects the identity and Trust reviewers in a real
-   terminal; decline its optional scan here. See the
-   [guided setup reference](../cli/init.md#guided-single-system-setup). Scanning
-   reads Git-tracked files only, so never Git-ignore `trust/`.
+   This tutorial edits the generated files by hand in the next two steps. To
+   be prompted for them instead, see the
+   [guided setup reference](../cli/init.md#guided-single-system-setup).
+   Scanning reads Git-tracked files only, so never Git-ignore `trust/`.
 
-4. **Record our identity** in `trust/system.yml`:
+4. **Record our identity.** Open `trust/system.yml` in your editor (for
+   example `code trust/system.yml`), replace its three lines with the block
+   below, and save:
 
    ```yaml
    name: Abingdon Taxi Solutions service
@@ -73,9 +80,10 @@ sets up before page 4.
    customer_facing_name: Abingdon Taxi Solutions
    ```
 
-5. **Exclude the workshop inputs.** In `trust/manual.yml` replace
-   `not_in_scope: []` with the block below. The `workshop/` files are examples
-   you copy in later; excluding them stops them appearing as current AI use.
+5. **Exclude the workshop inputs.** Open `trust/manual.yml` in your editor,
+   replace the line `not_in_scope: []` with the block below (keep the other
+   lines), and save. The `workshop/` files are examples you copy in later;
+   excluding them stops them appearing as current AI use.
 
    ```yaml
    not_in_scope:
@@ -85,6 +93,8 @@ sets up before page 4.
 
 6. **Commit and scan.** [`trustbom scan`](../cli/scan.md#example) reads
    tracked files, so commit the setup first:
+
+   **PowerShell / bash:**
 
    ```sh
    git add -A

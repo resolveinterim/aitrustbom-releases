@@ -16,6 +16,8 @@ commands. Without a license they exit `4` with a `license-*` diagnostic
    as internal. A draft export needs the card's commit id to match `HEAD`, so
    rescan first, then restore the tracked scan files afterwards:
 
+   **PowerShell / bash:**
+
    ```sh
    trustbom scan
    trustbom export --draft
@@ -36,6 +38,8 @@ commands. Without a license they exit `4` with a `license-*` diagnostic
 2. **Make the approved export.**
    [`trustbom export`](../cli/export.md#example) resolves the default branch,
    verifies the approval and writes the last **approved** graph:
+
+   **PowerShell / bash:**
 
    ```sh
    trustbom export
@@ -59,6 +63,8 @@ commands. Without a license they exit `4` with a `license-*` diagnostic
    `rfi/request.csv`.
    [`trustbom answer`](../cli/answer.md#example) maps each question to the
    approved graph:
+
+   **PowerShell / bash:**
 
    ```sh
    trustbom answer --questions rfi/request.csv
@@ -87,6 +93,8 @@ commands. Without a license they exit `4` with a `license-*` diagnostic
    `rfi/extra-question.csv`
    asks how drivers, managers and owners use AI. The fixed question bank covers
    model and policy facts, not each role's experience:
+
+   **PowerShell / bash:**
 
    ```sh
    trustbom answer --questions rfi/extra-question.csv

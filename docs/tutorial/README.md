@@ -33,8 +33,8 @@ to answer a customer. See the glossary for terms.
 ## Prerequisites
 
 - Git and a shell: PowerShell or bash (Linux, macOS, Git Bash, WSL). Commands
-  are shown once where they are identical in both shells, and as a labelled
-  **PowerShell** and **bash** pair where they differ; run the one for your shell.
+  are labelled **PowerShell / bash**, or given separately for each where they
+  differ.
 - The `trustbom` CLI. The simplest route is `npm install --global trustbom`;
   other routes avoid Node.js. See [installing the CLI](../installing.md).
 - **A free trial license before page 4.** Pages 1 to 3 use only free

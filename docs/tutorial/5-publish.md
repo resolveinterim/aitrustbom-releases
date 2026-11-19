@@ -15,6 +15,8 @@ does not depend on [page 4](4-answer.md).
    writes a free, offline checklist of what remains unevidenced for a
    framework (`nist-ai-rmf`, `iso-42001` or `eu-ai-act`):
 
+   **PowerShell / bash:**
+
    ```sh
    trustbom readiness --framework nist-ai-rmf
    ```
@@ -35,6 +37,8 @@ does not depend on [page 4](4-answer.md).
    [`trustbom export --format cyclonedx`](../cli/export.md#options) renders
    the same approved graph:
 
+   **PowerShell / bash:**
+
    ```sh
    trustbom export --format cyclonedx
    ```
@@ -52,6 +56,8 @@ does not depend on [page 4](4-answer.md).
 
 3. **Publish the trust page.** [`trustbom publish`](../cli/publish.md#example)
    builds a static site that a buyer can open and verify:
+
+   **PowerShell / bash:**
 
    ```sh
    trustbom publish
@@ -73,6 +79,8 @@ does not depend on [page 4](4-answer.md).
    free and offline. It succeeds only if every file still matches
    `manifest.json`; `--repo .` also confirms the approved fingerprint against
    `trust/approvals.yml` and the default branch:
+
+   **PowerShell / bash:**
 
    ```sh
    trustbom verify export/site

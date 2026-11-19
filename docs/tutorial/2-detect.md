@@ -19,7 +19,7 @@ checkpoint reached.
    Copy-Item workshop/models.example config/models.yaml
    ```
 
-   **bash (Linux and macOS):**
+   **bash:**
 
    ```bash
    cp workshop/gemini-requirements.example requirements.txt
@@ -27,7 +27,9 @@ checkpoint reached.
    cp workshop/models.example config/models.yaml
    ```
 
-   Then commit and scan (the same in both shells):
+   Then commit and scan:
+
+   **PowerShell / bash:**
 
    ```sh
    git add -A
@@ -101,11 +103,13 @@ checkpoint reached.
    Copy-Item workshop/mcp-config.example mcp.json
    ```
 
-   **bash (Linux and macOS):**
+   **bash:**
 
    ```bash
    cp workshop/mcp-config.example mcp.json
    ```
+
+   **PowerShell / bash:**
 
    ```sh
    git add -A
@@ -131,6 +135,8 @@ checkpoint reached.
 
 5. **Commit the scan result**, so the card on this branch matches the graph
    you will review next:
+
+   **PowerShell / bash:**
 
    ```sh
    git add -A

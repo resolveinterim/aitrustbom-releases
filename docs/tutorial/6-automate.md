@@ -20,6 +20,8 @@ scripted.
    updates only unedited generated files, including the Action's version pin.
    The dry run changes nothing:
 
+   **PowerShell / bash:**
+
    ```sh
    trustbom init --upgrade --dry-run
    ```

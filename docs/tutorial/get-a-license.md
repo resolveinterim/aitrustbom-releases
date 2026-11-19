@@ -20,6 +20,8 @@ required, one per GitHub owner.
    original repository instead, fork it, then point `origin` at your fork and
    keep the local push URL from page 1:
 
+   **PowerShell / bash:**
+
    ```sh
    git remote set-url origin https://github.com/<your-owner>/abingdon-taxi-solutions.git
    git remote get-url --push origin
@@ -29,8 +31,9 @@ required, one per GitHub owner.
    If it prints the GitHub URL, run
    `git remote set-url --push origin ../abingdon-origin.git`.
 
-2. **Request a trial** ([reference](../cli/license.md)). The commands are the
-   same in both shells:
+2. **Request a trial** ([reference](../cli/license.md)):
+
+   **PowerShell / bash:**
 
    ```sh
    trustbom license request-trial --email <you@example.com>
@@ -43,6 +46,8 @@ required, one per GitHub owner.
 
 3. **Activate the key** when it arrives. The key is read from a hidden prompt
    (or standard input):
+
+   **PowerShell / bash:**
 
    ```sh
    trustbom license activate

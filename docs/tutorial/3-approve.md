@@ -13,6 +13,8 @@ checkpoint reached and the stand-in remote from [page 1](1-setup.md#try-it).
    the graph with the approval. Nothing is approved yet, so it reports a
    bootstrap failure and exits `3`:
 
+   **PowerShell / bash:**
+
    ```sh
    trustbom gate
    ```
@@ -36,11 +38,15 @@ checkpoint reached and the stand-in remote from [page 1](1-setup.md#try-it).
    `gate` appends its assessment to the tracked `trust/card.md`, which leaves
    the working tree dirty and would block a branch switch later. Restore it:
 
+   **PowerShell / bash:**
+
    ```sh
    git restore trust/card.md
    ```
 
 2. **Start a feature branch.** Approval is an ordinary reviewed Git change:
+
+   **PowerShell / bash:**
 
    ```sh
    git checkout -b feature/approve-gemini
@@ -61,7 +67,7 @@ checkpoint reached and the stand-in remote from [page 1](1-setup.md#try-it).
    Copy-Item workshop/subprocessors.example trust/subprocessors.yml
    ```
 
-   **bash (Linux and macOS):**
+   **bash:**
 
    ```bash
    mkdir -p trust/terms trust/deletion trust/dpas
@@ -100,6 +106,8 @@ checkpoint reached and the stand-in remote from [page 1](1-setup.md#try-it).
 
 4. **Commit and rescan.** The findings are gone:
 
+   **PowerShell / bash:**
+
    ```sh
    git add -A
    git commit -m "Declare region, data handling and subprocessor for Gemini"
@@ -120,6 +128,8 @@ checkpoint reached and the stand-in remote from [page 1](1-setup.md#try-it).
    Preview first with
    [`trustbom request-approval`](../cli/request-approval.md#example):
 
+   **PowerShell / bash:**
+
    ```sh
    trustbom request-approval --dry-run --high-risk no --article-50 applies
    trustbom request-approval --high-risk no --article-50 applies
@@ -137,6 +147,8 @@ checkpoint reached and the stand-in remote from [page 1](1-setup.md#try-it).
 
 6. **Rescan, commit, and check the gate passes.** Committing changes `HEAD`,
    and the approved graph must still match:
+
+   **PowerShell / bash:**
 
    ```sh
    trustbom scan
@@ -159,6 +171,8 @@ checkpoint reached and the stand-in remote from [page 1](1-setup.md#try-it).
 7. **Merge as Trust.** Review what the approval covers, then merge with a
    merge commit (the review step a CODEOWNER performs):
 
+   **PowerShell / bash:**
+
    ```sh
    git checkout main
    git merge --no-ff feature/approve-gemini -m "Merge approval of the Gemini graph (Trust review)"
@@ -168,6 +182,8 @@ checkpoint reached and the stand-in remote from [page 1](1-setup.md#try-it).
    `origin/main`, not from a local `main`, so approved `export` refuses until
    the two match. In this exercise the push goes to the local bare repository
    (in production, merging on GitHub does this):
+
+   **PowerShell / bash:**
 
    ```sh
    git push origin main
