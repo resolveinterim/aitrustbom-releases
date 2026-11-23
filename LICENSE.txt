@@ -88,10 +88,11 @@ or contract, and it does not replace a human decision.
 
 The Trial Period is free, requires no payment method, and starts when the
 license service issues the trial key; it is available once per GitHub owner.
-Paid Operations are approved `export` (except `export --draft`), `publish`
-(including draft and `--from` modes), `pack` (including `--from`),
-`answer` (all modes), and `drift`, including Action or workflow steps that
-run those operations. They require a valid trial or paid entitlement. The
+Paid Operations are the operations that the Software's product web site at
+https://aitrustbom.com/pricing/ identifies as requiring a trial or
+Subscription, including Action or workflow steps that run them. They require
+a valid trial or paid entitlement. Every other operation is a Free Operation.
+The
 CLI checks entitlement before a Paid Operation does work and refuses it
 without a valid entitlement, using exit code 4 and a `license-*` diagnostic.
 A paid entitlement runs through the paid-through date. A grace period of up
@@ -102,10 +103,9 @@ Subscription or to an expired Trial Period. Cancellation stops future
 renewal but does not shorten the already-paid billing period.
 
 Free Operations do not require a trial or Subscription and remain available
-after a trial or paid entitlement ends. They include `init`, `scan`, `gate`,
-`readiness`, `request-approval`, `export --draft`,
-the Docker-free Action's scan/gate, PR comment and check, `license`
-management commands, and `version`. Free Operations do not check
+after a trial or paid entitlement ends. They include the operations that the
+product web site identifies as free and the `license` management commands.
+Free Operations do not check
 entitlement, prompt for a key, or emit `license-*` diagnostics. The explicit
 `license activate`, `license refresh`, and `license request-trial`
 management commands may contact the license service; management failures
@@ -171,7 +171,10 @@ for any other liability that cannot be excluded or limited by law.
 The perpetual license for Free Operations is not affected by expiry or
 cancellation of a Trial Period or Subscription, or by termination of Paid
 Operations on notice. Resolve Interim may terminate Your right to Paid
-Operations by giving You 30 days' written notice.
+Operations by giving You 30 days' written notice. Resolve Interim may also end
+Your right to Paid Operations by written notice if the payment for Your
+Subscription is refunded or reversed, including by chargeback, as described
+in its Refund & Cancellation Policy at https://aitrustbom.com/legal/refunds/.
 
 Resolve Interim may terminate this license, including the perpetual license
 for Free Operations, immediately if You materially breach Section 3 or

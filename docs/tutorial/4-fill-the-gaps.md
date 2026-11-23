@@ -93,7 +93,7 @@ never fills a gap by guessing.
 
    To propose this change, run these in your branch:
 
-   npm install --global trustbom@1.0.2
+   npm install --global trustbom
    trustbom propose --high-risk <yes|no> --article-50 <yes|no>
 
    Replace each <yes|no> with your decision (the scanner never makes it), then commit trust/ and push.
