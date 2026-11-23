@@ -1,130 +1,160 @@
 # How you use AI TrustBOM
 
-This is the end-to-end workflow at a glance. Each step links to the
-[CLI reference](cli/README.md) for commands and options, and the
-[tutorial](tutorial/README.md) walks through it hands-on.
+**A customer asked what AI you use. Answer with evidence a named person
+approved.**
 
-**Who is involved:** your developers, an existing team member authorized to
-review and approve the record (the **Trust approver**), and recipients such
-as customers or auditors.
+AI TrustBOM keeps an approved record of the AI in your product, and stops
+new AI from shipping until Trust signs it off. Day to day, the pull request
+is where you meet it. Running `trustbom` locally is optional. The
+[tutorial](tutorial/README.md) walks through all of this hands-on, and the
+[CLI reference](cli/README.md) has every command and option.
 
-For a graphical overview of the flow, including the loops back when a check or\nreview needs changes, see the [workflow diagram](workflow-diagram.md).
+1. **Open a pull request as usual.** If it adds or changes AI, the check
+   fails and the comment lists what changed and what is missing.
+2. **Fill the gaps and propose.** Follow the comment's steps, run
+   `trustbom propose`, and push.
+3. **Trust signs off.** Trust reviews the pull request and merges it. The
+   record is now approved, and you can hand it to customers.
 
-## 1. Get set up (once)
+For a graphical overview of the flow, including the loops back when a check
+or review needs changes, see the [workflow diagram](workflow-diagram.md).
 
-- Install the `trustbom` command-line tool.
-- Run `trustbom init` in your repository. It adds the folders, review rules
-  and pull-request workflow. Configure the required status check and branch
-  protections separately if a failing check must block merging.
-- Scanning, review, gating and `export --draft` are free and do not require a
-  trial. Start a trial or activate a subscription when you need paid
-  operations.
+## Who is involved
 
-See [install](installing.md),
-[initialize](cli/init.md) and
-[licensing](licensing.md).
+**Developers** open pull requests as usual and follow the comment when a
+change touches AI. They never need to look up flags or install routes; the
+comment gives the exact commands.
 
-## 2. Scan
+**VP Engineering** owns the setup: the workflow, the reviewers in
+`.github/CODEOWNERS` and, when sign-off must be enforced, the repository
+rules. In return there is one cited record per product instead of a
+spreadsheet rebuilt for every customer.
 
-- Run `trustbom scan`. Bounded detector packs inspect supported tracked
-  manifests, lockfiles, allowlisted configuration and patterns for cited
-  signals. This is not exhaustive discovery or runtime monitoring.
-- It produces your AI disclosure (the "trust card") and a questionnaire.
+**Trust** is an existing team member authorized to decide what the company
+tells customers. Trust reviews the record and merges the pull request. No
+scan or automation makes that decision. Customers and auditors receive the
+approved pack and can check it themselves.
 
-See [scan](cli/scan.md).
+## What it can and cannot see
 
-## 3. Declare what repository evidence cannot establish
+AI TrustBOM reads files tracked in Git. It does not run your code, read
+your source code's syntax or watch network traffic.
 
-- Edit `trust/manual.yml` to declare things that repository evidence can't
-  show:
-  - AI models or tools the scan can't detect;
-  - third-party providers (subprocessors);
-  - how data is handled, such as prompt retention, training use and deletion;
-  - your own judgements, with reasons.
-- Your declarations take precedence over scanned values and are marked as
-  manual, with their provenance retained. Anything unsupported stays
-  "unknown"; the scan does not infer a negative claim from missing evidence.
-- Re-run `trustbom scan` to include them.
+- **It can see** AI SDKs and frameworks in manifests and lockfiles (Python,
+  JavaScript/TypeScript, .NET, Java/Kotlin and Go), model IDs and provider
+  endpoints in allowlisted configuration files such as `config/models.yaml`
+  and `.env.example`, MCP server configuration, and evaluation workflows.
+  Each detected item cites the file and line it came from.
+- **It cannot see** raw HTTP calls to an AI API from your code, providers
+  it has no detector for, vendored or copied-in code, untracked files, or
+  configuration that exists only at runtime (deployment environment
+  variables, secret stores, feature flags). It also cannot see facts that
+  are not in code at all, such as the deployment region, retention terms or
+  whether a human reviews the AI's output.
 
-See [manual declarations](manual-declarations.md).
+Declare what it cannot see in `trust/manual.yml`, with a reason; see
+[manual declarations](manual-declarations.md). Anything neither detected
+nor declared stays **unknown**. AI TrustBOM never turns missing evidence
+into "no".
 
-## 4. Check locally
+## 1. Set up once
 
-- Run `trustbom gate`. It explains in plain language what would block your
-  change and how to resolve it.
-- Depending on the result:
-  - **Needs attention:** fix the issue or add a declaration (step 3), then
-    re-scan.
-  - **A finding can't be fixed now:** add a waiver (step 5).
-  - **Ready:** request approval (step 6).
+- Install the `trustbom` command-line tool; see [install](installing.md).
+- Run `trustbom init` in your repository. It adds the `trust/` files, the
+  reviewer rules in `.github/CODEOWNERS` and the pull-request workflow.
+  Replace the example reviewer teams with your Trust reviewers, commit and
+  push. See [initialize](cli/init.md).
+- Listing reviewers does not by itself stop a merge. To make Trust's
+  sign-off required, an administrator applies the repository rules; see
+  [GitHub rules](cli/github-rules.md) and
+  [enforcement levels](enforcement-levels.md).
+- Scanning, the pull-request check and `export --draft` are free. Start the
+  30-day trial or a subscription when you need paid commands such as
+  approved export; see [licensing](licensing.md).
 
-See [evaluate the gate](cli/gate.md).
+## 2. Open a pull request
 
-## 5. Waive a finding (optional)
-
-- Add a time-bounded waiver, with a reason, to the approval file. It covers
-  that specific finding until an expiry date.
-- Your authorized reviewer reviews waivers with the rest of the approval. When the
-  date passes, the finding blocks again.
-
-## 6. Request approval
-
-- Run `trustbom request-approval`. It prepares the approval entry for your
-  authorized reviewer; the entry binds to the exact graph fingerprint.
-- Re-scan to refresh your files, then run the local gate again to confirm it's
-  ready.
-- Commit the approval entry with the rescanned `trust/card.json` and
-  `trust/card.md` in the approval pull request:
-  `git add trust/approvals.yml trust/card.json trust/card.md`. Export reads
-  `trust/card.json` beside the approval, so it must be committed and not
-  ignored by `.gitignore` (only `export/` should be ignored).
-
-See [approve a graph](cli/request-approval.md#approve-a-graph-in-git).
-
-The `approved_by` and `approved_at` values in `trust/approvals.yml` are
-declared metadata. The independent GitHub review and merge history is the
-authoritative evidence of who reviewed the change.
-
-## 7. Open a pull request
-
-- Open a pull request with the approval entry. The generated workflow runs the\n  gate again on GitHub (the remote check) and comments on the pull request.
-  Require its status check and configure branch protections if a failing
-  gate must prevent merging; a workflow or CODEOWNERS file alone does not
-  enforce that.
-- If the remote check needs attention, go back to step 3.
+- Work as usual. When a pull request adds or changes AI, the workflow's
+  check fails and its comment lists:
+  - **what changed**, with the file and line for each new, removed or
+    changed item;
+  - **what is missing**, each with a `Next:` step.
+- When nothing is missing, the comment says **Ready for sign-off** and
+  gives the exact install line and `trustbom propose` command.
+- The check also fails when the committed `trust/card.json` is out of date;
+  run `trustbom scan` (or `trustbom propose`) and commit it.
 
 See [the GitHub Action](github-action.md).
 
-## 8. Trust approver reviews and merges
+## 3. Fill the gaps
 
-- An existing team member authorized to approve, other than the author,
-  independently reviews the exact record and approval entry, then merges.
-  GitHub review and merge history records that action; the YAML approver
-  fields are declarations, not proof of the review.
-- If the approver requests changes or rejects the pull request, go back to\n  step 3.
+- Edit `trust/manual.yml` to declare what the repository cannot show:
+  - AI models or tools the scan can't detect;
+  - deployment regions;
+  - how each provider handles data, such as retention, training use and
+    deletion;
+  - your own judgements, with reasons.
+- List third-party AI providers in `trust/subprocessors.yml`.
+- Your declarations take precedence over scanned values and are marked as
+  manual, with their source kept. See
+  [manual declarations](manual-declarations.md).
+- A finding that cannot be fixed now can get a time-limited waiver with a
+  reason, which Trust reviews with the rest of the sign-off. When it
+  expires, the finding blocks again.
+- Commit and push. The comment updates on each push.
 
-## 9. Share your disclosure
+## 4. Propose
 
-- A developer, the Trust approver or an automated job after the merge runs\n  the export.
-- Paid `trustbom export` produces a snapshot of the approved record:
-  summary, questionnaire answers and an integrity manifest. Add
-  `--format cyclonedx` for a CycloneDX BOM. `export --draft` is free and
-  watermarked as unapproved.
-- Paid `trustbom publish` produces a static HTML and PDF pack.
+- When the comment says **Ready for sign-off**, run the `trustbom propose`
+  line it gives. The first sign-off needs two human decisions,
+  `--high-risk yes|no` and `--article-50 yes|no`; later sign-offs carry them
+  forward. See [propose](cli/propose.md#approve-a-graph-in-git).
+- Commit what it prints, `git add trust/approvals.yml trust/card.json`, and
+  push. The comment now says **Proposed, not approved**.
+- The `approved_by` and `approved_at` values in `trust/approvals.yml` are
+  declared, not proven. GitHub's review and merge history is the evidence of
+  who signed off.
+
+## 5. Trust signs off
+
+- Trust, someone other than the author, reviews the exact record and the
+  proposal in the pull request, then approves and merges it. If Trust asks
+  for changes, go back to step 3.
+- Once merged into the default branch, the record is **Approved**. How
+  `export` proves that from Git history is described in
+  [how the approval is proven](tutorial/how-approval-is-proven.md).
+
+## 6. Share with customers
+
+- Paid `trustbom export` writes the approved record: summary, questionnaire
+  answers and an integrity manifest. Add `--format cyclonedx` for a
+  CycloneDX file. `export --draft` is free and watermarked as unapproved.
+- Paid `trustbom answer` maps a customer's questionnaire to cited answers
+  and lists the questions that need a person.
+- Paid `trustbom publish` produces a self-contained HTML and PDF pack.
 - Optionally, `trustbom readiness` gives an advisory view of evidence gaps.
-- Previously shared packs do not update when the record changes.
+- Packs already sent do not update when the record changes.
 
-See [export](cli/export.md),
-[approved export](approved-export.md), [trust page](trust-page.md) and
-[readiness](cli/readiness.md).
+See [export](cli/export.md), [approved export](approved-export.md),
+[questionnaire mapping](questionnaire-mapping.md), [trust page](trust-page.md)
+and [readiness](cli/readiness.md).
 
-## 10. Recipient verifies
+## 7. The customer verifies
 
 - Whoever receives your pack can run `trustbom verify`. It's free and works
   offline; it checks that the files match the supplied manifest. By itself,
   this does not authenticate origin or prove that the pack was approved.
-  `--repo` can compare manifest approval fields with the vendor's Git history;
-  origin still requires independent review evidence, a trusted delivery
-  channel or a verified signature.
+  `--repo` can compare the manifest's approval fields with the vendor's Git
+  history; origin still requires independent review evidence, a trusted
+  delivery channel or a verified signature.
 
 See [pack verification](pack-verification.md).
+
+## Checking locally (optional)
+
+You can run the same checks before pushing:
+
+- `trustbom scan` writes the draft record and reports what is missing. It
+  needs no setup, so it also works before `init`. See [scan](cli/scan.md).
+- `trustbom gate` explains in plain language what would fail the
+  pull-request check and how to resolve it. See [gate](cli/gate.md).

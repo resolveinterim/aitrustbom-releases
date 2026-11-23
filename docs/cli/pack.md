@@ -60,7 +60,7 @@ A released build without a key prints `license-missing` and instructions.
 
 - **Exit `4`**: a `license-*` diagnostic; see [`license`](license.md#license-enforcement).
 - **A system is unapproved or membership changed**: approve each system with
-  [`request-approval --system <id>`](request-approval.md) and merge it.
+  [`propose --system <id>`](propose.md) and merge it.
 - **Sibling artifacts not verified**: the repository's current default-branch
   approval must be reachable with `TRUSTBOM_GITHUB_TOKEN`.
 

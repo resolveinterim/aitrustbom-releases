@@ -1,6 +1,27 @@
 # AI TrustBOM GitHub Action
 
-The Action is a composite action: it installs the exact pinned `trustbom` npm package into the runner temp directory (`--ignore-scripts`) and runs the same scan and gate implementations as the local `trustbom` CLI. It needs Node.js, npm and Git, which GitHub-hosted runners provide. It writes `trust/card.json`, `trust/card.md`, `trust/questionnaire.yml`, and `trust/findings.sarif`, then evaluates `trust/approvals.yml`. The gate adds a plain-language assessment and required actions to `card.md` without changing `card.json` or its hash. On pull requests it creates or updates one marked comment and publishes an `AI TrustBOM` check with up to 50 finding annotations.
+**A customer asked what AI you use. Answer with evidence a named person
+approved.** AI TrustBOM keeps an approved record of the AI in your product,
+and stops new AI from shipping until Trust signs it off. This Action is
+where developers meet it: it runs on every pull request, and its comment is
+the main interface.
+
+1. **Open a pull request as usual.** If it adds or changes AI, the check
+   fails and the comment lists what changed and what is missing.
+2. **Fill the gaps and propose.** Follow the comment's steps, run
+   `trustbom propose`, and push. When the comment asks for `propose`, it
+   gives a copy-paste install line pinned to the version the Action ran,
+   then the exact `propose` command, so nobody has to look up flags.
+3. **Trust signs off.** Trust reviews the pull request and merges it. The
+   record is now approved, and you can hand it to customers.
+
+Running `trustbom scan` locally first is optional. The scanner reads
+tracked files only; see
+[what it can and cannot see](workflow.md#what-it-can-and-cannot-see).
+
+## How it works
+
+The Action is a composite action: it installs the exact pinned `trustbom` npm package into the runner temp directory (`--ignore-scripts`) and runs the same scan and gate implementations as the local `trustbom` CLI. It needs Node.js, npm and Git, which GitHub-hosted runners provide. It writes `trust/card.json`, `trust/card.md`, `trust/questionnaire.yml`, and `trust/findings.sarif`, then evaluates `trust/approvals.yml`. The gate adds a plain-language assessment and required actions to `card.md` without changing `card.json` or its hash. On pull requests it creates or updates one marked comment and publishes an `AI TrustBOM` check with up to 50 finding annotations. The comment's **What changed** section compares the graph with the approved default-branch graph, citing `path:line` evidence for each added, removed or changed row, and the rendered card follows in a collapsed block. A card that would push the comment past GitHub's 65,536-character limit is cut at a line and points to the full file in the run's `ai-trustbom` artifact.
 
 For several systems, use the [Growth reusable workflow](./growth-workflow.md); `trustbom init --growth` writes the same per-repository Action described below.
 The Action's `portfolio: "true"` input scans and gates the tracked
@@ -80,10 +101,22 @@ Two repository settings therefore decide how strong the gate is:
 Both are recommended controls, not enforced by `init`. The seven review rules
 are applied by `trustbom github-rules apply` and graded by `trustbom
 github-rules check` as an [enforcement level](enforcement-levels.md).
-`trustbom
-request-approval --check-controls` reports each one as observed, missing or
-unverified (when the token cannot read branch rules). Do not add a push or
-post-merge job to compensate.
+`trustbom github-rules check --github` also reports whether `Scan and gate`
+is a required status check (when the committed ruleset names one), as
+`verified`, `missing` or `unverified` (when the token cannot read branch
+rules). Do not add a push or post-merge job to compensate.
+
+## Stale `card.json`
+
+When `trust/card.json` is tracked, the Action compares its committed
+`graph_sha` with the graph scanned from the pull request. A difference fails
+the job (`gate-status` `failed`, exit `3`) with the blocker
+`card-stale`, so a forgotten card is caught before the merge instead of at
+export. The fix is: run `trustbom scan` (or `trustbom propose` when signing
+off) and commit `trust/card.json` to the pull request. A card that is not
+tracked never fails; in portfolio mode the same check applies to each tracked
+`trust/systems/<id>/card.json`. The check needs the failing job to block the
+merge, so require the `Scan and gate` status check (above).
 
 ## Inputs and outputs
 
@@ -110,7 +143,11 @@ GitHub gives pull requests from forks a read-only token. The Action still scans 
 `trustbom init` generates one consumer workflow with a single read-only
 `pull_request` review job. It pins the checkout Action to a tested immutable
 commit and uses full history. Existing workflow files are preserved rather than
-replaced. The workflow passes `trust/approvals.yml` to the gate unchanged: the
+replaced. Because `init` keeps `card.md`, `questionnaire.yml` and
+`findings.sarif` out of Git, the job uploads them as one `ai-trustbom`
+artifact (kept for 7 days, uploaded even when the gate fails) and writes the
+card to the job summary. Nothing is uploaded to GitHub code scanning; the
+check's annotations show the findings. The workflow passes `trust/approvals.yml` to the gate unchanged: the
 gate itself maps only the marked, comment-only unsigned template to the
 missing-approval bootstrap result (exit `3`), never to an approval.
 

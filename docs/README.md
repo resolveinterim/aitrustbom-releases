@@ -1,16 +1,39 @@
 # AI TrustBOM guides
 
-AI TrustBOM is a git-native AI disclosure tool. Your company builds
-AI-powered software, your customer (the buyer) receives its evidence, and
-Trust, your company's authorized human approver, decides what is approved.
-These guides follow that journey. Guides for buyers say "vendor" for the
-company that sends a pack.
+**A customer asked what AI you use. Answer with evidence a named person
+approved.**
+
+AI TrustBOM keeps an approved record of the AI in your product, and stops
+new AI from shipping until Trust signs it off. Your company (the vendor)
+builds the AI-powered software, your customer (the buyer) receives its
+evidence, and Trust, your company's authorized human approver, decides what
+is approved. Guides for buyers say "vendor" for the company that sends a
+pack.
+
+Try it first: in any Git repository, `npx trustbom scan` lists the AI it
+found with the file each came from and writes draft questionnaire answers.
+No licence, account or setup is needed, and everything it writes is marked
+as a draft. Then the work moves into pull requests:
+
+1. **Open a pull request as usual.** If it adds or changes AI, the check
+   fails and the comment lists what changed and what is missing.
+2. **Fill the gaps and propose.** Follow the comment's steps, run
+   `trustbom propose`, and push.
+3. **Trust signs off.** Trust reviews the pull request and merges it. The
+   record is now approved, and you can hand it to customers.
+
+The scanner reads tracked files, not running code; see
+[what it can and cannot see](workflow.md#what-it-can-and-cannot-see).
+Compliance platforms such as Vanta, Drata and Secureframe draft
+questionnaire answers from your policies; AI TrustBOM supplies the
+repository evidence and approved record behind the AI answers, and its
+CycloneDX output feeds AI-BOM tooling.
 
 ## Start here
 
 1. [How you use AI TrustBOM](workflow.md): the end-to-end workflow at a glance.
 2. [Tutorial: Abingdon Taxi Solutions](tutorial/README.md): a hands-on first journey
-   with a starter repository.
+   on your own fork of a starter repository, with real pull requests.
 3. [Licensing](licensing.md): the free tier, the 30-day trial and the paid
    subscription.
 

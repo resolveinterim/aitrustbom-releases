@@ -14,7 +14,7 @@ approval, and it changes no graph, hash or approval file.
 
 | Level | Meaning | Preventive? | Exit |
 | --- | --- | --- | --- |
-| `enforced` | All seven rules below are verified on the default branch and the audit found no violation. | Yes: GitHub blocks an uncontrolled approval change. | `0` |
+| `enforced` | Every rule below is verified on the default branch and the audit found no violation. | Yes: GitHub blocks an uncontrolled approval change. | `0` |
 | `audited` | Rules are not all verified, but every approvals-file change in the audit window was merged by a pull request approved on its final push by a CODEOWNER who was neither the author nor the last pusher. | No, detective only: it proves what happened, not that it could not have happened otherwise. | `0` |
 | `violation` | An approvals-file change in the window was a direct push or lacked that review. The finding names the commit. It outranks verified rules: they prevent future bypass, not a past one. A reviewed pull request that re-approves a changed graph (a new `approved_graph_sha`) starts a new window and clears it; a waivers-only change does not. | No | `3` |
 | `unverified` | Rules or history could not be read or proven (offline, shallow clone, no access, no `gh`). | No | `0` |
@@ -33,6 +33,12 @@ approval, and it changes no graph, hash or approval file.
 5. requiring approval of the most recent reviewable push;
 6. blocking force pushes and branch deletion;
 7. allowing merge commits only.
+
+When the committed ruleset (`.github/rulesets/trustbom.json`) requires a
+status check, an eighth rule, `Required status check "Scan and gate"`, is
+checked too: without it a pull request with a stale `trust/card.json` or a
+failing gate can merge. Growth payloads name no required check, so they have
+seven rules.
 
 Each rule reports `verified`, `missing` or `unverified`.
 

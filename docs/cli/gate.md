@@ -18,13 +18,24 @@ the gate still evaluates the hash, findings, waivers and rejections but reports 
 
 - how many conditions currently block the PR;
 - the semantic differences (added/removed models, tools, MCP servers,
-  classification changes) between the current graph and the approval;
+  classification changes) between the current graph and the approval; the
+  PR comment's **What changed** section also shows the
+  `path:line` evidence for each difference, says **No change** when the
+  approved version matches, and summarises a **First record** when the
+  default branch has no approved version yet. Fingerprints sit in a
+  collapsed **Technical details** block. When the comment asks for
+  `trustbom propose`, it gives the exact command (with `--system`, and the
+  `--high-risk` and `--article-50` decisions for a first sign-off) and an
+  `npm install --global trustbom@<version>` line pinned to the Action's
+  version; local `gate` output omits the install line;
 - each blocking condition and the concrete way to resolve it: correct the
   change, add a reasoned manual declaration, fix the finding, add a
   time-bounded waiver, resolve a rejection, or have Trust approve the graph.
 
-The same assessment is appended to `trust/card.md` (without changing
-`card.json` or its hash) and printed as the PR-comment Markdown that the
+The same assessment is appended to the local, Git-ignored `trust/card.md`
+(without changing `card.json` or its hash), whose
+[Approval section](scan.md#approval-status-in-cardmd) uses this command's
+approval lookup, and printed as the PR-comment Markdown that the
 GitHub Action posts. See [github-action.md](../github-action.md) for running
 this automatically on every pull request.
 
@@ -56,8 +67,8 @@ Free, single-system or portfolio. `gate` never checks a license.
 
 ## Example
 
-In a freshly scanned repository with no approval file (real output, trimmed to
-the fixed sections):
+In a freshly scanned repository whose approval file is still the unsigned
+template (real output, trimmed to the fixed sections):
 
 ```powershell
 trustbom gate
@@ -67,18 +78,24 @@ trustbom gate
 <!-- ai-trustbom-pr-comment -->
 ## AI TrustBOM
 
-**Status:** bootstrap required
-**Graph fingerprint:** `3d8031b7a3e5`
+**Status:** Not approved — Needs information
+
+**Gate:** bootstrap required
+
+- \[medium\] model-id-undeclared: The anthropic package is present but no model ID was found in an allowlisted configuration file.
+  **Next:** Declare the model 'anthropic' under models: in trust/manual.yml (provider, model\_id, region, reason), or list the path under not\_in\_scope: in trust/manual.yml if it is a false positive.
+...
+**Next:** Resolve the items above, then run `trustbom propose`.
 ...
 ### Why the gate failed
 
-The gate is blocked because this repository has no reviewed graph approval.
+The gate is blocked because this repository has no approved version yet.
 ...
 ### How to resolve
 
-#### 1. No approval file exists
+#### 1. The approval file is still the unsigned template
 
-AI TrustBOM could not find trust/approvals.yml. The first graph must be reviewed by Trust before it can become the baseline.
+trust/approvals.yml exists but is still the unsigned template. The first version must be reviewed by Trust before it counts as approved.
 ...
 ```
 
@@ -86,23 +103,30 @@ Exit code `3`. After the findings are resolved and the approval is merged to
 the default branch, the same command reports:
 
 ```text
-**Status:** passed
+**Status:** Approved
+
+**Gate:** passed
+
+**Next:** None: the default branch holds Trust's approval of this graph.
 ...
 ### Gate result
 
-The current graph matches its approval and has no blocking policy conditions.
+The current version matches its approval and has no blocking policy conditions.
 ...
-### Next step
+### Gate detail
 
 No approval action is required.
 ```
+
+On a feature branch that holds a matching proposal, the status is
+**Proposed, not approved** until the proposal merges to the default branch.
 
 Exit code `0`.
 
 ## Common errors
 
-- **Status `bootstrap required`**: no `trust/approvals.yml` entry exists yet.
-  Run [`request-approval`](request-approval.md).
+- **Gate `bootstrap required`**: no signed `trust/approvals.yml` entry exists yet.
+  Run [`propose`](propose.md).
 - **Unwaived findings at or above `--fail-on`**: fix the finding, add a reasoned
   manual declaration or a time-bounded waiver.
 - **No baseline diff reported**: the default branch cannot be proven (shallow
@@ -112,7 +136,7 @@ Exit code `0`.
 
 ## See also
 
-- [`request-approval`](request-approval.md)
+- [`propose`](propose.md)
 - [GitHub Action](../github-action.md)
 - [Enforcement levels](../enforcement-levels.md)
 - [Reducing review friction](../reducing-review-friction.md)

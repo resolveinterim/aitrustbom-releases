@@ -1,86 +1,72 @@
 # Tutorial: we are Abingdon Taxi Solutions
 
-For this tutorial, **we are an AI-first company providing software as a service for taxi companies**.
-Our customers want a better experience for their **drivers** (contract and
-earnings questions), **managers** (productivity and absence) and **owners**
-(fleet information). They also need to know how we use AI in our service. Our
-job is to give them an evidenced, reviewed answer rather than an unevidenced
-promise.
+A customer asked what AI you use. Answer with evidence a named person
+approved.
 
-You will work in the company's **Git evidence repository**: a description of
-the service, a sample customer request for information (RFI) and example
-inputs for later changes. It is not a runnable taxi application, and the
-records and the customer request are synthetic.
+In this tutorial **we are Abingdon Taxi Solutions**, a company that sells an
+AI-powered service to taxi firms. Our rider support already uses an OpenAI
+model. On a pull request we add a Gemini model for drivers, and AI TrustBOM
+stops it shipping until Trust signs it off. At the end we answer a customer's
+questionnaire from the approved record and publish evidence the customer can
+check.
+
+You work on your own GitHub copy (a fork) of the starter repository, with the
+real GitHub Action and real pull requests. The starter is an evidence
+repository, not a runnable application: a description of the service, a
+sample customer questionnaire and the files the tutorial adds. Everything in
+it is synthetic.
 
 ## Who does what
 
-| Role | Who | In this tutorial |
-| --- | --- | --- |
-| **Our company** | Abingdon Taxi Solutions, which sells the AI-powered service | You, working in the evidence repository. |
-| **Our customer (the buyer)** | The customer whose procurement team sends the RFI | Receives the approved evidence and verifies it. |
-| **Trust** | The person at our company who approves what we share | A hat you put on for this exercise when you review and merge the approval. In a real company this is a different person from the author. |
+| Role | In this tutorial |
+| --- | --- |
+| **Developer** | You. You add AI to the product and open pull requests, as you would on any other change. |
+| **Trust** | Also you, for pages 1 to 8. Trust is the person who approves what the company tells customers about its AI. **You are playing Trust here; in production a different person approves.** Page 9 turns on the rule that makes that a requirement. |
+| **Customer (the buyer)** | The taxi firm whose procurement team sends the questionnaire. On page 8 you check the published evidence as they would. |
 
-An **AI provider** (here Google, supplying Gemini) is the company whose model
-we use. The guides say "your company" and "your customer (the buyer)"; this
-tutorial says "we" and "our customer". The glossary calls the company *vendor*,
-a word kept for buyer-facing material, so that it is never confused with the AI
-provider.
+An **AI provider** (here OpenAI and Google) is the company whose model we use.
+The glossary defines every term.
 
-Scanning produces a *draft* inventory of what tracked files indicate. The
-team checks the underlying facts, and Trust approves a graph before it is used
-to answer a customer. See the glossary for terms.
+## How the pages work
 
-## Prerequisites
+Each page has three parts:
 
-- Git and a shell: PowerShell or bash (Linux, macOS, Git Bash, WSL). Commands
-  are labelled **PowerShell / bash**, or given separately for each where they
-  differ.
-- The `trustbom` CLI. The simplest route is `npm install --global trustbom`;
-  other routes avoid Node.js. See [installing the CLI](../installing.md).
-- **A free trial license before page 4.** Pages 1 to 3 use only free
-  commands. The approved `export`, `answer` and `publish` commands on pages 4
-  and 5 are paid, so do [Get a license](get-a-license.md) after page 3
-  (the trial emails a key, so start it early if you like). The license is bound
-  to the GitHub owner in `origin`, so fork the starter into your own account on
-  page 1. [Licensing](../licensing.md#free-and-paid-commands) lists which commands
-  are free.
+- **Why**: the problem the step solves.
+- **Try it**: the commands and the output they print.
+- **What you now have**: the result, and why Trust or a customer cares.
 
-Output in these pages is **representative of this starter**. Paths, commit
-ids, graph fingerprints and CLI versions vary between checkouts. Values in
-angle brackets are placeholders: `<repo>` stands for the location of your
-clone, and `<12 lowercase hex characters>` for a value you will see in your
-own output. Counts can vary with the detector set.
-
-Each page has runnable **Try it** steps and, separately, **In production**
-callouts that describe what differs in a real repository. The callouts never
-interrupt a command sequence and need not be run.
-
-## What you will have at the end
-
-- A scanned, cited `trust/card.json` for the Gemini model that answers driver questions (one model and one
-  MCP server) with no open findings.
-- A Trust decision recorded in `trust/approvals.yml` and merged to `main`,
-  with the human `high_risk` and `article_50` decisions stated.
-- An approved export, a cited RFI answer file and an unmatched-question list.
-- A CycloneDX ML-BOM, a readiness checklist and a deployable trust page that a
-  buyer verifies offline.
-- An understanding of what the GitHub Action adds on every pull request.
+Commands marked **PowerShell / bash** are the same in both shells. Output
+comes from a local run of these steps with a development build; a released
+`trustbom` prints the same text apart from version numbers. Values in
+angle brackets are placeholders: `<your-owner>` is your GitHub account,
+`<repo>` is the folder of your clone, and `<12 hex characters>` is a value
+that differs in your run.
+Windows shows paths with `\` where these pages show `/`.
 
 ## The pages
 
-| Page | Goal | Path |
+| Page | What you do | License |
 | --- | --- | --- |
-| [1. Set up](1-setup.md) | Clone, `init`, identity, scope exclusion, first scan | Core |
-| [2. Detect](2-detect.md) | Add Gemini and an MCP connection; read the card and questionnaire | Core |
-| [3. Approve](3-approve.md) | Resolve findings, `gate`, `request-approval`, merge as Trust | Core |
-| [Get a license](get-a-license.md) | Activate a free trial for the paid commands | Before page 4 |
-| [4. Answer](4-answer.md) | Draft versus approved export; answer the RFI | Independent |
-| [5. Publish](5-publish.md) | CycloneDX, readiness, `publish`, `verify` | Independent |
-| [6. Automate](6-automate.md) | The Action, PR comment, enforcement, upgrade, portfolio | Independent |
+| [Before you start](before-you-start.md) | Install `trustbom`, fork the starter and clone it | None |
+| [1. See your AI](1-see-your-ai.md) | Run one command and read what it found | None |
+| [2. Set up sign-off](2-set-up-sign-off.md) | Add the sign-off files and the pull-request check | None |
+| [3. Add AI](3-add-ai.md) | Add Gemini on a branch and open a pull request; the check fails | None |
+| [4. Fill the gaps](4-fill-the-gaps.md) | Follow the pull-request comment until it says Ready for sign-off | None |
+| [5. Propose](5-propose.md) | Ask Trust to sign off | None |
+| [6. Sign off](6-sign-off.md) | Review and merge as Trust; the record is approved | None |
+| [7. Answer a customer](7-answer-a-customer.md) | Start the free trial; export and answer a questionnaire | Trial |
+| [8. Publish and verify](8-publish-and-verify.md) | Publish the evidence and check it as the customer | Trial |
+| [9. Enforce, then the next change](9-enforce.md) | Require a second person; the next pull request is blocked | None |
 
-Do pages 1 to 3 in order: each ends at a checkpoint the next one starts from,
-and page 3 finishes with a real approval merged to the local `main`. Pages 4
-to 6 then run against that approved repository in any order. Every command is
-linked to its [reference entry](../cli/README.md).
+Do the pages in order: each one starts where the previous one ended. Pages 1
+to 6 and 9 use free commands. The paid commands start on page 7, where you
+request a free 30-day trial.
 
-Start with [page 1: set up](1-setup.md).
+Two reference pages sit beside the tutorial:
+
+- [How the approval is proven](how-approval-is-proven.md) explains what the
+  check compares and why a merged pull request counts as Trust's approval.
+- [Offline appendix](appendix-offline.md) runs the same steps without pull
+  requests, for example where GitHub Actions cannot run.
+
+Start with [Before you start](before-you-start.md).

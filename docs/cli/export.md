@@ -23,12 +23,13 @@ older or draft pack. `--fail-on` at export is the caller's threshold, not part
 of the approval contract: a lower threshold does not change what Trust
 reviewed.
 
-Do not ignore `trust/card.json` or `trust/card.md`: commit them with the
-approval, because approved export reads `trust/card.json` from the default
-branch.
+Do not ignore `trust/card.json`: commit it with the approval, because
+approved export reads `trust/card.json` from the default branch. `init`
+ignores the rendered `trust/card.md`, `trust/questionnaire.yml` and
+`trust/findings.sarif`; export renders its own pack from the graph.
 
-Every `scan` rewrites the tracked `trust/card.json` and `trust/card.md` (commit
-id and assessment) even when the graph is unchanged. `export --draft` and
+Every `scan` rewrites the tracked `trust/card.json` (commit id) even when the
+graph is unchanged. `export --draft` and
 `publish --draft` need the card's commit id to match `HEAD`, so rescan after
 each commit, including the commit that merges an approval, before a draft export.
 
@@ -102,4 +103,4 @@ labels the card `approved`.
 - [Approved and draft export](../approved-export.md)
 - [`publish`](publish.md) for a static trust page, [`verify`](verify.md) for buyers
 - [`answer`](answer.md) to answer buyer questions from the approved graph
-- [`request-approval`](request-approval.md)
+- [`propose`](propose.md)

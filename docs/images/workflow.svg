@@ -1,4 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="880" height="1200" viewBox="0 0 880 1200" font-family="Segoe UI, Segoe UI Emoji, Arial, sans-serif" font-size="15"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker></defs><rect width="880" height="1200" fill="#fff"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="1200" viewBox="0 0 880 1200" font-family="Segoe UI, Segoe UI Emoji, Arial, sans-serif" font-size="15" role="img" aria-labelledby="title desc">
+<title id="title">AI TrustBOM pull-request workflow</title>
+<desc id="desc">Set up once with trustbom init. A developer opens a pull request that adds or changes AI. The AI TrustBOM check fails and its comment says Not approved, Needs information, listing what changed, what is missing and whether trust/card.json is out of date. The developer fills the gaps in trust/manual.yml, scans, commits and pushes until the comment says Not approved, Ready for sign-off; if gaps remain they fill them again. The developer runs trustbom propose, commits and pushes; the first sign-off adds Trust's two decisions, --high-risk and --article-50. The check passes and the comment says Proposed, not approved. Trust, a code owner who is not the author, reviews and merges; changes requested go back to filling the gaps. Optionally, trustbom github-rules apply makes GitHub block the merge until a code owner other than the author approves. Once merged, the default branch holds the Approved version. The team shares it with the paid export, answer and publish commands; export --draft is free and watermarked. The customer checks the pack with trustbom verify, free and offline. The next AI change starts again at step 2, and the comment says Not approved (stale) until Trust signs it off again.</desc>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#334155"/></marker><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker></defs><rect width="880" height="1200" fill="#fff"/>
 <path d="M300,118 V162" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ar)"/>
 <path d="M300,218 V262" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ar)"/>
 <path d="M300,318 V362" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ar)"/>
@@ -9,48 +12,60 @@
 <path d="M300,818 V862" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ar)"/>
 <path d="M300,918 V962" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ar)"/>
 <path d="M300,1018 V1062" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ar)"/>
-<text x="308" y="544" text-anchor="start" font-size="12" font-style="italic" fill="#475569">ready</text>
-<text x="308" y="844" text-anchor="start" font-size="12" font-style="italic" fill="#475569">passes</text>
-<text x="308" y="944" text-anchor="start" font-size="12" font-style="italic" fill="#475569">approved</text>
-<path d="M175,490 H85 V512" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ar)"/>
-<text x="15" y="482" text-anchor="start" font-size="12" font-style="italic" fill="#475569">cannot fix now</text>
-<path d="M85,568 V590 H175" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#ar)"/>
-<rect x="10" y="512" width="150" height="56" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="6 4"/><text x="85" y="538" text-anchor="middle" fill="#0f172a">⏳ 5. Add waiver</text><text x="85" y="558" text-anchor="middle" fill="#0f172a">(optional)</text>
-<path d="M425,490 H480 V308 H425" fill="none" stroke="#dc2626" stroke-width="2" marker-end="url(#ar)"/>
-<text x="471" y="399" text-anchor="middle" font-size="12" font-style="italic" fill="#475569" transform="rotate(-90 471 399)">needs attention</text>
-<path d="M425,790 H520 V290 H425" fill="none" stroke="#dc2626" stroke-width="2" marker-end="url(#ar)"/>
-<text x="512" y="540" text-anchor="middle" font-size="12" font-style="italic" fill="#475569" transform="rotate(-90 512 540)">needs attention</text>
-<path d="M425,890 H560 V272 H425" fill="none" stroke="#dc2626" stroke-width="2" marker-end="url(#ar)"/>
-<text x="552" y="590" text-anchor="middle" font-size="12" font-style="italic" fill="#475569" transform="rotate(-90 552 590)">changes requested or rejected</text>
-<rect x="175" y="62" width="250" height="56" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
-<text x="300" y="85" text-anchor="middle" fill="#0f172a">📦 1. Install and initialise</text>
-<text x="300" y="105" text-anchor="middle" fill="#0f172a">(once)</text>
-<rect x="175" y="162" width="250" height="56" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
-<text x="300" y="195" text-anchor="middle" fill="#0f172a">🔍 2. Scan</text>
-<rect x="175" y="262" width="250" height="56" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
-<text x="300" y="285" text-anchor="middle" fill="#0f172a">✍️ 3. Declare in</text>
-<text x="300" y="305" text-anchor="middle" fill="#0f172a">trust/manual.yml</text>
-<rect x="175" y="362" width="250" height="56" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
-<text x="300" y="385" text-anchor="middle" fill="#0f172a">🔄 Re-scan</text>
-<text x="300" y="405" text-anchor="middle" fill="#0f172a">(to include declarations)</text>
-<rect x="175" y="462" width="250" height="56" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
-<text x="300" y="485" text-anchor="middle" fill="#0f172a">🚦 4. Check locally</text>
-<text x="300" y="505" text-anchor="middle" fill="#0f172a">(gate)</text>
-<rect x="175" y="562" width="250" height="56" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
-<text x="300" y="595" text-anchor="middle" fill="#0f172a">📝 6. Request approval</text>
-<rect x="175" y="662" width="250" height="56" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
-<text x="300" y="695" text-anchor="middle" fill="#0f172a">🔀 7. Open pull request</text>
-<rect x="175" y="762" width="250" height="56" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
-<text x="300" y="785" text-anchor="middle" fill="#0f172a">✅ Check remotely</text>
-<text x="300" y="805" text-anchor="middle" fill="#0f172a">(GitHub gate on the PR)</text>
-<rect x="175" y="862" width="250" height="56" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
-<text x="300" y="885" text-anchor="middle" fill="#0f172a">🛡️ 8. Trust approver</text>
-<text x="300" y="905" text-anchor="middle" fill="#0f172a">reviews and merges</text>
-<rect x="175" y="962" width="250" height="56" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
-<text x="300" y="985" text-anchor="middle" fill="#0f172a">📄 9. Export approved evidence</text>
-<text x="300" y="1005" text-anchor="middle" fill="#0f172a">(developer, approver or CI job)</text>
-<rect x="175" y="1062" width="250" height="56" rx="10" fill="#fae8ff" stroke="#c026d3" stroke-width="2.5"/>
-<text x="300" y="1085" text-anchor="middle" fill="#0f172a">🧾 10. Recipient</text>
-<text x="300" y="1105" text-anchor="middle" fill="#0f172a">verifies the pack</text>
-<text x="300" y="1154" text-anchor="middle" font-size="13" font-style="italic" fill="#475569">If the record changes later, start again at 2. Scan</text><g transform="translate(240 0)"><rect x="440" y="12" width="190" height="116" rx="8" fill="#fff" stroke="#cbd5e1" stroke-width="1.5"/><text x="452" y="32" font-size="13" font-weight="600" fill="#0f172a">Key</text><rect x="452" y="44" width="18" height="14" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><text x="478" y="56" font-size="13" fill="#0f172a">Your developers</text><rect x="452" y="64" width="18" height="14" rx="3" fill="#fef3c7" stroke="#d97706" stroke-width="2"/><text x="478" y="76" font-size="13" fill="#0f172a">AI TrustBOM gate check</text><rect x="452" y="84" width="18" height="14" rx="3" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/><text x="478" y="96" font-size="13" fill="#0f172a">Your Trust approver</text><rect x="452" y="104" width="18" height="14" rx="3" fill="#fae8ff" stroke="#c026d3" stroke-width="2"/><text x="478" y="116" font-size="13" fill="#0f172a">Pack recipients</text></g>
+<text x="308" y="444" text-anchor="start" font-size="12" font-style="italic" fill="#475569">push</text>
+<text x="308" y="644" text-anchor="start" font-size="12" font-style="italic" fill="#475569">push</text>
+<text x="308" y="844" text-anchor="start" font-size="12" font-style="italic" fill="#475569">merged</text>
+<path d="M150,490 H110 V400 H148" fill="none" stroke="#dc2626" stroke-width="2" marker-end="url(#arr)"/>
+<text x="102" y="445" text-anchor="middle" font-size="12" font-style="italic" fill="#475569" transform="rotate(-90 102 445)">gaps remain</text>
+<path d="M150,790 H70 V380 H148" fill="none" stroke="#dc2626" stroke-width="2" marker-end="url(#arr)"/>
+<text x="62" y="585" text-anchor="middle" font-size="12" font-style="italic" fill="#475569" transform="rotate(-90 62 585)">changes requested</text>
+<rect x="150" y="62" width="300" height="56" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+<text x="300" y="85" text-anchor="middle" fill="#0f172a">📦 1. Set up once</text>
+<text x="300" y="105" text-anchor="middle" font-size="13" fill="#0f172a">trustbom init, name Trust reviewers, push</text>
+<rect x="150" y="162" width="300" height="56" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+<text x="300" y="185" text-anchor="middle" fill="#0f172a">🔀 2. Open a pull request</text>
+<text x="300" y="205" text-anchor="middle" font-size="13" fill="#0f172a">as usual; it adds or changes AI</text>
+<rect x="150" y="262" width="300" height="56" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+<text x="300" y="285" text-anchor="middle" fill="#0f172a">🚦 Check fails and comments</text>
+<text x="300" y="305" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">Not approved — Needs information</text>
+<rect x="150" y="362" width="300" height="56" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+<text x="300" y="385" text-anchor="middle" fill="#0f172a">✍️ 3. Fill the gaps</text>
+<text x="300" y="405" text-anchor="middle" font-size="13" fill="#0f172a">in trust/manual.yml, then scan, commit, push</text>
+<rect x="150" y="462" width="300" height="56" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+<text x="300" y="485" text-anchor="middle" fill="#0f172a">🚦 Comment updates</text>
+<text x="300" y="505" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">Not approved — Ready for sign-off</text>
+<rect x="150" y="562" width="300" height="56" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+<text x="300" y="585" text-anchor="middle" fill="#0f172a">📝 4. Propose</text>
+<text x="300" y="605" text-anchor="middle" font-size="13" fill="#0f172a">trustbom propose, commit, push</text>
+<rect x="150" y="662" width="300" height="56" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+<text x="300" y="685" text-anchor="middle" fill="#0f172a">🚦 Check passes</text>
+<text x="300" y="705" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">Proposed, not approved</text>
+<rect x="150" y="762" width="300" height="56" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+<text x="300" y="785" text-anchor="middle" fill="#0f172a">🛡️ 5. Trust signs off</text>
+<text x="300" y="805" text-anchor="middle" font-size="13" fill="#0f172a">reviews and merges; not the author</text>
+<rect x="150" y="862" width="300" height="56" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+<text x="300" y="885" text-anchor="middle" font-weight="600" fill="#0f172a">✅ Approved</text>
+<text x="300" y="905" text-anchor="middle" font-size="13" fill="#0f172a">the approved version is on the default branch</text>
+<rect x="150" y="962" width="300" height="56" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+<text x="300" y="985" text-anchor="middle" fill="#0f172a">📤 6. Share with customers</text>
+<text x="300" y="1005" text-anchor="middle" font-size="13" fill="#0f172a">export, answer, publish (paid)</text>
+<rect x="150" y="1062" width="300" height="56" rx="10" fill="#fae8ff" stroke="#c026d3" stroke-width="2.5"/>
+<text x="300" y="1085" text-anchor="middle" fill="#0f172a">🧾 7. Customer verifies</text>
+<text x="300" y="1105" text-anchor="middle" font-size="13" fill="#0f172a">trustbom verify, free and offline</text>
+<path d="M450,290 H600" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 3"/>
+<rect x="600" y="238" width="260" height="104" rx="8" fill="#fff" stroke="#cbd5e1" stroke-width="1.5"/>
+<g font-size="13" fill="#0f172a"><text x="612" y="260" font-weight="600">The comment lists</text><text x="612" y="282">• what changed, with file and line</text><text x="612" y="302">• what is missing, each with a 'Next:' step</text><text x="612" y="322">• trust/card.json if it is out of date</text></g>
+<path d="M450,590 H600" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 3"/>
+<rect x="600" y="542" width="260" height="96" rx="8" fill="#fff" stroke="#cbd5e1" stroke-width="1.5"/>
+<g font-size="13" fill="#0f172a"><text x="612" y="564" font-weight="600">First sign-off only</text><text x="612" y="584">add Trust's two decisions:</text><text x="612" y="604" font-family="Consolas, Menlo, monospace" font-size="12">--high-risk yes|no</text><text x="612" y="624" font-family="Consolas, Menlo, monospace" font-size="12">--article-50 yes|no</text></g>
+<path d="M600,790 H452" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ar)"/>
+<text x="525" y="782" text-anchor="middle" font-size="12" font-style="italic" fill="#475569">enforces</text>
+<rect x="600" y="730" width="260" height="120" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="6 4"/>
+<g font-size="13" fill="#0f172a"><text x="612" y="752" font-size="15">🔒 Require sign-off (optional)</text><text x="612" y="774" font-family="Consolas, Menlo, monospace" font-size="12">trustbom github-rules apply</text><text x="612" y="796">GitHub blocks the merge until a</text><text x="612" y="816">code owner other than the author</text><text x="612" y="836">approves it</text></g>
+<path d="M450,990 H600" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 3"/>
+<rect x="600" y="954" width="260" height="72" rx="8" fill="#fff" stroke="#cbd5e1" stroke-width="1.5"/>
+<g font-size="13" fill="#0f172a"><text x="612" y="976">Run by a developer, Trust or a CI job.</text><text x="612" y="996"><tspan font-family="Consolas, Menlo, monospace" font-size="12">export --draft</tspan> is free and</text><text x="612" y="1016">watermarked as not approved.</text></g>
+<text x="300" y="1154" text-anchor="middle" font-size="13" font-style="italic" fill="#475569">The next AI change starts again at 2. Until Trust signs it off,</text>
+<text x="300" y="1174" text-anchor="middle" font-size="13" font-style="italic" fill="#475569">the comment says Not approved (stale).</text>
+<rect x="640" y="12" width="230" height="136" rx="8" fill="#fff" stroke="#cbd5e1" stroke-width="1.5"/><text x="652" y="32" font-size="13" font-weight="600" fill="#0f172a">Key</text><rect x="652" y="44" width="18" height="14" rx="3" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/><text x="678" y="56" font-size="13" fill="#0f172a">Your team</text><rect x="652" y="64" width="18" height="14" rx="3" fill="#fef3c7" stroke="#d97706" stroke-width="2"/><text x="678" y="76" font-size="13" fill="#0f172a">AI TrustBOM check and status</text><rect x="652" y="84" width="18" height="14" rx="3" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/><text x="678" y="96" font-size="13" fill="#0f172a">Trust (a different person)</text><rect x="652" y="104" width="18" height="14" rx="3" fill="#fae8ff" stroke="#c026d3" stroke-width="2"/><text x="678" y="116" font-size="13" fill="#0f172a">Customer (the buyer or auditor)</text><rect x="652" y="124" width="18" height="14" rx="3" fill="#fff" stroke="#2563eb" stroke-width="2" stroke-dasharray="4 2"/><text x="678" y="136" font-size="13" fill="#0f172a">Optional (dashed)</text>
 </svg>

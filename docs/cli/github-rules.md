@@ -52,12 +52,13 @@ trustbom github-rules check --github
 trustbom github-rules check --github --require-enforced
 ```
 
-`check` reports one level and the status of each of the seven rules
+`check` reports one level and the status of each of the seven rules, plus an
+eighth when the committed ruleset requires a status check
 (`verified`, `missing`, `unverified`):
 
 | Level | Meaning | Exit |
 | --- | --- | --- |
-| `enforced` | All seven rules are verified and the audit found no violation, so GitHub prevents uncontrolled approval changes. | 0 |
+| `enforced` | Every rule is verified and the audit found no violation, so GitHub prevents uncontrolled approval changes. | 0 |
 | `audited` | Rules are not all verified, but every change to an approvals file since the approved graph baseline was merged by a pull request approved on its final push by a CODEOWNER who was neither the author nor the last pusher. | 0 |
 | `violation` | An approvals-file change in that window was a direct push or lacked such an approval; the finding names the commit. It outranks verified rules until a reviewed pull request re-approves a changed graph (waivers alone do not clear it). | 3 |
 | `unverified` | The rules or history could not be read or proven (offline, shallow clone, no access). | 0 |
@@ -67,6 +68,14 @@ it still reports a CODEOWNERS file that does not cover an approvals file, with
 the exact line to add. `--require-enforced` exits `3` for any level below
 `enforced`. The level describes how approval changes were controlled; it is
 never an approval and changes no graph, hash or approval file.
+
+The eighth rule, `Required status check "Scan and gate"`, appears only when
+the ruleset payload committed at `.github/rulesets/trustbom.json` names a
+required check (Growth payloads do not). It is `verified` when the check is
+required before merge and `missing` when it is not, because then a pull
+request with a stale `trust/card.json` or a failing gate can merge. Offline it
+is `unverified` like the others. See the
+[Action guide](../github-action.md#stale-cardjson).
 
 Limits: only repository rulesets are verified (not legacy branch protection or
 organisation rulesets); reading bypass actors may need admin rights; the last
@@ -118,6 +127,7 @@ AI TrustBOM enforcement level: unverified
   [unverified] Most recent reviewable push approved: not checked (offline)
   [unverified] Force pushes and branch deletion blocked: not checked (offline)
   [unverified] Merge commits only: not checked (offline)
+  [unverified] Required status check "Scan and gate": not checked (offline)
 Approval history audit: unverified (not checked (offline))
 No GitHub calls were made. Pass --github to verify the rules and audit approval history.
 This level describes how approval changes were controlled. It is not an approval.
@@ -137,4 +147,4 @@ Exit code `0`. Add `--github` to read the repository's rulesets through `gh`.
 - [Enforcement levels](../enforcement-levels.md)
 - [`init`](init.md), which writes `.github/rulesets/trustbom.json`
 - [`gate`](gate.md) and [`export`](export.md) for `--github-rules`
-- [`request-approval`](request-approval.md) for `--check-controls`
+- [`propose`](propose.md), which writes the proposal these controls review

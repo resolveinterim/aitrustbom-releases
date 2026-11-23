@@ -309,8 +309,7 @@ git add trust/manual.yml docs/ai-disclosure.md trust/deletion trust/terms
 git commit -m "Declare reviewed AI deployment facts"
 trustbom scan
 trustbom readiness --framework nist-ai-rmf --framework iso-42001 --framework eu-ai-act
-trustbom gate
-trustbom request-approval --dry-run
+trustbom propose --dry-run --high-risk no --article-50 no
 ```
 
 Inspect `trust/card.json`, `trust/card.md`, `trust/questionnaire.yml` and
@@ -322,7 +321,7 @@ data-handling declarations must be resolved, not silently ignored.
 
 Changing declared graph facts, including retention/training/deletion facts,
 can change the graph fingerprint and require fresh Trust review. After
-resolving findings, use `request-approval` to propose the approval, obtain
+resolving findings, use `trustbom propose` to propose the approval, obtain
 independent CODEOWNER review, and merge to the default branch. This
 file, its reasons and a passing local scan are not themselves approval.
 Approved export/publication additionally require an active license.

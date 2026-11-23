@@ -13,7 +13,7 @@ Release availability is published on the GitHub Releases page and the npm regist
 | Free: never checks a license, never prompts | Paid: active trial or subscription required |
 |---|---|
 | `init` in all modes; `scan` and `gate`, single-system or portfolio, any number of systems | Approved `export` (without `--draft`) |
-| `readiness`, `request-approval` | `publish`, including `--draft` and `--from` |
+| `readiness`, `propose` | `publish`, including `--draft` and `--from` |
 | `export --draft` (watermarked, never approved) | `pack`, including `--from` |
 | `license` and every `license` subcommand | `answer` in every mode, including workbook reuse and `--suggest-only`; `drift` |
 

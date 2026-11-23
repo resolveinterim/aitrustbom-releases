@@ -16,11 +16,34 @@ Inspects the tracked lockfiles, manifests, allowlisted configuration, and
 - `trust/questionnaire.yml`: fixed-question answers cited to the graph
 - `trust/findings.sarif`: findings as SARIF 2.1.0 for code-scanning UIs
 
-The command prints the path of each file it wrote, a short graph fingerprint,
-and the full fingerprint for review. Do not copy it into an approval by hand;
-[`trustbom request-approval`](request-approval.md) writes the proposal.
-`card.md` is watermarked `draft (unapproved)` until it is approved. Findings
-never fail the scan itself: only the [gate](gate.md) enforces policy.
+Commit only `card.json`. The other three files are derived from it, so
+[`init`](init.md) adds them to `.gitignore`; the generated workflow attaches
+them to each pull-request run instead.
+
+The command prints the path of each file it wrote, a one-line summary and the
+approval status (see below): the headline, each blocker with a `Next:` line
+naming its fix, and one next step. Do not copy a fingerprint into an approval by
+hand; [`trustbom propose`](propose.md) writes the proposal. Findings never fail
+the scan itself: only the [gate](gate.md) enforces policy.
+
+### Approval status in `card.md`
+
+`card.md` has an **Approval** section above the classification. It uses the
+same approval and default-branch lookup as [`gate`](gate.md), so the two agree:
+
+| Status | When |
+| --- | --- |
+| **Approved** | The default branch holds an approval whose `approved_graph_sha` matches this graph. The card shows Trust's `high_risk` and `article_50`, the `approved_by` claim and `approved_at`, and drops the `draft (unapproved)` watermark. |
+| **Proposed, not approved** | `trust/approvals.yml` in the working tree matches this graph, but no approval of it is found on the default branch (for example on the proposal branch before the merge, or when the default branch cannot be proven). The card shows the proposed values. |
+| **Not approved (stale)** | An approval exists, but for a different fingerprint: the graph has changed since. |
+| **Not approved** | No approval file, or only the unsigned template or an invalid file. The refinement is **Needs information** while findings, an invalid approval file or a rejection (shown as Trust's rejection) block a proposal, and **Ready for sign-off** when nothing does, so `trustbom propose` would succeed. |
+
+The classification below it is headed **Classification: scanner draft (not a
+Trust decision)**: `card.json` always keeps the scanner's values (for example
+`high_risk: unknown`), because the approval binds to its hash. `card.md` is a
+local view of repository state, not evidence; [`trustbom export`](export.md)
+produces the buyer copy. `card.json`, the questionnaire and SARIF do not
+depend on the approval status.
 
 `card.json` records a coverage statement: the detector packs and versions
 installed, the ecosystems recognised from tracked manifests and lockfiles (with or
@@ -129,15 +152,22 @@ Wrote <repository>\trust\card.json
 Wrote <repository>\trust\card.md
 Wrote <repository>\trust\questionnaire.yml
 Wrote <repository>\trust\findings.sarif
-Graph fingerprint: 3d8031b7a3e5
-Full fingerprint (SHA-256): 3d8031b7a3e57e09159c566235e4d1f4e483fdeae9b5028fa3f40ca97887b191
 Found 0 model(s), 0 tool(s), 3 finding(s). Review <repository>\trust\card.md.
+Status: Not approved — Needs information
+  - [medium] model-id-undeclared: The anthropic package is present but no model ID was found in an allowlisted configuration file.
+    Next: Declare the model 'anthropic' under models: in trust/manual.yml (provider, model_id, region, reason), or list the path under not_in_scope: in trust/manual.yml if it is a false positive.
+  - [medium] no-models-detected: No AI models were detected in tracked repository inputs.
+    Next: Declare the product's models under models: in trust/manual.yml; if it uses none, Trust adds a waiver in trust/approvals.yml.
+  - [medium] subprocessor-undeclared: Provider 'anthropic' has no declared subprocessor.
+    Next: Add 'anthropic' to trust/subprocessors.yml, or list the path under not_in_scope: in trust/manual.yml if it is a false positive.
+Next: Resolve the items above, then run 'trustbom propose'.
 ```
 
 Exit code `0`. The three findings are `model-id-undeclared`,
 `no-models-detected` and `subprocessor-undeclared`; declaring the model in
 `trust/manual.yml` and the party in `trust/subprocessors.yml` and rescanning
-gives `Found 1 model(s), 0 tool(s), 0 finding(s).`
+gives `Found 1 model(s), 0 tool(s), 0 finding(s).` and
+`Status: Not approved — Ready for sign-off`.
 
 ## Common errors
 

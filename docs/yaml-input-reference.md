@@ -18,7 +18,7 @@ published JSON Schema or an editor-validation integration.
 | [`trust/question-map.yml`](#buyer-question-aliases) | Engineer/Trust maintains aliases to canonical buyer questions. |
 | [`trust/answer-register.yml`](#reviewed-answer-register) | Trust records reviewed, supplied answer versions and evidence dependencies. |
 | [`trust/answer-reuse.yml`](#reviewed-workbook-mapping) | `answer --suggest-only` generates a proposal; Trust reviews the mappings before merging them. |
-| [`trust/approvals.yml`](#trust-decisions-and-approval) | `request-approval` authors a proposal. Trust may edit human decisions, waivers, rejections and break-glass. No field is automation-maintained. |
+| [`trust/approvals.yml`](#trust-decisions-and-approval) | `propose` authors a proposal. Trust may edit human decisions, waivers, rejections and break-glass. No field is automation-maintained. |
 
 **Approvals are not entirely machine-owned.** Anyone with write access can
 propose a change, but independent Trust/CODEOWNER review and merge establish
@@ -378,7 +378,7 @@ Keys match the graph differ's exact keys, **not JSONPath**:
 | `eval_gates` | `<name>/<path>` |
 | `subprocessors`, `data_handling` | Provider identifier |
 | `findings` | `<id>/<subject-or-repository-path-or-repository>`; use the exact reported key |
-| `classification` | `role`, `gpai_provider`, `high_risk`, `article_50` |
+| `classification` | `high_risk`, `article_50` |
 | `coverage` | `ecosystems`, `ecosystem_manifests`, `not_in_scope`, `method_limits` |
 
 Do not invent dependency keys: the loader accepts a nonblank key, but that
@@ -449,20 +449,20 @@ new proposal rather than assuming an old review carries over.
 ## Trust decisions and approval
 
 **Default:** `trust/approvals.yml`; portfolios use
-`trust/systems/<id>/approvals.yml`. Gate/request-approval `--baseline`
+`trust/systems/<id>/approvals.yml`. Gate/propose `--baseline`
 and export `--from-approvals` support alternate paths where documented.
 
-Prefer `request-approval` to copying hashes/timestamps manually. Trust still
+Prefer `propose` to copying hashes/timestamps manually. Trust still
 reviews its proposal and can edit the fields below. `init` creates a
-comment-only **unsigned template**, not a valid approval; `request-approval`
+comment-only **unsigned template**, not a valid approval; `propose`
 replaces the template's comments with the proposal.
 
 ```yaml
 approved_graph_sha: cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 approved_by: secops
 approved_at: 2026-10-20T12:00:00Z
-high_risk: unset
-article_50: unset
+high_risk: no
+article_50: yes
 waivers: []
 rejections: []
 ```
@@ -472,8 +472,8 @@ rejections: []
 | `approved_graph_sha` | string | Required | Proposed/reviewed full lower-case **64-character** graph SHA-256; never the short display fingerprint. |
 | `approved_by` | string | Required | Human/proposed reviewer label, **1-128 characters** after trimming; not authenticated by the CLI. |
 | `approved_at` | timestamp string | Required | Explicit offset, maximum **64 characters**; ISO timestamp with seconds and optional fractional seconds. Recorded, not enforced: a future value is not rejected, and the merged approval in Git history is the authority. |
-| `high_risk` | string | Required | `unset`, `"no"` or `"yes"`; explicit human decision, not scanner inference. |
-| `article_50` | string | Required | `unset`, `applies` or `not_applicable`; explicit human decision. |
+| `high_risk` | string | Required | `yes` or `no`; explicit human decision, not scanner inference. `unset` is no longer accepted. |
+| `article_50` | string | Required | `yes` or `no`; explicit human decision. `unset`, `applies` and `not_applicable` are no longer accepted (`applies` is `yes`, `not_applicable` is `no`); rendered output keeps the buyer wording. `trustbom propose --high-risk yes\|no --article-50 yes\|no` replaces legacy values. |
 | `waivers` | list of mappings | Optional; defaults to `[]` | Human-owned, time-limited finding exceptions; see below. |
 | `rejections` | list of mappings | Optional; defaults to `[]` | Human-owned blockers; see below. |
 | `break_glass` | mapping | Optional; absent means no exception | Temporary draft-only gate exception; see below. |
@@ -550,7 +550,7 @@ through a customer `validate-yaml` command or a published JSON Schema.
 | Question aliases | Run `answer --questions <csv>` with a licensed, valid approved baseline. Input/regex errors differ from unmatched rows, but both can exit `2`. |
 | Answer register | Run `drift` (paid) or `readiness --register <path>` (free, advisory); historical references must be available. |
 | Reuse mapping | Generate suggestions, review/merge the map, then rerun workbook answering without `--suggest-only` (paid); mismatches fail or remain unresolved. |
-| Approval | Use `request-approval --dry-run`, review the proposal, then `gate`; approval publication additionally needs merge to the default branch. |
+| Approval | Use `propose --dry-run`, review the proposal, then `propose`; approval publication additionally needs merge to the default branch. |
 
 Preserve unknowns instead of inventing facts. Commit input changes, rescan
 and review semantic changes before updating approval. An exit `0` from a

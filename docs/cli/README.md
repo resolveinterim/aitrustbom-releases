@@ -21,7 +21,7 @@ and gates on pull requests, and [approved export](../approved-export.md).
 | [`trustbom init`](init.md) | Write preserved-file scaffolding; use `--interactive` for previewed single-system onboarding and optional read-only setup checks |
 | [`trustbom scan`](scan.md) | Detect AI usage and write `trust/card.json`, `card.md`, `questionnaire.yml`, `findings.sarif` |
 | [`trustbom gate`](gate.md) | Compare the current graph with the approved baseline and explain what blocks the PR |
-| [`trustbom request-approval [--check-controls]`](request-approval.md) | Author an approval-file proposal for independent CODEOWNER review; optionally inspect read-only GitHub controls |
+| [`trustbom propose`](propose.md) | Write the approval-file proposal and scan artifacts for independent CODEOWNER review, and print the `git add` line |
 | [`trustbom export`](export.md) | Write the approved `export/card.md` and `export/questionnaire.yml` (or `--draft` for an internal snapshot); `--format cyclonedx` also writes `export/trustbom.cdx.json` |
 | [`trustbom publish`](publish.md) | Render a self-contained static trust page under `export/site/` (index, per-system pages, `verify.html`, `index.pdf`, downloads and approved `manifest.json`) from approved graphs, or `--draft` for a watermarked internal pack |
 | [`trustbom license`](license.md) | Print the license terms for the installed version; works offline |

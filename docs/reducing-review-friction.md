@@ -2,7 +2,7 @@
 
 AI TrustBOM keeps approval in Git: a pull request that changes
 `trust/approvals.yml` must be approved by a CODEOWNER with the Trust role who is
-not its author (see [approving a graph](cli/request-approval.md#approve-a-graph-in-git)). Trust is often
+not its author (see [approving a graph](cli/propose.md#approve-a-graph-in-git)). Trust is often
 outside the development team, so this can feel like a bottleneck. This guide
 explains where waiting actually happens and how to keep it small without
 weakening the control.
@@ -34,9 +34,9 @@ cheaply* approval happens, never *whether*.
    reviewer who also authors the change cannot approve it. Your company needs at
    least two people able to review.
 2. **Make the review small.** Trust should review the gate's pull-request
-   comment (semantic changes, findings, required actions) and a short
+   comment (what changed with its evidence, findings, required actions) and a short
    `approvals.yml` diff, not the code. The
-   `trustbom request-approval` command writes the full
+   `trustbom propose` command writes the full
    fingerprint, requester and timestamp so the
    diff is a few lines and nothing is typed by hand.
 3. **Use a time-boxed break-glass entry for urgent merges.** Break-glass is a
@@ -67,12 +67,11 @@ cheaply* approval happens, never *whether*.
    [Enforcement levels](enforcement-levels.md).
    `trustbom init --interactive` can read branch
    protection and CODEOWNERS (read-only, with consent) and report what is
-   missing. The planned `request-approval --check-controls` also checks for
-   "approval of the most recent reviewable push", a CODEOWNERS entry for the
-   approvals path, at least two eligible reviewers, and administrator bypass.
-   It also reports whether `Scan and gate` is a required status check and
-   whether "require branches to be up to date" is set; both are recommended
-   because the generated workflow has no post-merge run (see
+   missing. `github-rules check --github` also verifies "approval of the most recent
+   reviewable push", and, when the committed ruleset names it, that
+   `Scan and gate` is a required status check. "Require branches to be up to
+   date" is recommended too, because the generated workflow has no post-merge
+   run (see
    [GitHub Action guide](github-action.md#recommended-repository-controls)).
 
 ## Solo founders and small teams
@@ -86,6 +85,6 @@ temporary exception.
 ## Related
 
 - [Enforcement levels](enforcement-levels.md)
-- [CLI reference: approve a graph in git](cli/request-approval.md#approve-a-graph-in-git)
+- [CLI reference: approve a graph in git](cli/propose.md#approve-a-graph-in-git)
 - [GitHub Action guide](github-action.md)
 - [Approved export](approved-export.md)

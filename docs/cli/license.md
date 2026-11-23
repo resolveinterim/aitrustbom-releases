@@ -75,7 +75,7 @@ failed check writes and renders nothing: approved [`export`](export.md) (not
 including workbook reuse and `--suggest-only`) and [`drift`](drift.md). Every
 other command is free and never checks a license, prompts or contacts the
 license service: `init`, `scan`, `gate` (single-system or portfolio),
-`readiness`, `request-approval`, `export --draft` and every `license`
+`readiness`, `propose`, `export --draft` and every `license`
 subcommand. A fresh clone with no license can run that whole free journey.
 Argument errors (exit `2`) are reported before the check and never prompt.
 
