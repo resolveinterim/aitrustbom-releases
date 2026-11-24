@@ -140,7 +140,7 @@ its Unicode code point and retains the previous site rather than silently
 omitting text from the PDF.
 
 `trustbom publish --draft` instead uses current-branch graph(s), requires
-that each was scanned at the current commit, and visibly marks the entire
+that each matches a scan of the current commit, and visibly marks the entire
 pack as **Draft - unapproved - not for buyer use**. A draft carries no
 `manifest.json`, so there is nothing to verify and it must not be sent to a
 buyer. It never falls back to draft automatically and cannot be combined with

@@ -102,6 +102,6 @@ For sibling imports, `answer --from artifacts` and
 `publish --from artifacts` use the same verified approved snapshots as
 `pack --from artifacts`. Set a read-only `TRUSTBOM_GITHUB_TOKEN` with access
 to each source repository and prepare `portfolio-import.json` as described
-in the [Growth workflow guide](growth-workflow.md). Unverified artifact
+in the [portfolio across repositories guide](portfolio-across-repositories.md). Unverified artifact
 content is never an approved buyer claim. The command reference is
 [`answer`](cli/answer.md).

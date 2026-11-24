@@ -39,13 +39,12 @@ of the pull request, so Git records who approved which version and when.
    git switch main
    git pull
    trustbom scan
-   git restore trust/card.json
    ```
 
    Output of `trustbom scan`:
 
    ```text
-   Wrote <repo>/trust/card.json
+   No changes detected; trust/card.json is up to date.
    Wrote <repo>/trust/card.md
    Wrote <repo>/trust/questionnaire.yml
    Wrote <repo>/trust/findings.sarif
@@ -54,9 +53,8 @@ of the pull request, so Git records who approved which version and when.
    Next: None: the default branch holds Trust's approval of this graph.
    ```
 
-   The scan writes the new commit id and time into `trust/card.json`. That is
-   not a change to the record, so `git restore` discards it. Open
-   `trust/card.md`: its status is now **Approved**, with Trust's two
+   The merge changed nothing in the graph, so the scan leaves
+   `trust/card.json` as it is. Open `trust/card.md`: its status is now **Approved**, with Trust's two
    decisions. The section below it, the scanner's draft classification, stays
    `unknown`, because the scanner never makes those decisions.
 

@@ -62,11 +62,15 @@ Do the pages in order: each one starts where the previous one ended. Pages 1
 to 6 and 9 use free commands. The paid commands start on page 7, where you
 request a free 30-day trial.
 
-Two reference pages sit beside the tutorial:
+Three pages sit beside the tutorial:
 
 - [How the approval is proven](how-approval-is-proven.md) explains what the
   check compares and why a merged pull request counts as Trust's approval.
 - [Offline appendix](appendix-offline.md) runs the same steps without pull
   requests, for example where GitHub Actions cannot run.
+- [Several AI systems in one repository](portfolio-monorepo.md) is for after
+  page 7: add a second AI system under the same Trust, approve each system
+  separately and publish one pack. For systems in separate repositories, give
+  each repository its own TrustBOM, as in this tutorial.
 
 Start with [Before you start](before-you-start.md).

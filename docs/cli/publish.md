@@ -28,7 +28,7 @@ separate review.
 For sibling imports, `publish --from artifacts` uses the same verified approved
 snapshots as `pack --from artifacts`. Set a read-only `TRUSTBOM_GITHUB_TOKEN`
 with access to each source repository and prepare `portfolio-import.json` as
-described in the [Growth workflow guide](../growth-workflow.md). Unverified
+described in the [portfolio across repositories guide](../portfolio-across-repositories.md). Unverified
 artifact content is never an approved buyer claim.
 
 ## Options
@@ -73,8 +73,8 @@ A released build without a key prints `license-missing` and instructions.
 - **Exit `4`**: a `license-*` diagnostic; see [`license`](license.md#license-enforcement).
 - **Approval refused**: same checks as [`export`](export.md); `--draft` is the
   only way to render an unapproved graph and is watermarked.
-- **`--draft` refused**: the card's commit id must match `HEAD`; rescan after
-  each commit.
+- **`--draft` refused**: the card must match a scan of `HEAD`; rescan after
+  a commit that changes the graph.
 
 ## See also
 

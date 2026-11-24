@@ -152,11 +152,13 @@ receive your key.
    holding your license key. Never put the key in a workflow file, an input
    default or a log; only secrets are passed to the CLI, always as the
    `TRUSTBOM_LICENSE_KEY` environment variable and never as an argument.
-2. `trustbom init --growth` generates a caller workflow that already passes it
-   to the Growth reusable workflow (`secrets: license-key: ${{
-   secrets.TRUSTBOM_LICENSE_KEY }}`). Only the Growth job that runs `pack`,
+2. `trustbom init --portfolio` generates a caller workflow that already passes it
+   to the portfolio reusable workflow (`secrets: license-key: ${{
+   secrets.TRUSTBOM_LICENSE_KEY }}`). Only the portfolio job that runs `pack`,
    `answer` and `publish` receives the key, and that job runs on pushes to the
-   default branch only. The standard workflow and the free scan/gate Action
+   default branch only. Scanning and gating a portfolio stay free for any number
+   of systems; delivery and answering use the organization license. The standard
+   workflow and the free scan/gate Action
    run no paid command and need no secret.
 3. For your own paid step (`export`, `drift` and so on), set the variable on
    that step after installing the CLI:

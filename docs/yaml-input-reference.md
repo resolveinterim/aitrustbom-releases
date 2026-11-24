@@ -12,7 +12,7 @@ published JSON Schema or an editor-validation integration.
 |---|---|
 | [`trust/system.yml`](#system-identity) | Engineer/Trust authors the system identity; init creates a starter. |
 | [`trust/manual.yml`](#manual-declarations) | Engineer/Trust authors facts detection cannot establish. |
-| [`trust/portfolio.yml`](#portfolio-membership) | Engineer/Trust declares portfolio membership; Growth init creates a starter. |
+| [`trust/portfolio.yml`](#portfolio-membership) | Engineer/Trust declares portfolio membership; `init --portfolio` creates a starter. |
 | [`trust/subprocessors.yml`](#subprocessors) | Trust maintains processor declarations and references to reviewed DPAs. |
 | [`trust/evals.yml`](#evaluation-artifacts) | Engineer declares evaluation artifacts already produced by CI. |
 | [`trust/question-map.yml`](#buyer-question-aliases) | Engineer/Trust maintains aliases to canonical buyer questions. |
@@ -163,7 +163,7 @@ of valid input or a passing gate.
 
 **Path:** `trust/portfolio.yml`, selected with portfolio commands such as
 `scan --portfolio` and `gate --portfolio`. The canonical path is not
-configurable by the Growth workflow.
+configurable by the portfolio workflow.
 
 ```yaml
 org: Example Vendor
@@ -199,7 +199,7 @@ shared root `trust/terms/anthropic.md`.
 
 Invalid membership, missing tracked inputs, duplicate IDs or overlapping
 paths are operational errors, not silently skipped systems. See
-[Growth setup](growth-workflow.md).
+[Portfolio in one repository](portfolio-one-repository.md).
 
 ## Subprocessors
 

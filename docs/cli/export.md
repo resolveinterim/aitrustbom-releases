@@ -28,10 +28,10 @@ approved export reads `trust/card.json` from the default branch. `init`
 ignores the rendered `trust/card.md`, `trust/questionnaire.yml` and
 `trust/findings.sarif`; export renders its own pack from the graph.
 
-Every `scan` rewrites the tracked `trust/card.json` (commit id) even when the
-graph is unchanged. `export --draft` and
-`publish --draft` need the card's commit id to match `HEAD`, so rescan after
-each commit, including the commit that merges an approval, before a draft export.
+`export --draft` and `publish --draft` need the card to match a scan of
+`HEAD`: either its commit id is `HEAD`, or the graph differs from a fresh scan
+only in `commit`, `scanned_at` and `cli_version`. After a commit that changes
+the graph, rescan before a draft export.
 
 See [approved-export.md](../approved-export.md) for the full refusal and
 watermarking rules and the CycloneDX mapping.
@@ -95,8 +95,8 @@ labels the card `approved`.
   [`gate`](gate.md) for the resolution.
 - **Default branch cannot be proven**: run `git remote set-head origin -a`; a
   local `main` or `master` is not evidence. A shallow clone is also refused.
-- **Draft refused because the card's commit id does not match `HEAD`**: rescan
-  after each commit.
+- **Draft refused because the card does not match a scan of `HEAD`**: the
+  graph changed since the last scan; rescan.
 
 ## See also
 

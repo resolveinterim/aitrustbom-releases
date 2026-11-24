@@ -30,7 +30,7 @@ Git and the `trustbom` command. You do not need a license key until page 7.
    trustbom --version
    ```
 
-   The second command prints the installed version, for example `1.0.3`.
+   The second command prints the installed version, for example `1.0.4`.
 
 3. **Fork the starter.** Open
    [`resolveinterim/abingdon-taxi-solutions`](https://github.com/resolveinterim/abingdon-taxi-solutions)

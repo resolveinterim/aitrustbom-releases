@@ -37,8 +37,8 @@ approval, and it changes no graph, hash or approval file.
 When the committed ruleset (`.github/rulesets/trustbom.json`) requires a
 status check, an eighth rule, `Required status check "Scan and gate"`, is
 checked too: without it a pull request with a stale `trust/card.json` or a
-failing gate can merge. Growth payloads name no required check, so they have
-seven rules.
+failing gate can merge. A portfolio ruleset requires
+`portfolio / Portfolio approval gate` instead.
 
 Each rule reports `verified`, `missing` or `unverified`.
 

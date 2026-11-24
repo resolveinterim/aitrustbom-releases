@@ -17,9 +17,9 @@ The graph **fingerprint** is a SHA-256 hash of the graph content. It excludes
 volatile metadata (the commit id, scan time and CLI version) and renderer
 wording. So:
 
-- rescanning after an unrelated commit changes `commit` and `scanned_at` in
-  `card.json` but not the fingerprint, and needs no new sign-off (tutorial
-  pages 6 and 9 discard that rescan with `git restore`);
+- rescanning after an unrelated commit leaves `card.json` untouched, and
+  needs no new sign-off: its `commit`, `scanned_at` and `cli_version` record
+  the last graph change, not the last scan;
 - changing a model, provider, declaration, finding or decision changes the
   fingerprint, and the old approval no longer matches.
 

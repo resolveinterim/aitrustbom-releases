@@ -69,7 +69,7 @@ cheaply* approval happens, never *whether*.
    protection and CODEOWNERS (read-only, with consent) and report what is
    missing. `github-rules check --github` also verifies "approval of the most recent
    reviewable push", and, when the committed ruleset names it, that
-   `Scan and gate` is a required status check. "Require branches to be up to
+   `Scan and gate` (or `portfolio / Portfolio approval gate`) is a required status check. "Require branches to be up to
    date" is recommended too, because the generated workflow has no post-merge
    run (see
    [GitHub Action guide](github-action.md#recommended-repository-controls)).

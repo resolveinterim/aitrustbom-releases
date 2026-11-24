@@ -20,6 +20,15 @@ Commit only `card.json`. The other three files are derived from it, so
 [`init`](init.md) adds them to `.gitignore`; the generated workflow attaches
 them to each pull-request run instead.
 
+When the new graph differs from the existing `card.json` only in `commit`,
+`scanned_at` and `cli_version`, the scan leaves `card.json` untouched and
+prints `No changes detected; trust/card.json is up to date.` in place of its
+`Wrote` line, so a rescan after an unrelated commit leaves `git status` clean.
+Those three fields therefore record the last graph change, not the last scan;
+the fingerprint excludes them either way. Any other difference, a missing or
+unreadable `card.json`, or a `--path` scan rewrites it. The three derived files
+are always rewritten. `scan --portfolio` applies the same rule to each system.
+
 The command prints the path of each file it wrote, a one-line summary and the
 approval status (see below): the headline, each blocker with a `Next:` line
 naming its fix, and one next step. Do not copy a fingerprint into an approval by

@@ -62,11 +62,19 @@ CycloneDX output feeds AI-BOM tooling.
     questions from approved evidence, including answer drift and workbook reuse.
 13. [Publish the trust page](trust-page.md): a static trust site, for example on
     GitHub Pages.
-14. [Growth reusable workflow](growth-workflow.md): scan and approve a portfolio
-    of systems in one repository.
-15. [Review pack history](pack-history.md): compare approved graphs over time.
+14. [Portfolio in one repository](portfolio-one-repository.md): a portfolio is
+    several AI systems under one Trust; scan and approve them from one
+    repository. [Walk through it](tutorial/portfolio-monorepo.md) on the
+    Abingdon example.
+15. [Portfolio across repositories](portfolio-across-repositories.md): reference
+    for importing approved cards from other repositories into one pack. Not
+    recommended: it has not been run end to end; give each repository its own
+    TrustBOM instead.
+16. [Portfolio reference](portfolio-reference.md): workflow inputs, tokens,
+    permissions and CLI interfaces.
+17. [Review pack history](pack-history.md): compare approved graphs over time.
 
 ## Receive and verify
 
-16. [Verifying a received pack](pack-verification.md): for buyers checking a
+18. [Verifying a received pack](pack-verification.md): for buyers checking a
     vendor's pack.

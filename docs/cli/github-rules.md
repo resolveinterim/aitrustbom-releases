@@ -69,9 +69,10 @@ the exact line to add. `--require-enforced` exits `3` for any level below
 `enforced`. The level describes how approval changes were controlled; it is
 never an approval and changes no graph, hash or approval file.
 
-The eighth rule, `Required status check "Scan and gate"`, appears only when
-the ruleset payload committed at `.github/rulesets/trustbom.json` names a
-required check (Growth payloads do not). It is `verified` when the check is
+The eighth rule, `Required status check "<check>"`, appears when the ruleset
+payload committed at `.github/rulesets/trustbom.json` names a required check:
+`Scan and gate` for one system, `portfolio / Portfolio approval gate` for a
+portfolio. It is `verified` when the check is
 required before merge and `missing` when it is not, because then a pull
 request with a stale `trust/card.json` or a failing gate can merge. Offline it
 is `unverified` like the others. See the

@@ -141,7 +141,7 @@ your own fork.
 
    ```text
    Wrote proposal to trust/approvals.yml (graph <64 hex characters>).
-   Decisions: high_risk no, article_50 yes (change them with --high-risk and --article-50).
+   EU AI Act decisions: high_risk no, article_50 yes (change them with --high-risk and --article-50).
    Wrote <repo>/trust/card.json
    Wrote <repo>/trust/card.md
    Wrote <repo>/trust/questionnaire.yml
@@ -173,7 +173,6 @@ your own fork.
    git switch main
    git pull
    trustbom scan
-   git restore trust/card.json
    trustbom github-rules check --github
    ```
 
@@ -199,6 +198,8 @@ Delete this repository**). Your trial stays tied to your GitHub account.
   compares, and why the merge counts as the sign-off.
 - [GitHub Action](../github-action.md): permissions, fork pull requests and
   upgrades with `trustbom init --upgrade`.
+- [Several AI systems in one repository](portfolio-monorepo.md): add a
+  second system under the same Trust.
 - [Reducing review friction](../reducing-review-friction.md): keeping
   sign-off quick as changes become routine.
 - [CLI reference](../cli/README.md): every command.

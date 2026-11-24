@@ -85,4 +85,4 @@ A released build without a key prints `license-missing` and instructions.
 
 - [Map a buyer questionnaire](../questionnaire-mapping.md)
 - [`export`](export.md), [`drift`](drift.md) and [`pack`](pack.md)
-- [Growth workflow guide](../growth-workflow.md) for `portfolio-import.json`
+- [Portfolio across repositories guide](../portfolio-across-repositories.md) for `portfolio-import.json`

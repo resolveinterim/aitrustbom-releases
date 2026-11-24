@@ -86,7 +86,7 @@ git rev-parse main refs/remotes/origin/main
 ```
 
 The last command prints the same commit id twice. Then run `trustbom scan`
-and `git restore trust/card.json` as on page 6; the scan reports
+as on page 6; the scan leaves `trust/card.json` unchanged and reports
 `Status: Approved`.
 
 If an approved command says `Git cannot prove the default branch`, run

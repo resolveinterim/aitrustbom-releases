@@ -17,7 +17,7 @@ that a buyer checks with [`verify`](verify.md).
 
 For sibling imports, set a read-only `TRUSTBOM_GITHUB_TOKEN` with access to
 each source repository and prepare `portfolio-import.json` as described in the
-[Growth workflow guide](../growth-workflow.md). Unverified artifact content is
+[portfolio across repositories guide](../portfolio-across-repositories.md). Unverified artifact content is
 never an approved buyer claim.
 
 ## Options
@@ -66,5 +66,5 @@ A released build without a key prints `license-missing` and instructions.
 
 ## See also
 
-- [Growth workflow](../growth-workflow.md)
+- [Portfolio in one repository](../portfolio-one-repository.md)
 - [`publish`](publish.md), [`answer`](answer.md), [`verify`](verify.md)

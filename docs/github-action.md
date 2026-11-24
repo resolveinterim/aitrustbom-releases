@@ -23,7 +23,7 @@ tracked files only; see
 
 The Action is a composite action: it installs the exact pinned `trustbom` npm package into the runner temp directory (`--ignore-scripts`) and runs the same scan and gate implementations as the local `trustbom` CLI. It needs Node.js, npm and Git, which GitHub-hosted runners provide. It writes `trust/card.json`, `trust/card.md`, `trust/questionnaire.yml`, and `trust/findings.sarif`, then evaluates `trust/approvals.yml`. The gate adds a plain-language assessment and required actions to `card.md` without changing `card.json` or its hash. On pull requests it creates or updates one marked comment and publishes an `AI TrustBOM` check with up to 50 finding annotations. The comment's **What changed** section compares the graph with the approved default-branch graph, citing `path:line` evidence for each added, removed or changed row, and the rendered card follows in a collapsed block. A card that would push the comment past GitHub's 65,536-character limit is cut at a line and points to the full file in the run's `ai-trustbom` artifact.
 
-For several systems, use the [Growth reusable workflow](./growth-workflow.md); `trustbom init --growth` writes the same per-repository Action described below.
+For several systems, use the [portfolio workflow](./portfolio-one-repository.md); `trustbom init --portfolio` writes the same per-repository Action described below.
 The Action's `portfolio: "true"` input scans and gates the tracked
 `trust/portfolio.yml`; it emits `system-ids`, `graph-shas`, and `sarif-paths`
 as JSON plus an aggregate `gate-status`, and posts one marked comment and
@@ -44,7 +44,7 @@ never in the repository, workflow file, generated Action or logs. This
 registry override changes only where npm installs from, not the version pin.
 Do not give untrusted fork code access to registry credentials.
 
-Every file `init` owns (`ai-trustbom.yml`, `ai-trustbom-growth.yml`, `growth.yml`, and the Action's `action.yml` and `install/action.yml`) starts with a marker such as `# trustbom-generated: version=1.2.3 sha256=<hash>` recording the generating `trustbom` version and a hash of the body. To move to a newer pinned version, first make the new exact main and RID packages available in the chosen registry. Install the newer `trustbom` CLI and run `trustbom init --upgrade --dry-run`, then `trustbom init --upgrade`: it rewrites only marked files whose body still matches the hash, never downgrades, and never touches unmarked or edited files, `trust/*.yml`, approvals or CODEOWNERS. Review the diff and merge it through a pull request; see the [`init` reference](./cli/init.md#upgrading-generated-files).
+Every file `init` owns (`ai-trustbom.yml`, `ai-trustbom-portfolio.yml`, `portfolio.yml`, and the Action's `action.yml` and `install/action.yml`) starts with a marker such as `# trustbom-generated: version=1.2.3 sha256=<hash>` recording the generating `trustbom` version and a hash of the body. To move to a newer pinned version, first make the new exact main and RID packages available in the chosen registry. Install the newer `trustbom` CLI and run `trustbom init --upgrade --dry-run`, then `trustbom init --upgrade`: it rewrites only marked files whose body still matches the hash, never downgrades, and never touches unmarked or edited files, `trust/*.yml`, approvals or CODEOWNERS. Review the diff and merge it through a pull request; see the [`init` reference](./cli/init.md#upgrading-generated-files).
 
 The generated workflow is equivalent to the following. Every `with:` value is
 the Action's default, so a minimal workflow is the checkout step plus
@@ -106,6 +106,10 @@ is a required status check (when the committed ruleset names one), as
 `verified`, `missing` or `unverified` (when the token cannot read branch
 rules). Do not add a push or post-merge job to compensate.
 
+A [portfolio](portfolio-one-repository.md) runs a different workflow, so its
+ruleset requires `portfolio / Portfolio approval gate` instead (the caller's
+job id, then the reusable job's name).
+
 ## Stale `card.json`
 
 When `trust/card.json` is tracked, the Action compares its committed
@@ -126,7 +130,7 @@ merge, so require the `Scan and gate` status check (above).
 | `path` | empty | Optional repository-relative scan glob |
 | `baseline` | `trust/approvals.yml` | Approval YAML path |
 | `comment` | `true` | Create or update the marked PR comment |
-| `portfolio` | `false` | Scan and gate the systems in `trust/portfolio.yml` (used by Growth) |
+| `portfolio` | `false` | Scan and gate the systems in `trust/portfolio.yml` (used by the portfolio workflow) |
 
 The Action outputs `graph-sha`, `sarif`, and `gate-status`, plus `system-ids`, `graph-shas`, and `sarif-paths` in portfolio mode. Exit `0` means approved or an explicitly draft break-glass soft pass, `3` means a policy failure, and `2` means the Action could not evaluate policy.
 

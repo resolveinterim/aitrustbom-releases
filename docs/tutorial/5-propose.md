@@ -24,7 +24,7 @@ merging.
 
    ```text
    Wrote proposal to trust/approvals.yml (graph <64 hex characters>).
-   Wrote <repo>/trust/card.json
+   No changes detected; trust/card.json is up to date.
    Wrote <repo>/trust/card.md
    Wrote <repo>/trust/questionnaire.yml
    Wrote <repo>/trust/findings.sarif

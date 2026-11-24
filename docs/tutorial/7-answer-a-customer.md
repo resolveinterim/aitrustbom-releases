@@ -149,7 +149,8 @@ paid.
    `rfi/extra-question.csv`
    asks how drivers, managers and owners use AI. The record holds facts about
    models and providers, not how each role uses the service. Each `answer`
-   run replaces `export/answers.csv` and `export/unmatched.csv`:
+   run replaces `export/answers.csv` and `export/unmatched.csv`, so close
+   either file in Excel or any other program before re-running `answer`:
 
    **PowerShell / bash:**
 
