@@ -96,7 +96,7 @@ your own fork.
    gh pr create --fill
    ```
 
-5. **Read the comment.** The check fails, and the comment now compares the
+5. **Read the pull request comment.** Wait a minute or two, then refresh the\n   pull request page. The check fails, and the comment now compares the
    pull request with the approved version on `main`:
 
    ```text

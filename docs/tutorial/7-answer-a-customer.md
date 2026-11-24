@@ -18,7 +18,7 @@ paid.
 
    **PowerShell / bash:**
 
-   ```sh
+   ```powershell
    trustbom export
    ```
 
@@ -83,13 +83,30 @@ paid.
 4. **Export the approved record.** [`trustbom export`](../cli/export.md#example)
    finds Trust's sign-off on `main` as you last pulled it from GitHub, checks
    that it still matches, and writes the customer copy to `export/`. It uses
-   the approved version even if you are on another branch:
+   the approved version even if you are on another branch.
+
+   First check that your clone has page 6's merge. If this prints nothing,
+   run `git pull` and check again; if it still prints nothing, the pull
+   request is not merged on GitHub yet:
 
    **PowerShell / bash:**
 
    ```sh
+   git fetch origin
+   git log origin/main --merges -1 --oneline
+   ```
+
+   Then export:
+
+   **PowerShell / bash:**
+
+   ```powershell
    trustbom export
    ```
+
+   If it fails with `There is no approval for this repository on the default
+   branch`, your clone does not have the merge yet: run `git pull` and try
+   again.
 
    Output:
 

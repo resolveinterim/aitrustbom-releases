@@ -80,7 +80,7 @@ never fills a gap by guessing.
    git push
    ```
 
-4. **Read the comment again.** The check runs again and updates its comment:
+4. **Read the pull request comment again.** Wait a minute or two, then refresh\n   the pull request page. The check runs again and updates its comment:
 
    ```text
    AI TrustBOM

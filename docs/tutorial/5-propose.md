@@ -46,10 +46,12 @@ merging.
    ```
 
    The long value identifies this exact record: if anything in it changes
-   later, the proposal no longer matches. `approved_by` and `approved_at`
-   name who is asked to approve and when it was proposed; `approved_by` comes
-   from your Git email and is not a verified identity. The file proposes; it
-   approves nothing until Trust merges it.
+   later, the proposal no longer matches. `approved_by` is the person
+   proposing the sign-off, taken from your Git email (or from
+   `trustbom propose --by <identity>`), and `approved_at` is when you
+   proposed it. Despite their names, neither records an approval, and the
+   email is not a verified identity. The approval is the pull request merge
+   that Trust makes on GitHub; until then the file only proposes.
 
 2. **Commit and push**, using the `git add` line from the output. The other
    files in `trust/` are either unchanged or ignored by Git, so this is the
@@ -64,7 +66,7 @@ merging.
    git push
    ```
 
-3. **Read the comment again.** The check now passes, and the comment reads:
+3. **Read the pull request comment again.** Wait a minute or two, then refresh\n   the pull request page. The check now passes, and the comment reads:
 
    ```text
    AI TrustBOM

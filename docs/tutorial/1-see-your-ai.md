@@ -79,7 +79,7 @@ no license, account or setup.
 
    **PowerShell / bash:**
 
-   ```sh
+   ```powershell
    trustbom export --draft --format cyclonedx
    ```
 
